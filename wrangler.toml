@@ -1,0 +1,35 @@
+name = "twisted"
+main = ".open-next/worker.js"
+compatibility_date = "2025-12-01"
+compatibility_flags = ["nodejs_compat"]
+
+# Workers configuration
+workers_dev = true
+
+# Routes - configure when custom domain is ready
+# routes = [
+#   { pattern = "twistedcustomleather.com/*", zone_name = "twistedcustomleather.com" }
+# ]
+
+# Assets binding for static files
+[assets]
+binding = "ASSETS"
+directory = ".open-next/assets"
+
+# Images binding for image optimization
+[images]
+binding = "IMAGES"
+
+# Self-reference service binding for caching
+[[services]]
+binding = "WORKER_SELF_REFERENCE"
+service = "twisted"
+
+# Observability - Logs
+[observability]
+
+[observability.logs]
+enabled = true
+head_sampling_rate = 1
+invocation_logs = true
+persist = true

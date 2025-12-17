@@ -1,0 +1,222 @@
+@import "tailwindcss";
+
+/* Satoshi Font Faces */
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-Regular.woff') format('woff');
+	font-weight: 400;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-Italic.woff') format('woff');
+	font-weight: 400;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-Bold.woff') format('woff');
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-BoldItalic.woff') format('woff');
+	font-weight: 700;
+	font-style: italic;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-Black.woff') format('woff');
+	font-weight: 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Satoshi';
+	src: url('/fonts/satoshi/Satoshi-BlackItalic.woff') format('woff');
+	font-weight: 900;
+	font-style: italic;
+	font-display: swap;
+}
+
+/* Root CSS Variables - Rustic Western Palette */
+:root {
+	--background: #f5f1e8;
+	--foreground: #3a2f2f;
+
+	/* Western color palette */
+	--wood-dark: #3a2f2f;
+	--wood-medium: #5c4a3a;
+	--wood-light: #8b7355;
+	--sage: #9caf88;
+	--sage-dark: #6b7d5c;
+	--cream: #f5f1e8;
+	--beige: #d4c5b0;
+	--copper: #b87333;
+	--copper-light: #d4a574;
+
+	/* Glow effects */
+	--glow-warm: rgba(184, 115, 51, 0.5);
+	--glow-intense: rgba(184, 115, 51, 0.8);
+}
+
+/* Tailwind v4 Theme Configuration */
+@theme inline {
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-wood-dark: var(--wood-dark);
+	--color-wood-medium: var(--wood-medium);
+	--color-wood-light: var(--wood-light);
+	--color-sage: var(--sage);
+	--color-sage-dark: var(--sage-dark);
+	--color-cream: var(--cream);
+	--color-beige: var(--beige);
+	--color-copper: var(--copper);
+	--color-copper-light: var(--copper-light);
+
+	--font-family-sans: 'Satoshi', system-ui, -apple-system, sans-serif;
+}
+
+/* Base Styles */
+body {
+	background: var(--background);
+	color: var(--foreground);
+	font-family: 'Satoshi', system-ui, -apple-system, sans-serif;
+	font-size: 16px;
+}
+
+@media (min-width: 1024px) {
+	body {
+		font-size: 18px;
+	}
+}
+
+/* Custom Utility Classes */
+
+/* Text Glow Effect */
+.text-glow {
+	text-shadow:
+		0 0 10px rgba(255, 255, 255, 0.5),
+		0 0 20px rgba(255, 255, 255, 0.3),
+		0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Card Glow - Warm Candlelight Effect */
+.card-glow {
+	box-shadow:
+		0 0 20px var(--glow-warm),
+		0 0 40px var(--glow-warm),
+		0 4px 6px rgba(0, 0, 0, 0.1);
+	transition: box-shadow 0.3s ease;
+}
+
+.card-glow:hover {
+	box-shadow:
+		0 0 30px var(--glow-intense),
+		0 0 60px var(--glow-intense),
+		0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Reduce glow intensity on mobile for performance */
+@media (max-width: 640px) {
+	.card-glow {
+		box-shadow:
+			0 0 10px var(--glow-warm),
+			0 4px 6px rgba(0, 0, 0, 0.1);
+	}
+
+	.card-glow:hover {
+		box-shadow:
+			0 0 15px var(--glow-warm),
+			0 6px 8px rgba(0, 0, 0, 0.15);
+	}
+}
+
+/* Glass Morphism */
+.glass {
+	background: rgba(245, 241, 232, 0.1);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	border: 1px solid rgba(184, 115, 51, 0.3);
+}
+
+/* Western Typography Styles */
+.heading-western {
+	font-weight: 900;
+	font-style: italic;
+	letter-spacing: -0.02em;
+}
+
+.body-western {
+	font-style: italic;
+}
+
+/* Keyframe Animations */
+
+/* Glitch Animation */
+@keyframes glitch {
+	0%, 100% {
+		text-shadow:
+			0 0 10px rgba(255, 255, 255, 0.5),
+			0 0 20px rgba(255, 255, 255, 0.3);
+	}
+	25% {
+		text-shadow:
+			-2px 0 rgba(255, 0, 0, 0.7),
+			2px 0 rgba(0, 255, 255, 0.7);
+	}
+	50% {
+		text-shadow:
+			2px 0 rgba(255, 0, 0, 0.7),
+			-2px 0 rgba(0, 255, 255, 0.7);
+	}
+	75% {
+		text-shadow:
+			-2px 0 rgba(255, 0, 0, 0.7),
+			2px 0 rgba(0, 255, 255, 0.7);
+	}
+}
+
+.glitch-hover:hover {
+	animation: glitch 0.3s ease-in-out;
+}
+
+/* Floating Animation */
+@keyframes float {
+	0%, 100% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+.float {
+	animation: float 3s ease-in-out infinite;
+}
+
+/* Smooth Scrolling */
+html {
+	scroll-behavior: smooth;
+}
+
+/* Selection Color */
+::selection {
+	background-color: var(--copper);
+	color: var(--cream);
+}
+
+::-moz-selection {
+	background-color: var(--copper);
+	color: var(--cream);
+}
