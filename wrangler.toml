@@ -6,10 +6,10 @@ compatibility_flags = ["nodejs_compat"]
 # Workers configuration
 workers_dev = true
 
-# Routes - configure when custom domain is ready
-# routes = [
-#   { pattern = "twistedcustomleather.com/*", zone_name = "twistedcustomleather.com" }
-# ]
+# Routes - custom domain configuration
+routes = [
+  { pattern = "twistedcustomleather.com/*", zone_name = "twistedcustomleather.com" }
+]
 
 # Assets binding for static files
 [assets]
