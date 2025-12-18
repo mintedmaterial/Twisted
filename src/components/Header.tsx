@@ -1,10 +1,13 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 
 export default function Header() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+	const [productsDropdownOpen, setProductsDropdownOpen] = useState(false);
+	const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
 
 	const scrollToSection = (sectionId: string) => {
 		const element = document.getElementById(sectionId);
@@ -31,25 +34,76 @@ export default function Header() {
 						</h1>
 					</div>
 
+					{/* Desktop Navigation */}
 					<nav className="hidden md:flex items-center space-x-8">
-						<button
-							onClick={() => scrollToSection('home')}
+						<Link
+							href="/"
 							className="text-cream hover:text-copper transition-colors font-medium"
 						>
 							Home
-						</button>
-						<button
-							onClick={() => scrollToSection('products')}
+						</Link>
+
+						{/* Products Dropdown */}
+						<div
+							className="relative"
+							onMouseEnter={() => setProductsDropdownOpen(true)}
+							onMouseLeave={() => setProductsDropdownOpen(false)}
+						>
+							<button
+								className="text-cream hover:text-copper transition-colors font-medium flex items-center gap-1"
+							>
+								Products
+								<svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+								</svg>
+							</button>
+
+							{productsDropdownOpen && (
+								<div className="absolute top-full left-0 mt-2 w-56 glass backdrop-blur-md rounded-lg border border-copper/30 py-2 shadow-lg">
+									<div className="px-3 py-2">
+										<p className="text-xs text-sage uppercase tracking-wide font-bold mb-2">Wallets</p>
+										<Link
+											href="/products/wallets/slim"
+											className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+										>
+											Slim Wallets
+										</Link>
+										<Link
+											href="/products/wallets/bifold-trifold"
+											className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+										>
+											Bifold & Trifold
+										</Link>
+										<Link
+											href="/products/wallets/clutch"
+											className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+										>
+											Clutch Wallets
+										</Link>
+										<Link
+											href="/products/wallets/roper"
+											className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+										>
+											Roper Wallets
+										</Link>
+									</div>
+									<div className="border-t border-copper/30 mt-2 pt-2 px-3">
+										<p className="text-xs text-beige/50 px-3 py-1">Coming Soon</p>
+										<span className="block px-3 py-2 text-beige/50 cursor-not-allowed">Belts</span>
+										<span className="block px-3 py-2 text-beige/50 cursor-not-allowed">Purses</span>
+										<span className="block px-3 py-2 text-beige/50 cursor-not-allowed">Welding Gear</span>
+										<span className="block px-3 py-2 text-beige/50 cursor-not-allowed">Bible Covers</span>
+									</div>
+								</div>
+							)}
+						</div>
+
+						<Link
+							href="/about"
 							className="text-cream hover:text-copper transition-colors font-medium"
 						>
-							Products
-						</button>
-						<button
-							onClick={() => scrollToSection('video')}
-							className="text-cream hover:text-copper transition-colors font-medium"
-						>
-							Our Craft
-						</button>
+							About
+						</Link>
 						<button
 							onClick={() => scrollToSection('contact')}
 							className="text-cream hover:text-copper transition-colors font-medium"
@@ -58,6 +112,7 @@ export default function Header() {
 						</button>
 					</nav>
 
+					{/* Mobile Menu Button */}
 					<button
 						onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
 						className="md:hidden text-cream hover:text-copper transition-colors"
@@ -81,27 +136,82 @@ export default function Header() {
 					</button>
 				</div>
 
+				{/* Mobile Navigation */}
 				{mobileMenuOpen && (
 					<div className="md:hidden pb-4">
 						<nav className="flex flex-col space-y-3">
-							<button
-								onClick={() => scrollToSection('home')}
+							<Link
+								href="/"
+								onClick={() => setMobileMenuOpen(false)}
 								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
 							>
 								Home
-							</button>
-							<button
-								onClick={() => scrollToSection('products')}
+							</Link>
+
+							{/* Products with Sub-menu */}
+							<div>
+								<button
+									onClick={() => setMobileProductsOpen(!mobileProductsOpen)}
+									className="w-full text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2 flex items-center justify-between"
+								>
+									Products
+									<svg
+										className={`w-4 h-4 transition-transform ${mobileProductsOpen ? 'rotate-180' : ''}`}
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+									</svg>
+								</button>
+
+								{mobileProductsOpen && (
+									<div className="ml-4 mt-2 space-y-2">
+										<p className="text-xs text-sage uppercase tracking-wide font-bold px-2 py-1">Wallets</p>
+										<Link
+											href="/products/wallets/slim"
+											onClick={() => setMobileMenuOpen(false)}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Slim Wallets
+										</Link>
+										<Link
+											href="/products/wallets/bifold-trifold"
+											onClick={() => setMobileMenuOpen(false)}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Bifold & Trifold
+										</Link>
+										<Link
+											href="/products/wallets/clutch"
+											onClick={() => setMobileMenuOpen(false)}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Clutch Wallets
+										</Link>
+										<Link
+											href="/products/wallets/roper"
+											onClick={() => setMobileMenuOpen(false)}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Roper Wallets
+										</Link>
+										<p className="text-xs text-beige/50 px-2 py-1 mt-2">Coming Soon</p>
+										<span className="block text-beige/50 px-2 py-2 cursor-not-allowed">Belts</span>
+										<span className="block text-beige/50 px-2 py-2 cursor-not-allowed">Purses</span>
+										<span className="block text-beige/50 px-2 py-2 cursor-not-allowed">Welding Gear</span>
+										<span className="block text-beige/50 px-2 py-2 cursor-not-allowed">Bible Covers</span>
+									</div>
+								)}
+							</div>
+
+							<Link
+								href="/about"
+								onClick={() => setMobileMenuOpen(false)}
 								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
 							>
-								Products
-							</button>
-							<button
-								onClick={() => scrollToSection('video')}
-								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
-							>
-								Our Craft
-							</button>
+								About
+							</Link>
 							<button
 								onClick={() => scrollToSection('contact')}
 								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"

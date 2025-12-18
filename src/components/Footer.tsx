@@ -36,9 +36,27 @@ export default function Footer() {
 									Website
 								</a>
 							</li>
+							<li>
+								<a
+									href="https://www.facebook.com/twistedcustomleather"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="hover:text-copper transition-colors"
+								>
+									Facebook
+								</a>
+							</li>
+							<li>
+								<a
+									href="https://www.google.com/search?q=twisted+custom+leather+valliant"
+									target="_blank"
+									rel="noopener noreferrer"
+									className="hover:text-copper transition-colors"
+								>
+									Google Reviews
+								</a>
+							</li>
 							<li className="hover:text-copper transition-colors cursor-pointer">Email</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Facebook</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Instagram</li>
 						</ul>
 					</div>
 				</div>
@@ -47,8 +65,16 @@ export default function Footer() {
 					<p className="text-beige text-sm">
 						&copy; {new Date().getFullYear()} Twisted Custom Leather. All rights reserved.
 					</p>
-					<p className="text-sage-dark text-xs mt-2 italic">
-						Custom leather twisted enough for all your needs
+					<p className="text-sage text-xs mt-2">
+						Site developed and Maintained by{' '}
+						<a
+							href="https://srvcflo.com/"
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-copper hover:text-copper-light transition-colors font-bold"
+						>
+							Srvcflo
+						</a>
 					</p>
 				</div>
 			</div>

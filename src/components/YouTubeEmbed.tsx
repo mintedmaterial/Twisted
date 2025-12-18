@@ -3,6 +3,9 @@ export default function YouTubeEmbed() {
 		<section id="video" className="py-16 md:py-24 px-4 sm:px-6 lg:px-8">
 			<div className="max-w-5xl mx-auto">
 				<div className="text-center mb-8 md:mb-12">
+					<p className="text-sage text-sm md:text-base font-bold uppercase tracking-wide mb-4">
+						Seen on The Voice with Ashland Craft
+					</p>
 					<h2 className="heading-western text-glow text-4xl sm:text-5xl md:text-6xl text-cream mb-4">
 						The Craft Behind The Leather
 					</h2>
