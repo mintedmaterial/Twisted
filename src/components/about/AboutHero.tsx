@@ -21,7 +21,7 @@ export default function AboutHero() {
 					Twisted enough for a Lifetime
 				</h1>
 				<p className="body-western text-xl sm:text-2xl lg:text-3xl text-beige max-w-3xl mx-auto">
-					Site developed and Maintained by <a href="https://srvcflo.com/" classname ="underlined text-black">ServiceFlow</a>
+					Handcrafted western leather goods with authentic quality and care.
 				</p>
 			</div>
 		</section>
