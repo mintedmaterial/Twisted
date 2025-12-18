@@ -6,7 +6,7 @@ export default function ReviewsWidget() {
 					What Our Customers Say
 				</h2>
 				<p className="text-beige text-center mb-12 text-lg">
-					Don't just take our word for it—see what our customers have to say about
+					Don&apos;t just take our word for it—see what our customers have to say about
 					their Twisted Custom Leather experience.
 				</p>
 
@@ -73,8 +73,8 @@ export default function ReviewsWidget() {
 								))}
 							</div>
 							<p className="text-beige italic mb-2">
-								"The quality of the craftsmanship is outstanding. My wallet gets compliments
-								everywhere I go. Truly custom leather twisted enough for all my needs!"
+								&ldquo;The quality of the craftsmanship is outstanding. My wallet gets compliments
+								everywhere I go. Truly custom leather twisted enough for all my needs!&rdquo;
 							</p>
 							<p className="text-sage text-sm">— [Customer testimonial from reviews]</p>
 						</div>

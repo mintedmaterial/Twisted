@@ -19,7 +19,7 @@ export default function Footer() {
 							<li className="hover:text-copper transition-colors cursor-pointer">Belts</li>
 							<li className="hover:text-copper transition-colors cursor-pointer">Purses</li>
 							<li className="hover:text-copper transition-colors cursor-pointer">Welding Gear</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Bible Covers</li>
+							<li className="hover:text-copper transition-colors cursor-pointer">Book/Bible/Planner Covers</li>
 						</ul>
 					</div>
 

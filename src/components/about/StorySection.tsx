@@ -19,7 +19,7 @@ export default function StorySection() {
 							accessories built to last a lifetime—and beyond.
 						</p>
 						<p className="italic text-copper-light">
-							[Edit this section with your founder's story and company history]
+							[Edit this section with your founder&apos;s story and company history]
 						</p>
 					</div>
 				</div>
@@ -38,7 +38,7 @@ export default function StorySection() {
 							Locally Owned & Operated
 						</h3>
 						<p className="text-beige">
-							Based in Valliant, Oklahoma, we're proud to be a local business serving
+							Based in Valliant, Oklahoma, we&apos;re proud to be a local business serving
 							our community and customers nationwide with authentic craftsmanship.
 						</p>
 					</div>
@@ -71,7 +71,7 @@ export default function StorySection() {
 						</h3>
 						<p className="text-beige">
 							We stand behind our work. If your Twisted Custom Leather piece ever
-							fails due to craftsmanship, we'll repair or replace it. That's our promise.
+							fails due to craftsmanship, we&apos;ll repair or replace it. That&apos;s our promise.
 						</p>
 					</div>
 				</div>

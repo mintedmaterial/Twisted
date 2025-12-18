@@ -71,7 +71,7 @@ export default function SlimWalletsPage() {
 							Custom Orders Available Soon
 						</h2>
 						<p className="text-beige mb-4">
-							We're preparing our online store for launch.
+							We&apos;re preparing our online store for launch.
 							Each piece is handmade to order with premium materials.
 						</p>
 						<p className="text-sm text-sage">
