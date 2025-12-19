@@ -47,7 +47,6 @@ export default function ProductSection() {
 							key={product.title}
 							title={product.title}
 							description={product.description}
-							icon={product.icon}
 							iconImage={product.iconImage}
 						/>
 					))}
