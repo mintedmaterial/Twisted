@@ -4,7 +4,7 @@ const products = [
 	{
 		title: 'Wallets',
 		description: 'Handcrafted leather wallets with timeless western style and durability.',
-		icon: '👛',
+		iconImage: '/Fieldnote-cover.jpeg',
 	},
 	{
 		title: 'Belts',
@@ -14,7 +14,7 @@ const products = [
 	{
 		title: 'Purses',
 		description: 'Elegant leather purses combining function with western charm.',
-		icon: '👜',
+		iconImage: '/purse.jpeg',
 	},
 	{
 		title: 'Welding Gear',
