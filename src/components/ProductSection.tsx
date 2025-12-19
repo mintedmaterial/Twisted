@@ -4,7 +4,7 @@ const products = [
 	{
 		title: 'Wallets',
 		description: 'Handcrafted leather wallets with timeless western style and durability.',
-		iconImage: '/Fieldnote-cover.jpeg',
+		iconImage: '/wallet.png',
 	},
 	{
 		title: 'Belts',
