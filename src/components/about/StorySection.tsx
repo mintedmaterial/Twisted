@@ -9,18 +9,44 @@ export default function StorySection() {
 					</h2>
 					<div className="space-y-4 text-beige text-lg leading-relaxed">
 						<p>
-							Twisted Custom Leather was founded with a passion for creating heirloom-quality
-							leather goods that stand the test of time. We believe in the beauty of
-							hand-stitched craftsmanship and the integrity of premium materials.
+							Twisted Custom Leather found its beginning back in &apos;93. It didn&apos;t know it at the time. Because it all started as a hobby—just a guy in his workshop, tinkering with leather scraps and hand tools. But it quickly became a long-lived passion, the kind that keeps you up at night sketching designs and planning your next project.
 						</p>
 						<p>
-							Every piece we create is an antidote to disposable culture. In a world of
-							mass-produced items designed to be replaced, we craft wallets, belts, and
-							accessories built to last a lifetime—and beyond.
+							Over thirty years later, we&apos;re still at it. Creating heirloom-quality leather goods that Farmers, Ranchers, Welders, and everyone in between can depend on day in and day out. We believe in the beauty, longevity, and durability of hand-cut, carved, and tooled leather work. And we believe in the integrity of creating with premium materials—full-grain leather, solid hardware, and techniques that have stood the test of time.
 						</p>
-						<p className="italic text-copper-light">
-							[Edit this section with your founder&apos;s story and company history]
+						<p>
+							Because the last thing you need is to cinch down your $20 Wally World special on that important day, only to have the tongue rip clean off. Now you&apos;re late, beltless, and standing in the driveway wondering how your day got derailed by cheap leather. Don&apos;t be Kevin. Kevin bought the cheap belt. Kevin learned the hard way.
 						</p>
+						<p>
+							Every piece we create is an antidote to disposable culture. In a world full of mass-produced items designed to be replaced, we craft wallets, belts, and accessories built to last a lifetime—and beyond. We&apos;re talking about leather that gets better with age, that tells a story with every scratch and scuff, that your grandkids will fight over someday.
+						</p>
+					</div>
+
+					{/* Meet Randy Section */}
+					<div className="mt-12 glass card-glow rounded-lg p-8">
+						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+							<div className="md:col-span-1">
+								<img
+									src="/Randy.jpg"
+									alt="Randy, Master Craftsman and Founder of Twisted Custom Leather"
+									className="rounded-lg shadow-lg w-full h-auto"
+								/>
+							</div>
+							<div className="md:col-span-2 space-y-4 text-beige">
+								<h3 className="heading-western text-3xl text-copper mb-4">
+									Meet the Master Craftsman
+								</h3>
+								<p>
+									Randy, the founder, established Twisted Custom Leather as a small business in 2010. Having grown up around the cattle industry, horses, and rodeo, his interest in leather making came at an early age. He has been perfecting his leather craftsman skills ever since.
+								</p>
+								<p>
+									Over time, Randy started making leather products for family and friends merely as a hobby. But in 2010, his son had a guy notice some of his work. He was a welder and wanted an armpad &quot;armguard&quot; for pipe welding. That quickly became a popular item and really helped Twisted Custom Leather take off.
+								</p>
+								<p>
+									Now we make armguards and custom hoods for welders, leather belts, wallets, purses, sheaths, and more. We&apos;re proud to be one of the few companies to offer high-quality, handcrafted leather products using a blend of Western Floral, Basket Stamp, Big Weave, and other unique hand-carved designs along with grade A materials and exotic materials to build items that last a lifetime.
+								</p>
+							</div>
+						</div>
 					</div>
 				</div>
 
