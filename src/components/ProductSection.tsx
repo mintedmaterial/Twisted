@@ -9,7 +9,7 @@ const products = [
 	{
 		title: 'Belts',
 		description: 'Premium leather belts tooled and crafted for lasting quality.',
-		icon: '🎗️',
+		iconImage: '/belt.png',
 	},
 	{
 		title: 'Purses',
@@ -19,12 +19,12 @@ const products = [
 	{
 		title: 'Welding Gear',
 		description: 'Heavy-duty leather gear built to protect and endure.',
-		icon: '🛠️',
+		iconImage: '/Pancake-black.png',
 	},
 	{
 		title: 'Bible Covers',
 		description: 'Beautiful custom leather Bible covers crafted with care.',
-		icon: '📖',
+		iconImage: '/Book-cover.png',
 	},
 ];
 
@@ -48,6 +48,7 @@ export default function ProductSection() {
 							title={product.title}
 							description={product.description}
 							icon={product.icon}
+							iconImage={product.iconImage}
 						/>
 					))}
 				</div>
