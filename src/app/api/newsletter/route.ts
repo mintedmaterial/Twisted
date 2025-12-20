@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
-export const runtime = 'edge';
+import { getRequestContext } from '@cloudflare/next-on-pages';
 
 export async function POST(request: NextRequest) {
 	try {
@@ -14,9 +13,9 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// Get D1 database binding from env
-		const env = process.env as Record<string, unknown>;
-		const db = env.DB as D1Database | undefined;
+		// Get D1 database binding from Cloudflare context
+		const { env } = getRequestContext();
+		const db = env.DB as D1Database;
 
 		if (!db) {
 			console.error('D1 database binding not found');
