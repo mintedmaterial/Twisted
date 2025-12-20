@@ -10,6 +10,15 @@ export default function ReviewsWidget() {
 					their Twisted Custom Leather experience.
 				</p>
 
+				{/* Reviews Collage Image */}
+				<div className="mb-12 flex justify-center">
+					<img
+						src="/reviews-collage.png"
+						alt="Customer Reviews Collage"
+						className="rounded-lg shadow-lg max-w-full h-auto"
+					/>
+				</div>
+
 				{/* Review Links Grid */}
 				<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
 					{/* Google Reviews */}

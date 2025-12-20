@@ -4,17 +4,17 @@ const products = [
 	{
 		title: 'Wallets',
 		description: 'Handcrafted leather wallets with timeless western style and durability.',
-		iconImage: '/wallet.png',
+		iconImage: '/wallet-icon.png',
 	},
 	{
 		title: 'Belts',
 		description: 'Premium leather belts tooled and crafted for lasting quality.',
-		iconImage: '/belt.png',
+		iconImage: '/belt-icon.png',
 	},
 	{
 		title: 'Purses',
 		description: 'Elegant leather purses combining function with western charm.',
-		iconImage: '/purse.jpeg',
+		iconImage: '/purse-icon.png',
 	},
 	{
 		title: 'Welding Gear',
@@ -24,7 +24,12 @@ const products = [
 	{
 		title: 'Bible Covers',
 		description: 'Beautiful custom leather Bible covers crafted with care.',
-		iconImage: '/Book-cover.png',
+		iconImage: '/bible-icon.png',
+	},
+	{
+		title: 'Misc',
+		description: 'Unique custom leather creations and specialty items.',
+		iconImage: '/misc-icon.png',
 	},
 ];
 
