@@ -13,7 +13,8 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Get D1 database binding from process.env (OpenNext Cloudflare)
-		const db = (process.env as any).DB as D1Database;
+		const env = process.env as unknown as { DB?: D1Database };
+		const db = env.DB;
 
 		if (!db) {
 			console.error('D1 database binding not found');
