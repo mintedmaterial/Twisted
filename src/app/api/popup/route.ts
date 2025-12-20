@@ -4,7 +4,8 @@ export const runtime = 'edge';
 
 export async function POST(request: NextRequest) {
 	try {
-		const { email, action, sessionId } = await request.json();
+		const body = await request.json() as { email?: string; action?: string; sessionId?: string };
+		const { email, action, sessionId } = body;
 
 		if (!action || !['subscribed', 'dismissed', 'closed'].includes(action)) {
 			return NextResponse.json(

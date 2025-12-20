@@ -5,7 +5,6 @@ import NewsletterSignup from './NewsletterSignup';
 
 export default function PromoPopup() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [hasInteracted, setHasInteracted] = useState(false);
 
 	useEffect(() => {
 		// Check if user has already dismissed the popup
@@ -24,15 +23,13 @@ export default function PromoPopup() {
 
 	const handleClose = () => {
 		setIsOpen(false);
-		if (!hasInteracted) {
-			localStorage.setItem('promo-popup-dismissed', 'true');
-			// Track dismissal in database
-			fetch('/api/popup', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({ action: 'dismissed' })
-			});
-		}
+		localStorage.setItem('promo-popup-dismissed', 'true');
+		// Track dismissal in database
+		fetch('/api/popup', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ action: 'dismissed' })
+		});
 	};
 
 	if (!isOpen) return null;

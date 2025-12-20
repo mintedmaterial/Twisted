@@ -4,7 +4,8 @@ export const runtime = 'edge';
 
 export async function POST(request: NextRequest) {
 	try {
-		const { email, source = 'website' } = await request.json();
+		const body = await request.json() as { email?: string; source?: string };
+		const { email, source = 'website' } = body;
 
 		if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 			return NextResponse.json(
