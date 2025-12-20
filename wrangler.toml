@@ -25,6 +25,12 @@ binding = "IMAGES"
 binding = "WORKER_SELF_REFERENCE"
 service = "twisted"
 
+# D1 Database for newsletter
+[[d1_databases]]
+binding = "DB"
+database_name = "twisted-newsletter"
+database_id = "b3b64ce4-8731-4ffe-ab46-f66d722dbc2c"
+
 # Observability - Logs
 [observability]
 

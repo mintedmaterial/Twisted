@@ -2,6 +2,7 @@ import AboutHero from '@/components/about/AboutHero';
 import StorySection from '@/components/about/StorySection';
 import SupplierLogos from '@/components/about/SupplierLogos';
 import ReviewsWidget from '@/components/about/ReviewsWidget';
+import NewsletterSignup from '@/components/NewsletterSignup';
 
 export const metadata = {
 	title: 'About Us | Twisted Custom Leather',
@@ -51,24 +52,7 @@ export default function AboutPage() {
 								Subscribe to get special offers, new product launches, and behind-the-scenes
 								updates from our workshop.
 							</p>
-							<form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-								<input
-									type="email"
-									placeholder="Enter your email"
-									className="flex-1 px-4 py-3 rounded-lg bg-wood-dark/30 border-2 border-wood-light/30 text-cream placeholder-beige/50 focus:border-copper focus:outline-none transition-colors"
-									disabled
-								/>
-								<button
-									type="submit"
-									className="px-6 py-3 bg-copper/20 border-2 border-copper rounded-lg text-copper font-bold cursor-not-allowed opacity-70 transition-opacity"
-									disabled
-								>
-									Coming Soon
-								</button>
-							</form>
-							<p className="text-sm text-sage mt-4">
-								Newsletter signup will be available when our store launches
-							</p>
+							<NewsletterSignup source="about-page" className="max-w-md mx-auto" />
 						</div>
 					</div>
 				</section>

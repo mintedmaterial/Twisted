@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductSection from "@/components/ProductSection";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
+import NewsletterSection from "@/components/NewsletterSection";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
 				<Hero />
 				<ProductSection />
 				<YouTubeEmbed />
+				<NewsletterSection />
 			</main>
 
 			<Footer />
