@@ -26,7 +26,7 @@ export default function NewsletterSignup({ source = 'website', className = '' }:
 				body: JSON.stringify({ email, source }),
 			});
 
-			const data = await response.json();
+			const data = await response.json() as { message?: string; error?: string };
 
 			if (response.ok) {
 				setStatus('success');
