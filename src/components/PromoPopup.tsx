@@ -35,14 +35,6 @@ export default function PromoPopup() {
 		}
 	};
 
-	const handleSubscribeSuccess = () => {
-		setHasInteracted(true);
-		localStorage.setItem('newsletter-subscribed', 'true');
-		setTimeout(() => {
-			setIsOpen(false);
-		}, 2000);
-	};
-
 	if (!isOpen) return null;
 
 	return (
@@ -66,7 +58,7 @@ export default function PromoPopup() {
 						aria-label="Close popup"
 					>
 						<svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path strokeLinecap="round" strokeLinecap="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+							<path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
 						</svg>
 					</button>
 

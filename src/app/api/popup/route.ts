@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Get D1 database binding from env
-		const env = process.env as any;
-		const db = env.DB;
+		const env = process.env as Record<string, unknown>;
+		const db = env.DB as D1Database | undefined;
 
 		if (!db) {
 			console.error('D1 database binding not found');

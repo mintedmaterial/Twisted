@@ -14,8 +14,8 @@ export async function POST(request: NextRequest) {
 		}
 
 		// Get D1 database binding from env
-		const env = process.env as any;
-		const db = env.DB;
+		const env = process.env as Record<string, unknown>;
+		const db = env.DB as D1Database | undefined;
 
 		if (!db) {
 			console.error('D1 database binding not found');
@@ -36,9 +36,9 @@ export async function POST(request: NextRequest) {
 				{ success: true, message: 'Successfully subscribed to newsletter' },
 				{ status: 201 }
 			);
-		} catch (dbError: any) {
+		} catch (dbError) {
 			// Check if it's a duplicate email error
-			if (dbError.message?.includes('UNIQUE constraint failed')) {
+			if (dbError instanceof Error && dbError.message?.includes('UNIQUE constraint failed')) {
 				return NextResponse.json(
 					{ error: 'Email already subscribed' },
 					{ status: 409 }
