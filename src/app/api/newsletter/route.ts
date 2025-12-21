@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 
-export const runtime = 'edge';
-
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json() as { email?: string; source?: string };
@@ -15,10 +13,10 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// Get D1 database binding from Cloudflare context
+		// Get D1 database binding from Cloudflare context (synchronous for server routes)
 		let db: D1Database;
 		try {
-			const { env } = await getCloudflareContext({ async: true });
+			const { env } = getCloudflareContext();
 			console.log('Available env keys:', Object.keys(env));
 			db = env.DB as D1Database;
 
