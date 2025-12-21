@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 export async function POST(request: NextRequest) {
 	try {
@@ -12,8 +13,8 @@ export async function POST(request: NextRequest) {
 			);
 		}
 
-		// Get D1 database binding from process.env (OpenNext Cloudflare)
-		const env = process.env as unknown as { DB?: D1Database };
+		// Get D1 database binding from Cloudflare context
+		const { env } = await getCloudflareContext();
 		const db = env.DB;
 
 		if (!db) {
