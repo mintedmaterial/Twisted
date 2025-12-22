@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import VoiceAgent from "@/components/VoiceAgent";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,9 +21,7 @@ export default function RootLayout({
 			</head>
 			<body className="antialiased">
 				{children}
-
-				<elevenlabs-convai agent-id="agent_4901kd1hbf8keec91akr5trg8czn"></elevenlabs-convai>
-				<script src="https://unpkg.com/@elevenlabs/convai-widget-embed@beta" async type="text/javascript"></script>
+				<VoiceAgent />
 			</body>
 		</html>
 	);
