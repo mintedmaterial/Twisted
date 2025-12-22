@@ -18,7 +18,12 @@ export default function RootLayout({
 				<link rel="icon" href="/favicon.svg" type="image/svg+xml"></link>
 				<link rel="preload" href="/background.mp4" as="video" type="video/mp4"></link>
 			</head>
-			<body className="antialiased">{children}</body>
+			<body className="antialiased">
+				{children}
+
+				<elevenlabs-convai agent-id="agent_4901kd1hbf8keec91akr5trg8czn"></elevenlabs-convai>
+				<script src="https://unpkg.com/@elevenlabs/convai-widget-embed@beta" async type="text/javascript"></script>
+			</body>
 		</html>
 	);
 }
