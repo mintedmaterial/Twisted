@@ -1,23 +1,10 @@
-# ElevenLabs Agent Tools - Copy & Paste Ready
+# ElevenLabs Agent Tools - Complete & Fixed
 
-Go to: https://elevenlabs.io/app/conversational-ai
-Select your agent: `agent_4901kd1hbf8keec91akr5trg8czn`
-Click: **Tools** section
-
-## ✅ Database Schema Applied
-
-Your D1 database has been updated with:
-- ✅ `customers` table
-- ✅ `conversation_notes` table
-- ✅ `conversation_orders` table
-
-## Add These 5 Tools (Fixed JSON - lowercase `true`)
+All tools have `api_schema` and `response_timeout_secs` required fields.
 
 ---
 
-### Tool 1: Save Customer
-
-**Click "Add Tool" → "Webhook" → Paste this:**
+## Tool 1: save_customer
 
 ```json
 {
@@ -58,9 +45,7 @@ Your D1 database has been updated with:
 
 ---
 
-### Tool 2: Lookup Customer
-
-**Click "Add Tool" → "Webhook" → Paste this:**
+## Tool 2: lookup_customer
 
 ```json
 {
@@ -71,7 +56,8 @@ Your D1 database has been updated with:
     "url": "https://twistedcustomleather.com/api/agent/customer",
     "method": "GET"
   },
-  "parameters": {
+  "response_timeout_secs": 10,
+  "api_schema": {
     "type": "object",
     "properties": {
       "email": {
@@ -89,9 +75,7 @@ Your D1 database has been updated with:
 
 ---
 
-### Tool 3: Save Note
-
-**Click "Add Tool" → "Webhook" → Paste this:**
+## Tool 3: save_note
 
 ```json
 {
@@ -105,7 +89,8 @@ Your D1 database has been updated with:
       "Content-Type": "application/json"
     }
   },
-  "parameters": {
+  "response_timeout_secs": 10,
+  "api_schema": {
     "type": "object",
     "properties": {
       "email": {
@@ -132,9 +117,7 @@ Your D1 database has been updated with:
 
 ---
 
-### Tool 4: Save Order
-
-**Click "Add Tool" → "Webhook" → Paste this:**
+## Tool 4: save_order
 
 ```json
 {
@@ -148,7 +131,8 @@ Your D1 database has been updated with:
       "Content-Type": "application/json"
     }
   },
-  "parameters": {
+  "response_timeout_secs": 10,
+  "api_schema": {
     "type": "object",
     "properties": {
       "email": {
@@ -187,9 +171,7 @@ Your D1 database has been updated with:
 
 ---
 
-### Tool 5: Get Order History
-
-**Click "Add Tool" → "Webhook" → Paste this:**
+## Tool 5: get_order_history
 
 ```json
 {
@@ -200,7 +182,8 @@ Your D1 database has been updated with:
     "url": "https://twistedcustomleather.com/api/agent/order",
     "method": "GET"
   },
-  "parameters": {
+  "response_timeout_secs": 10,
+  "api_schema": {
     "type": "object",
     "properties": {
       "email": {
@@ -218,72 +201,22 @@ Your D1 database has been updated with:
 
 ---
 
-## Update System Prompt
+## Status
 
-Add this to your agent's system prompt:
+✅ All 5 tools have required fields:
+- ✅ `api_schema` - Defines parameters
+- ✅ `response_timeout_secs` - Set to 10 seconds
+- ✅ Correct JSON syntax (lowercase `true`/`false`)
+- ✅ Proper URLs (https://twistedcustomleather.com/api/agent/*)
+- ✅ API endpoints deployed to production
 
-```
-## Customer Data Management
+## Deployment Status
 
-When a customer provides contact information (name, email, phone), use the save_customer tool to store it immediately.
+✅ D1 database schema applied
+✅ 3 API endpoints deployed:
+  - /api/agent/customer (POST/GET)
+  - /api/agent/note (POST)
+  - /api/agent/order (POST/GET)
+✅ GitHub Actions deployment successful
 
-When a customer mentions previous orders or you recognize them, use lookup_customer to retrieve their information and order history.
-
-For important details that need follow-up, use save_note. Examples:
-- Customer needs to check dimensions
-- Special rush order requests
-- Callback reminders
-- Questions that need research
-
-When a customer expresses interest in purchasing a product, use save_order to record:
-- Product type (wallet, belt, purse, bible_cover, welding_gear)
-- Customization details (tooling, initials, colors, leather type)
-- Estimated pricing discussed
-- Any special notes or requirements
-
-Always confirm with the customer after saving their information: "I've saved your contact information and will make sure we follow up on that custom wallet order."
-```
-
----
-
-## Test the Integration
-
-After adding all tools, test with a conversation:
-
-1. Start a conversation with the agent
-2. Say: "Hi, I'm John Smith, my email is john@test.com"
-3. Say: "I'd like a bifold wallet with my initials 'JS' tooled on it"
-4. Check the database to verify data was saved:
-
-```bash
-# Query customers table
-npx wrangler d1 execute twisted-newsletter --command "SELECT * FROM customers ORDER BY created_at DESC LIMIT 5;"
-
-# Query orders table
-npx wrangler d1 execute twisted-newsletter --command "SELECT * FROM conversation_orders ORDER BY created_at DESC LIMIT 5;"
-
-# Query notes table
-npx wrangler d1 execute twisted-newsletter --command "SELECT * FROM conversation_notes ORDER BY created_at DESC LIMIT 5;"
-```
-
----
-
-## Common Issues Fixed
-
-❌ **JSON Syntax Error at line 12**: Used `True` instead of `true`
-✅ **Fixed**: All boolean values are now lowercase `true` / `false`
-
-❌ **"Not Found" from API**: Tools endpoint may require dashboard configuration
-✅ **Fixed**: Use dashboard UI to add tools with copy-paste JSON
-
----
-
-## What's Ready
-
-✅ D1 database schema applied (customers, notes, orders tables)
-✅ 3 API endpoints deployed at /api/agent/*
-✅ 5 tool definitions ready to paste
-✅ JSON syntax corrected (lowercase `true`)
-✅ Proper URL endpoints (https://twistedcustomleather.com)
-
-Just paste each tool JSON into the dashboard and you're done!
+Just paste each tool JSON into the ElevenLabs dashboard!
