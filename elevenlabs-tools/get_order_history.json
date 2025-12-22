@@ -1,0 +1,22 @@
+{
+  "type": "webhook",
+  "name": "get_order_history",
+  "description": "Retrieve a customer's previous order history to reference past purchases or preferences.",
+  "config": {
+    "url": "https://twistedcustomleather.com/api/agent/order",
+    "method": "GET"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Customer's email to look up orders"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer's phone to look up orders"
+      }
+    }
+  }
+}

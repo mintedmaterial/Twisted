@@ -1,6 +1,7 @@
 'use client';
 
 import { Conversation } from '@elevenlabs/client';
+import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 
 export default function VoiceAgent() {
@@ -58,46 +59,48 @@ export default function VoiceAgent() {
         onClick={isSpeaking ? endConversation : startConversation}
         className={`
           relative group
-          w-16 h-16 rounded-full
+          w-20 h-20 rounded-full
           flex items-center justify-center
           shadow-lg hover:shadow-xl
           transition-all duration-300 ease-in-out
+          overflow-hidden
+          border-4
           ${isSpeaking
-            ? 'bg-red-500 hover:bg-red-600 animate-pulse'
+            ? 'border-red-500 animate-pulse'
             : isConnected
-            ? 'bg-green-500 hover:bg-green-600'
-            : 'bg-amber-700 hover:bg-amber-800'
+            ? 'border-green-500'
+            : 'border-amber-700 hover:border-amber-600'
           }
         `}
         aria-label={isSpeaking ? 'End conversation' : 'Start voice conversation'}
       >
-        {/* Microphone Icon */}
-        <svg
-          className="w-8 h-8 text-white"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          {isSpeaking ? (
-            // Stop icon when speaking
-            <rect x="6" y="6" width="12" height="12" strokeWidth="2" />
-          ) : (
-            // Microphone icon when not speaking
-            <>
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"
-              />
-            </>
-          )}
-        </svg>
+        {/* Avatar Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/agent-avatar.jpg"
+            alt="Twisted Custom Leather Voice Agent"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+
+        {/* Overlay when speaking */}
+        {isSpeaking && (
+          <div className="absolute inset-0 bg-red-500 bg-opacity-40 flex items-center justify-center">
+            <svg
+              className="w-10 h-10 text-white animate-pulse"
+              fill="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <rect x="6" y="6" width="12" height="12" />
+            </svg>
+          </div>
+        )}
 
         {/* Pulsing ring effect when speaking */}
         {isSpeaking && (
-          <span className="absolute inset-0 rounded-full bg-red-400 animate-ping opacity-75" />
+          <span className="absolute -inset-1 rounded-full border-4 border-red-400 animate-ping opacity-75" />
         )}
 
         {/* Tooltip */}
@@ -108,7 +111,7 @@ export default function VoiceAgent() {
 
       {/* Status indicator */}
       {isConnected && !isSpeaking && (
-        <div className="absolute -top-1 -right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-white" />
+        <div className="absolute -top-1 -right-1 w-5 h-5 bg-green-400 rounded-full border-2 border-white animate-pulse" />
       )}
     </div>
   );

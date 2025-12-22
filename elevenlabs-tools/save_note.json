@@ -1,0 +1,34 @@
+{
+  "type": "webhook",
+  "name": "save_note",
+  "description": "Save important notes from the conversation for follow-up. Use this to record special requests, questions that need research, or callback reminders.",
+  "config": {
+    "url": "https://twistedcustomleather.com/api/agent/note",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Customer's email if available"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer's phone if available"
+      },
+      "conversation_id": {
+        "type": "string",
+        "description": "ElevenLabs conversation ID"
+      },
+      "note": {
+        "type": "string",
+        "description": "The note to save"
+      }
+    },
+    "required": ["note"]
+  }
+}

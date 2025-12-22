@@ -1,0 +1,33 @@
+{
+  "type": "webhook",
+  "name": "save_customer",
+  "description": "Save or update customer contact information including name, email, phone, and preferences. Use this when a customer provides their contact details or mentions preferences about leather types, colors, or customization options.",
+  "config": {
+    "url": "https://twistedcustomleather.com/api/agent/customer",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Customer's email address"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer's phone number"
+      },
+      "name": {
+        "type": "string",
+        "description": "Customer's full name"
+      },
+      "preferences": {
+        "type": "object",
+        "description": "Customer preferences as a JSON object (e.g., {\"leather_type\": \"veg tan\", \"favorite_color\": \"natural\"})"
+      }
+    }
+  }
+}

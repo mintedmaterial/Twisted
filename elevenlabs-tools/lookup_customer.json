@@ -1,0 +1,22 @@
+{
+  "type": "webhook",
+  "name": "lookup_customer",
+  "description": "Look up a customer's information and order history by email or phone number. Use this to check if the customer has ordered before or to retrieve their preferences.",
+  "config": {
+    "url": "https://twistedcustomleather.com/api/agent/customer",
+    "method": "GET"
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Customer's email address to look up"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer's phone number to look up"
+      }
+    }
+  }
+}

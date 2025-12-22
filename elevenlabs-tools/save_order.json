@@ -1,0 +1,46 @@
+{
+  "type": "webhook",
+  "name": "save_order",
+  "description": "Save an order inquiry or quote request with product details and customization options. Use this when a customer expresses interest in purchasing a product.",
+  "config": {
+    "url": "https://twistedcustomleather.com/api/agent/order",
+    "method": "POST",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  },
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "email": {
+        "type": "string",
+        "description": "Customer's email"
+      },
+      "phone": {
+        "type": "string",
+        "description": "Customer's phone"
+      },
+      "conversation_id": {
+        "type": "string",
+        "description": "ElevenLabs conversation ID"
+      },
+      "product_type": {
+        "type": "string",
+        "description": "Type of product: wallet, belt, purse, bible_cover, or welding_gear"
+      },
+      "customization": {
+        "type": "object",
+        "description": "Customization details as JSON (e.g., {\"tooling\": \"floral\", \"initials\": \"JS\", \"color\": \"natural\"})"
+      },
+      "estimated_price": {
+        "type": "number",
+        "description": "Estimated price if discussed"
+      },
+      "notes": {
+        "type": "string",
+        "description": "Additional notes about the order"
+      }
+    },
+    "required": ["product_type"]
+  }
+}
