@@ -1,10 +1,11 @@
 import VideoBackground from "@/components/VideoBackground";
 import Header from "@/components/Header";
+import CustomOrderCheckout from "@/components/CustomOrderCheckout";
+import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import NewsletterSection from "@/components/NewsletterSection";
 import ProductSection from "@/components/ProductSection";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
-import NewsletterSection from "@/components/NewsletterSection";
-import Footer from "@/components/Footer";
 
 export default function Home() {
 	return (
@@ -17,6 +18,7 @@ export default function Home() {
 				<Hero />
 				<ProductSection />
 				<YouTubeEmbed />
+				<CustomOrderCheckout />
 				<NewsletterSection />
 			</main>
 
