@@ -12,8 +12,11 @@ export default function YouTubeEmbed() {
             Custom Leather Work Made To Be Used
           </h2>
           <p className="text-beige text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
-            Wallets, belts, purses, welding gear, Bible covers, and one-of-a-kind pieces
+            Wallets, belts, purses, guitar straps, welding gear, Bible covers, and one-of-a-kind pieces
             built by hand with western character and everyday durability.
+          </p>
+          <p className="text-copper text-base md:text-lg max-w-3xl mx-auto leading-relaxed mt-4">
+            Stage-ready custom leatherwork, including a guitar strap crafted for country artist Ashland Craft.
           </p>
         </div>
 
