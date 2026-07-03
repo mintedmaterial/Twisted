@@ -3,17 +3,17 @@ import ProductCard from './ProductCard';
 const products = [
 	{
 		title: 'Wallets',
-		description: 'Handcrafted leather wallets with timeless western style and durability.',
+		description: 'Handcrafted wallets, ropers, clutches, and card holders built to be carried every day.',
 		iconImage: '/wallet-icon.png',
 	},
 	{
 		title: 'Belts',
-		description: 'Premium leather belts tooled and crafted for lasting quality.',
+		description: 'Premium leather belts cut, tooled, and fitted for long-lasting western quality.',
 		iconImage: '/belt-icon.png',
 	},
 	{
 		title: 'Purses',
-		description: 'Elegant leather purses combining function with western charm.',
+		description: 'Leather purses and bags with practical layouts, custom details, and western charm.',
 		iconImage: '/purse-icon.png',
 	},
 	{
@@ -28,7 +28,7 @@ const products = [
 	},
 	{
 		title: 'Misc',
-		description: 'Unique custom leather creations and specialty items.',
+		description: 'Guitar straps, sheaths, gifts, and specialty pieces made around your idea.',
 		iconImage: '/misc-icon.png',
 	},
 ];
@@ -39,10 +39,10 @@ export default function ProductSection() {
 			<div className="max-w-7xl mx-auto">
 				<div className="text-center mb-12 md:mb-16">
 					<h2 className="heading-western text-glow text-4xl sm:text-5xl md:text-6xl text-cream mb-4">
-						Our Products
+						What We Make
 					</h2>
 					<p className="body-western text-xl md:text-2xl text-beige max-w-3xl mx-auto">
-						Each piece crafted with authentic western tradition and quality leather
+						Choose a starting point, then tell us the leather, tooling, and details you have in mind.
 					</p>
 				</div>
 

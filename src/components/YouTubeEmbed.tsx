@@ -45,18 +45,18 @@ export default function YouTubeEmbed() {
 
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
+            href="#custom-order"
+            className="inline-flex items-center justify-center px-8 py-4 bg-copper text-charcoal font-semibold rounded-lg hover:bg-cream transition-colors"
+          >
+            Start A Custom Order
+          </a>
+          <a
             href="https://www.facebook.com/twistedcustomleather"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-4 bg-copper text-charcoal font-semibold rounded-lg hover:bg-cream transition-colors"
-          >
-            Message Us On Facebook
-          </a>
-          <a
-            href="#products"
             className="inline-flex items-center justify-center px-8 py-4 border border-copper text-cream font-semibold rounded-lg hover:bg-copper/20 transition-colors"
           >
-            Browse Product Types
+            Message Us On Facebook
           </a>
         </div>
       </div>

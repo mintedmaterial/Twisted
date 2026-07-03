@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import NewsletterSignup from './NewsletterSignup';
 
@@ -63,9 +64,11 @@ export default function PromoPopup() {
 					<div className="p-8 sm:p-12 text-center">
 						{/* Logo or Brand Image */}
 						<div className="mb-6">
-							<img
+							<Image
 								src="/twisted.png"
 								alt="Twisted Custom Leather"
+								width={128}
+								height={128}
 								className="w-32 h-auto mx-auto"
 							/>
 						</div>

@@ -15,11 +15,11 @@ export default function Footer() {
 					<div>
 						<h4 className="font-bold text-lg text-cream mb-4">Products</h4>
 						<ul className="space-y-2 text-beige text-sm">
-							<li className="hover:text-copper transition-colors cursor-pointer">Wallets</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Belts</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Purses</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Welding Gear</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Book/Bible/Planner Covers</li>
+							<li><a href="#products" className="hover:text-copper transition-colors">Wallets</a></li>
+							<li><a href="#products" className="hover:text-copper transition-colors">Belts</a></li>
+							<li><a href="#products" className="hover:text-copper transition-colors">Purses</a></li>
+							<li><a href="#products" className="hover:text-copper transition-colors">Welding Gear</a></li>
+							<li><a href="#products" className="hover:text-copper transition-colors">Book/Bible/Planner Covers</a></li>
 						</ul>
 					</div>
 
@@ -56,7 +56,30 @@ export default function Footer() {
 									Google Reviews
 								</a>
 							</li>
-							<li className="hover:text-copper transition-colors cursor-pointer">Email</li>
+							<li>
+								<a
+									href="mailto:connie@twistedcustomleather.com"
+									className="hover:text-copper transition-colors"
+								>
+									connie@twistedcustomleather.com
+								</a>
+							</li>
+							<li>
+								<a
+									href="mailto:randy@twistedcustomleather.com"
+									className="hover:text-copper transition-colors"
+								>
+									randy@twistedcustomleather.com
+								</a>
+							</li>
+							<li>
+								<a
+									href="tel:5803929090"
+									className="hover:text-copper transition-colors"
+								>
+									580-392-9090
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

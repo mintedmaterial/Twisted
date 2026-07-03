@@ -10,21 +10,21 @@ export default function Hero() {
 				</h1>
 
 				<p className="body-western text-xl sm:text-2xl md:text-3xl lg:text-4xl text-beige mb-8 md:mb-12">
-					Custom leather twisted enough for all your needs
+					Handmade Oklahoma leather built for work, gifts, and one-of-a-kind pieces.
 				</p>
 
 				<div className="flex flex-col sm:flex-row gap-4 justify-center">
 					<a
-						href="#products"
+						href="#custom-order"
 						className="card-glow glass rounded-lg px-8 py-4 text-lg font-bold text-cream hover:text-copper transition-all duration-300"
 					>
-						Explore Products
+						Start A Custom Order
 					</a>
 					<a
-						href="#video"
+						href="#products"
 						className="glass rounded-lg px-8 py-4 text-lg font-medium text-cream hover:text-copper-light transition-all duration-300 border border-copper/50"
 					>
-						See Our Craft
+						Browse What We Make
 					</a>
 				</div>
 			</div>

@@ -2,9 +2,18 @@ import { getProductsBySubcategory } from '@/data/products';
 import ProductGrid from '@/components/products/ProductGrid';
 
 export const metadata = {
-	title: 'Slim Wallets | Twisted Custom Leather',
-	description: 'Hand-stitched slim wallets with minimal tooling. Premium leather, handmade to order. Starting at $85.',
-	keywords: ['slim wallet', 'minimalist wallet', 'leather wallet', 'handmade wallet', 'custom leather']
+	title: 'Custom Slim Leather Wallets',
+	description: 'Hand-stitched slim leather wallets made to order in Oklahoma. Minimalist card holders and front-pocket wallets with premium leather and custom tooling options.',
+	keywords: ['custom slim wallet', 'minimalist leather wallet', 'front pocket wallet', 'handmade wallet Oklahoma', 'custom leather wallet'],
+	alternates: {
+		canonical: '/products/wallets/slim',
+	},
+	openGraph: {
+		title: 'Custom Slim Leather Wallets',
+		description: 'Minimalist handmade leather wallets built for everyday carry with premium leather and custom details.',
+		url: '/products/wallets/slim',
+		images: [{ url: '/TCL1.png', width: 1200, height: 630, alt: 'Custom slim leather wallet by Twisted Custom Leather' }],
+	},
 };
 
 export default function SlimWalletsPage() {

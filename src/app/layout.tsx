@@ -3,9 +3,63 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-	title: "Twisted Custom Leather | Handcrafted Western Leather Goods",
-	description: "Custom leather twisted enough for all your needs. Handcrafted wallets, belts, purses, welding gear, and Bible covers with authentic western craftsmanship.",
-	keywords: ["custom leather", "western leather goods", "handcrafted leather", "leather wallets", "leather belts", "leather purses", "welding gear", "Bible covers"],
+	metadataBase: new URL("https://twistedcustomleather.com"),
+	title: {
+		default: "Twisted Custom Leather | Custom Handmade Leather Goods in Oklahoma",
+		template: "%s | Twisted Custom Leather",
+	},
+	description: "Custom handmade leather goods from Valliant, Oklahoma. Order wallets, belts, purses, guitar straps, welding gear, Bible covers, and one-of-a-kind western leatherwork.",
+	keywords: [
+		"custom leather",
+		"custom leather goods Oklahoma",
+		"handmade leather wallets",
+		"western leather goods",
+		"custom leather belts",
+		"leather guitar straps",
+		"leather welding gear",
+		"Bible covers",
+		"Valliant Oklahoma leather"
+	],
+	applicationName: "Twisted Custom Leather",
+	authors: [{ name: "Twisted Custom Leather" }],
+	creator: "Twisted Custom Leather",
+	publisher: "Twisted Custom Leather",
+	alternates: {
+		canonical: "/",
+	},
+	openGraph: {
+		type: "website",
+		locale: "en_US",
+		url: "https://twistedcustomleather.com",
+		siteName: "Twisted Custom Leather",
+		title: "Twisted Custom Leather | Custom Handmade Leather Goods in Oklahoma",
+		description: "Handmade western leather goods built for work, gifts, musicians, welders, and everyday carry.",
+		images: [
+			{
+				url: "/TCL1.png",
+				width: 1200,
+				height: 630,
+				alt: "Twisted Custom Leather handmade leatherwork",
+			},
+		],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: "Twisted Custom Leather | Custom Handmade Leather Goods",
+		description: "Custom wallets, belts, purses, guitar straps, welding gear, Bible covers, and western leather goods from Oklahoma.",
+		images: ["/TCL1.png"],
+	},
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			"max-image-preview": "large",
+			"max-snippet": -1,
+			"max-video-preview": -1,
+		},
+	},
 };
 
 export default function RootLayout({
