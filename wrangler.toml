@@ -29,7 +29,7 @@ service = "twisted"
 [[d1_databases]]
 binding = "DB"
 database_name = "twisted-newsletter"
-database_id = "b3b64ce4-8731-4ffe-ab46-f66d722dbc2c"
+database_id = "0463a12e-0924-4856-a8ba-42a0c94e8287"
 
 # Observability - Logs
 [observability]
