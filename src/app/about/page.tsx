@@ -5,9 +5,18 @@ import ReviewsWidget from '@/components/about/ReviewsWidget';
 import NewsletterSignup from '@/components/NewsletterSignup';
 
 export const metadata = {
-	title: 'About Us | Twisted Custom Leather',
-	description: 'Learn about Twisted Custom Leather - locally owned, handcrafted leather goods with a lifetime guarantee. Quality materials from trusted suppliers.',
-	keywords: ['about twisted custom leather', 'handmade leather', 'valliant oklahoma', 'custom leather goods', 'lifetime guarantee']
+	title: 'About Randy and Twisted Custom Leather',
+	description: 'Meet Randy and the story behind Twisted Custom Leather in Valliant, Oklahoma. Handmade wallets, belts, welding gear, guitar straps, and western leather goods built to last.',
+	keywords: ['about twisted custom leather', 'Randy leather craftsman', 'handmade leather Oklahoma', 'valliant oklahoma', 'custom leather goods', 'lifetime guarantee'],
+	alternates: {
+		canonical: '/about',
+	},
+	openGraph: {
+		title: 'About Randy and Twisted Custom Leather',
+		description: 'A locally owned Oklahoma leather shop creating handmade western leather goods with premium materials and real-life durability.',
+		url: '/about',
+		images: [{ url: '/Randy.jpg', width: 1200, height: 630, alt: 'Randy of Twisted Custom Leather' }],
+	},
 };
 
 export default function AboutPage() {

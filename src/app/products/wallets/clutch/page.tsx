@@ -3,9 +3,18 @@ import ProductDetailCard from '@/components/products/ProductDetailCard';
 import Link from 'next/link';
 
 export const metadata = {
-	title: 'Lifetime Clutch Wallet | Twisted Custom Leather',
-	description: 'Premium clutch wallet with phone compartment, card slots, and cash storage. Handmade to order. Starting at $125.',
-	keywords: ['clutch wallet', 'phone wallet', 'leather clutch', 'handmade wallet', 'premium wallet']
+	title: 'Custom Leather Clutch Wallets',
+	description: 'Premium handmade leather clutch wallets with room for a phone, cards, and cash. Custom leather colors, tooling, initials, and western details available.',
+	keywords: ['custom clutch wallet', 'leather clutch wallet', 'phone wallet', 'handmade leather clutch', 'western clutch wallet'],
+	alternates: {
+		canonical: '/products/wallets/clutch',
+	},
+	openGraph: {
+		title: 'Custom Leather Clutch Wallets',
+		description: 'Handmade clutch wallets with phone storage, card slots, and custom western leather details.',
+		url: '/products/wallets/clutch',
+		images: [{ url: '/wallet.png', width: 1200, height: 630, alt: 'Custom leather clutch wallet' }],
+	},
 };
 
 export default function ClutchWalletPage() {

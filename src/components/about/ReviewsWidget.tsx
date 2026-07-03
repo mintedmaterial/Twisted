@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function ReviewsWidget() {
 	return (
 		<section className="px-4 sm:px-6 lg:px-8 py-20">
@@ -12,10 +14,13 @@ export default function ReviewsWidget() {
 
 				{/* Reviews Collage Image */}
 				<div className="mb-12 flex justify-center">
-					<img
+					<Image
 						src="/reviews-collage.png"
 						alt="Customer Reviews Collage"
+						width={960}
+						height={640}
 						className="rounded-lg shadow-lg max-w-full h-auto"
+						sizes="(max-width: 1024px) 100vw, 960px"
 					/>
 				</div>
 

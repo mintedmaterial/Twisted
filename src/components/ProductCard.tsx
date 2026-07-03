@@ -1,18 +1,31 @@
+import Image from 'next/image';
+
 interface ProductCardProps {
 	title: string;
 	description?: string;
 	icon?: string;
 	iconImage?: string;
+	actionLabel?: string;
+	actionHref?: string;
 }
 
-export default function ProductCard({ title, description, icon, iconImage }: ProductCardProps) {
+export default function ProductCard({
+	title,
+	description,
+	icon,
+	iconImage,
+	actionLabel = 'Start an order',
+	actionHref = '#custom-order',
+}: ProductCardProps) {
 	return (
 		<div className="card-glow glass rounded-lg p-6 md:p-8 transition-all duration-300 hover:scale-105 group">
 			{iconImage ? (
 				<div className="mb-4 group-hover:scale-110 transition-transform duration-300">
-					<img
+					<Image
 						src={iconImage}
 						alt={`${title} product`}
+						width={96}
+						height={96}
 						className="w-20 h-20 md:w-24 md:h-24 object-cover rounded-lg"
 					/>
 				</div>
@@ -33,9 +46,12 @@ export default function ProductCard({ title, description, icon, iconImage }: Pro
 			)}
 
 			<div className="mt-4 inline-block">
-				<span className="text-copper font-bold text-sm group-hover:text-copper-light transition-colors">
-					Coming Soon →
-				</span>
+				<a
+					href={actionHref}
+					className="text-copper font-bold text-sm group-hover:text-copper-light transition-colors"
+				>
+					{actionLabel} -&gt;
+				</a>
 			</div>
 		</div>
 	);
