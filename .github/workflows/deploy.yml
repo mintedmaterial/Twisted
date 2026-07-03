@@ -24,11 +24,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build Next.js app
-        run: npm run build
-
       - name: Build OpenNext worker bundle
-        run: npx @opennextjs/cloudflare build --skipBuild
+        run: npx opennextjs-cloudflare build
+
+      - name: Verify OpenNext worker bundle
+        run: test -f .open-next/worker.js && test -d .open-next/assets
 
       - name: Set Square access token secret
         run: printf "%s" "$SQUARE_ACCESS_TOKEN" | npx wrangler secret put SQUARE_ACCESS_TOKEN
@@ -38,7 +38,7 @@ jobs:
           SQUARE_ACCESS_TOKEN: ${{ secrets.SQUARE_ACCESS_TOKEN }}
 
       - name: Deploy to Cloudflare Workers
-        run: npx wrangler deploy
+        run: npx wrangler deploy --config wrangler.jsonc
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
