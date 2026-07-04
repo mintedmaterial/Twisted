@@ -2,7 +2,7 @@ export default function Hero() {
 	return (
 		<section
 			id="home"
-			className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-20"
+			className="min-h-[50vh] md:min-h-[55vh] flex items-center justify-center px-4 sm:px-6 lg:px-8 py-10 md:py-12"
 		>
 			<div className="text-center max-w-5xl mx-auto">
 				<h1 className="heading-western text-glow glitch-hover text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-cream mb-6 md:mb-8 float">
