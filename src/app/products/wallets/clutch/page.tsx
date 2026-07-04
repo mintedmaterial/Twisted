@@ -4,14 +4,14 @@ import Link from 'next/link';
 
 export const metadata = {
 	title: 'Custom Leather Clutch Wallets',
-	description: 'Premium handmade leather clutch wallets with room for a phone, cards, and cash. Custom leather colors, tooling, initials, and western details available.',
-	keywords: ['custom clutch wallet', 'leather clutch wallet', 'phone wallet', 'handmade leather clutch', 'western clutch wallet'],
+	description: 'Premium handmade leather clutch wallets with room for cards, cash, and everyday essentials. Custom leather colors, tooling, initials, and western details available.',
+	keywords: ['custom clutch wallet', 'leather clutch wallet', 'handmade leather clutch', 'western clutch wallet'],
 	alternates: {
 		canonical: '/products/wallets/clutch',
 	},
 	openGraph: {
 		title: 'Custom Leather Clutch Wallets',
-		description: 'Handmade clutch wallets with phone storage, card slots, and custom western leather details.',
+		description: 'Handmade clutch wallets with card slots, cash storage, and custom western leather details.',
 		url: '/products/wallets/clutch',
 		images: [{ url: '/wallet.png', width: 1200, height: 630, alt: 'Custom leather clutch wallet' }],
 	},

@@ -167,9 +167,9 @@ export const walletProducts: Product[] = [
 		priceRange: { min: 125, max: 155 },
 		images: ['/TCL1.png'],
 		description: 'Coming Soon',
-		longDescription: 'Premium clutch wallet with room for phone, cards, and cash. Perfect for everyday carry or special occasions.',
+		longDescription: 'Premium clutch wallet with room for cards, cash, and everyday essentials. Perfect for everyday carry or special occasions.',
 		features: [
-			'Phone compartment',
+			'Interior storage compartment',
 			'Multiple card slots',
 			'Cash storage',
 			'Wrist strap option',

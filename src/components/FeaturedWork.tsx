@@ -56,15 +56,6 @@ const featuredWork = [
 		width: 250,
 		height: 335,
 	},
-	{
-		src: '/featured-work/floral-leather-phone-case.jpg',
-		alt: 'Colorful floral tooled leather phone case',
-		title: 'Phone Case',
-		category: 'Accessories',
-		span: '',
-		width: 207,
-		height: 278,
-	},
 ];
 
 export default function FeaturedWork() {

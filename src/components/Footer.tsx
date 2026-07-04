@@ -57,6 +57,9 @@ export default function Footer() {
 								</a>
 							</li>
 							<li>
+								<span className="block text-sage text-xs font-bold uppercase tracking-wide">
+									Marketing
+								</span>
 								<a
 									href="mailto:connie@twistedcustomleather.com"
 									className="hover:text-copper transition-colors"
@@ -65,19 +68,14 @@ export default function Footer() {
 								</a>
 							</li>
 							<li>
+								<span className="block text-sage text-xs font-bold uppercase tracking-wide">
+									Crafter
+								</span>
 								<a
 									href="mailto:randy@twistedcustomleather.com"
 									className="hover:text-copper transition-colors"
 								>
 									randy@twistedcustomleather.com
-								</a>
-							</li>
-							<li>
-								<a
-									href="tel:5803929090"
-									className="hover:text-copper transition-colors"
-								>
-									580-392-9090
 								</a>
 							</li>
 						</ul>
