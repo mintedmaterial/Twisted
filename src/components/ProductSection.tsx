@@ -37,8 +37,9 @@ const products = [
 		title: 'Bible Covers',
 		description: 'Beautiful custom leather Bible covers crafted with care.',
 		iconImage: '/bible-icon.png',
-		actionLabel: 'Start a custom order',
-		actionHref: '#custom-order',
+		actionLabel: 'View Bible cover photos',
+		actionHref: 'https://photos.app.goo.gl/6M9U4yqexiwxj7NDA',
+		actionExternal: true,
 	},
 	{
 		title: 'Misc',
