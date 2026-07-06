@@ -21,8 +21,9 @@ const products = [
 		title: 'Purses',
 		description: 'Leather purses and bags with practical layouts, custom details, and western charm.',
 		iconImage: '/purse-icon.png',
-		actionLabel: 'View purse examples',
-		actionHref: '#featured-work',
+		actionLabel: 'View purse photos',
+		actionHref: 'https://photos.google.com/share/AF1QipMK0kGjNQo_7a8uqjQdcsxqbyZVy4oamKWDFiLjB5LNsszKaQZptHv5LjLBqlw_Zw?key=X2Fia3FIQ25NLWtvREcxVWlQSzZfSzRsUm9MTmhB',
+		actionExternal: true,
 	},
 	{
 		title: 'Welding Gear',
