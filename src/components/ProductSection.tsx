@@ -5,8 +5,9 @@ const products = [
 		title: 'Wallets',
 		description: 'Handcrafted wallets, ropers, clutches, and card holders built to be carried every day.',
 		iconImage: '/wallet-icon.png',
-		actionLabel: 'Shop wallets',
-		actionHref: '/products/wallets/bifold-trifold',
+		actionLabel: 'View wallet photos',
+		actionHref: 'https://photos.google.com/share/AF1QipOsNxODm1-e7A7G3G6ZEPn-cshXXMuZRXZXyykPdt4nqefNbiUnD5bRCaW32J-fsg?key=RFJLS0hBckVXTmpubFdBU0xGbzNjSWFiXzR2VnVn',
+		actionExternal: true,
 	},
 	{
 		title: 'Belts',
