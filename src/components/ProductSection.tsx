@@ -45,7 +45,8 @@ const products = [
 		description: 'Guitar straps, sheaths, gifts, and specialty pieces made around your idea.',
 		iconImage: '/misc-icon.png',
 		actionLabel: 'View leather examples',
-		actionHref: '#featured-work',
+		actionHref: 'https://photos.google.com/share/AF1QipNbIqjWYJxvskI09AoMCV-j3L-Z_BheRNxablAfaI6t19Zjsim69rcEzhNYVwRj8w?key=MmNEcXRTLWZMakpnNk80RE96dmc4Q2c1RUNUdGVR',
+		actionExternal: true,
 	},
 ];
 
