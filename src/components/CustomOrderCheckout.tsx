@@ -21,6 +21,15 @@ type DetailKey =
 
 type OrderDetails = Record<DetailKey, string>;
 
+type ExoticHideId = 'none' | 'stingray' | 'gator' | 'ostrich';
+
+const exoticHideOptions: Array<{ id: ExoticHideId; label: string; amount: number }> = [
+	{ id: 'none', label: 'No exotic hide', amount: 0 },
+	{ id: 'stingray', label: 'Stingray', amount: 100 },
+	{ id: 'gator', label: 'Gator', amount: 50 },
+	{ id: 'ostrich', label: 'Ostrich', amount: 50 },
+];
+
 const blankOrderDetails: OrderDetails = {
 	address: '',
 	primaryColor: '',
@@ -57,6 +66,7 @@ export default function CustomOrderCheckout() {
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [notes, setNotes] = useState('');
+	const [selectedExoticHide, setSelectedExoticHide] = useState<ExoticHideId>('none');
 	const [orderDetails, setOrderDetails] = useState<OrderDetails>(blankOrderDetails);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -65,7 +75,9 @@ export default function CustomOrderCheckout() {
 		.map((product) => ({ ...product, quantity: cart[product.id] || 0 }))
 		.filter((product) => product.quantity > 0), [cart]);
 
-	const total = cartItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+	const exoticHide = exoticHideOptions.find((option) => option.id === selectedExoticHide) || exoticHideOptions[0];
+	const itemTotal = cartItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+	const total = itemTotal + exoticHide.amount;
 	const deliveryWindow = useMemo(() => {
 		const today = new Date();
 		const start = new Date(today);
@@ -114,6 +126,7 @@ export default function CustomOrderCheckout() {
 					phone,
 					deliveryWindow,
 					orderDetails,
+					exoticHide: selectedExoticHide,
 					notes,
 				}),
 			});
@@ -168,6 +181,12 @@ export default function CustomOrderCheckout() {
 									<span className="text-copper font-bold">${item.amount * item.quantity}</span>
 								</div>
 							)) : <p className="text-beige">Choose an item to get started.</p>}
+							{exoticHide.amount > 0 && (
+								<div className="flex items-center justify-between gap-4 text-beige">
+									<span>{exoticHide.label} exotic hide upcharge</span>
+									<span className="text-copper font-bold">${exoticHide.amount}</span>
+								</div>
+							)}
 						</div>
 
 						<div className="border-t border-copper/30 pt-4 mb-6 flex items-center justify-between">
@@ -179,6 +198,19 @@ export default function CustomOrderCheckout() {
 							<input value={customerName} onChange={(event) => setCustomerName(event.target.value)} placeholder="Your name" className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper" />
 							<input type="email" value={email} onChange={(event) => setEmail(event.target.value)} placeholder="Email" className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper" />
 							<input value={phone} onChange={(event) => setPhone(event.target.value)} placeholder="Phone" className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper" />
+
+							<div className="rounded-lg border border-copper/20 bg-charcoal/40 p-4">
+								<p className="text-cream font-bold mb-3">Exotic hide upcharge</p>
+								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+									{exoticHideOptions.map((option) => (
+										<label key={option.id} className={`rounded-lg border px-4 py-3 cursor-pointer transition-colors ${selectedExoticHide === option.id ? 'border-copper bg-copper/20 text-cream' : 'border-copper/30 bg-charcoal/70 text-beige hover:border-copper/60'}`}>
+											<input type="radio" name="exoticHide" value={option.id} checked={selectedExoticHide === option.id} onChange={() => setSelectedExoticHide(option.id)} className="sr-only" />
+											<span className="block font-bold">{option.label}</span>
+											<span className="text-sm">{option.amount ? `+$${option.amount}` : 'No upcharge'}</span>
+										</label>
+									))}
+								</div>
+							</div>
 
 							<div className="rounded-lg border border-copper/20 bg-charcoal/40 p-4">
 								<p className="text-cream font-bold mb-3">Custom order details</p>
