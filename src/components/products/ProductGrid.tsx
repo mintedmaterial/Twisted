@@ -9,46 +9,46 @@ interface ProductGridProps {
 
 export default function ProductGrid({ products }: ProductGridProps) {
 	return (
-		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+		<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
 			{products.map((product) => (
 				<Link
 					key={product.id}
 					href={`/products/wallets/${product.subcategory}`}
-					className="glass card-glow rounded-lg overflow-hidden transition-transform hover:scale-105 group"
+					className="glass card-glow rounded-lg overflow-hidden transition-transform hover:scale-[1.03] group"
 				>
 					{/* Product Image */}
-					<div className="relative w-full aspect-square overflow-hidden bg-beige/10">
+					<div className="relative w-full aspect-[4/3] overflow-hidden bg-beige/10">
 						<Image
 							src={product.images[0]}
 							alt={product.name}
 							fill
 							className="object-cover transition-transform group-hover:scale-110"
-							sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+							sizes="(max-width: 768px) 50vw, (max-width: 1280px) 33vw, 25vw"
 						/>
 					</div>
 
 					{/* Product Info */}
-					<div className="p-6">
+					<div className="p-3 md:p-4">
 						{/* Product Name */}
-						<h3 className="heading-western text-xl text-copper mb-2 group-hover:text-copper-light transition-colors">
+						<h3 className="heading-western text-base md:text-lg text-copper mb-1 group-hover:text-copper-light transition-colors">
 							{product.name}
 						</h3>
 
 						{/* Description */}
 						{product.description && (
-							<p className="body-western text-beige text-sm mb-3">
+							<p className="body-western text-beige text-xs mb-2">
 								{product.description}
 							</p>
 						)}
 
 						{/* Price */}
-						<div className="flex items-baseline justify-between mb-4">
+						<div className="flex items-baseline justify-between mb-2">
 							{product.priceRange ? (
-								<p className="text-2xl font-bold text-copper">
+								<p className="text-lg md:text-xl font-bold text-copper">
 									${product.priceRange.min}—${product.priceRange.max}
 								</p>
 							) : (
-								<p className="text-2xl font-bold text-copper">
+								<p className="text-lg md:text-xl font-bold text-copper">
 									${product.price}+
 								</p>
 							)}
@@ -56,14 +56,14 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
 						{/* Color Variants Preview */}
 						{product.variants && product.variants.find(v => v.type === 'color') && (
-							<div className="flex gap-2 mb-4">
+							<div className="flex gap-1.5 mb-3">
 								{product.variants
 									.find(v => v.type === 'color')
 									?.options.slice(0, 4)
 									.map((color) => (
 										<div
 											key={color}
-											className="w-6 h-6 rounded-full border-2 border-wood-light/30"
+											className="w-4 h-4 rounded-full border border-wood-light/30"
 											style={{
 												backgroundColor:
 													color === 'Black' ? '#000000' :
@@ -80,7 +80,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
 
 						{/* Coming Soon Button */}
 						<button
-							className="w-full px-6 py-3 bg-copper/20 border-2 border-copper rounded-lg text-copper font-bold cursor-not-allowed opacity-70 transition-opacity"
+							className="w-full px-3 py-2 bg-copper/20 border border-copper rounded-md text-copper text-xs md:text-sm font-bold cursor-not-allowed opacity-70 transition-opacity"
 							disabled
 						>
 							Coming Soon

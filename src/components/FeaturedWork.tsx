@@ -37,6 +37,7 @@ const featuredWork = [
 		span: '',
 		width: 207,
 		height: 278,
+		href: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
 	},
 	{
 		src: '/featured-work/custom-tooled-belt-rs-tail.jpg',
@@ -46,6 +47,26 @@ const featuredWork = [
 		span: '',
 		width: 597,
 		height: 403,
+	},
+	{
+		src: '/featured-work/belts-album-cover.jpg',
+		alt: 'Turquoise custom tooled leather belt from the Twisted Custom Leather belts album',
+		title: 'Belts Album',
+		category: 'Photo Album',
+		span: '',
+		width: 490,
+		height: 368,
+		href: 'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
+	},
+	{
+		src: '/featured-work/leather-work-album-cover.jpg',
+		alt: 'Custom tooled leather purse and wallet from the Twisted Custom Leather work album',
+		title: 'Leather Work Album',
+		category: 'Photo Album',
+		span: '',
+		width: 419,
+		height: 313,
+		href: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
 	},
 	{
 		src: '/featured-work/custom-leather-floral-purse-lgv.jpg',
@@ -84,31 +105,52 @@ export default function FeaturedWork() {
 				</div>
 
 				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-					{featuredWork.map((item) => (
-						<article
-							key={item.src}
-							className={`group relative overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/60 min-h-[18rem] ${item.span}`}
-						>
-							<Image
-								src={item.src}
-								alt={item.alt}
-								width={item.width}
-								height={item.height}
-								className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-								style={{ objectPosition: item.position ?? 'center' }}
-								sizes={item.span ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
-							/>
-							<div className="absolute inset-0 bg-gradient-to-t from-wood-dark/80 via-wood-dark/10 to-transparent" />
-							<div className="absolute left-4 right-4 bottom-4">
-								<p className="text-copper-light text-sm font-bold uppercase">
-									{item.category}
-								</p>
-								<h3 className="heading-western text-2xl text-cream">
-									{item.title}
-								</h3>
+					{featuredWork.map((item) => {
+						const card = (
+							<article
+								className={`group relative overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/60 min-h-[18rem] ${item.span}`}
+							>
+								<Image
+									src={item.src}
+									alt={item.alt}
+									width={item.width}
+									height={item.height}
+									className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+									style={{ objectPosition: item.position ?? 'center' }}
+									sizes={item.span ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
+								/>
+								<div className="absolute inset-0 bg-gradient-to-t from-wood-dark/80 via-wood-dark/10 to-transparent" />
+								<div className="absolute left-4 right-4 bottom-4">
+									<p className="text-copper-light text-sm font-bold uppercase">
+										{item.category}
+									</p>
+									<h3 className="heading-western text-2xl text-cream">
+										{item.title}
+									</h3>
+								</div>
+							</article>
+						);
+
+						if (item.href) {
+							return (
+								<a
+									key={item.src}
+									href={item.href}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={`Open ${item.title}`}
+								>
+									{card}
+								</a>
+							);
+						}
+
+						return (
+							<div key={item.src}>
+								{card}
 							</div>
-						</article>
-					))}
+						);
+					})}
 				</div>
 			</div>
 		</section>

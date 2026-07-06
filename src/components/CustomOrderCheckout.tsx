@@ -5,12 +5,43 @@ import { checkoutProducts } from '@/data/checkout-products';
 
 type Cart = Record<string, number>;
 
+interface OrderDetails {
+	address: string;
+	primaryColor: string;
+	secondaryColor: string;
+	beltSizing: string;
+	pantsSize: string;
+	foldHole: string;
+	purseSize: string;
+	leatherMaterial: string;
+	hardware: string;
+	toolingDesign: string;
+	laceStitching: string;
+	specialFinish: string;
+}
+
+const blankOrderDetails: OrderDetails = {
+	address: '',
+	primaryColor: '',
+	secondaryColor: '',
+	beltSizing: '',
+	pantsSize: '',
+	foldHole: '',
+	purseSize: '',
+	leatherMaterial: '',
+	hardware: '',
+	toolingDesign: '',
+	laceStitching: '',
+	specialFinish: ''
+};
+
 export default function CustomOrderCheckout() {
 	const [cart, setCart] = useState<Cart>({});
 	const [customerName, setCustomerName] = useState('');
 	const [email, setEmail] = useState('');
 	const [phone, setPhone] = useState('');
 	const [notes, setNotes] = useState('');
+	const [orderDetails, setOrderDetails] = useState<OrderDetails>(blankOrderDetails);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState('');
 
@@ -21,6 +52,22 @@ export default function CustomOrderCheckout() {
 	}, [cart]);
 
 	const total = cartItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+	const deliveryWindow = useMemo(() => {
+		const today = new Date();
+		const start = new Date(today);
+		const end = new Date(today);
+		start.setDate(today.getDate() + 42);
+		end.setDate(today.getDate() + 56);
+
+		return `${start.toLocaleDateString()} - ${end.toLocaleDateString()}`;
+	}, []);
+
+	function updateOrderDetail(field: keyof OrderDetails, value: string) {
+		setOrderDetails((current) => ({
+			...current,
+			[field]: value
+		}));
+	}
 
 	function updateQuantity(id: string, nextQuantity: number) {
 		setCart((current) => {
@@ -61,6 +108,8 @@ export default function CustomOrderCheckout() {
 					customerName,
 					email,
 					phone,
+					deliveryWindow,
+					orderDetails,
 					notes
 				})
 			});
@@ -181,9 +230,95 @@ export default function CustomOrderCheckout() {
 								className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
 							/>
 							<textarea
+								value={orderDetails.address}
+								onChange={(event) => updateOrderDetail('address', event.target.value)}
+								placeholder="Address"
+								rows={2}
+								className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper resize-none"
+							/>
+
+							<div className="rounded-lg border border-copper/20 bg-charcoal/40 p-4">
+								<p className="text-cream font-bold mb-3">Custom order details</p>
+								<div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+									<input
+										value={orderDetails.primaryColor}
+										onChange={(event) => updateOrderDetail('primaryColor', event.target.value)}
+										placeholder="Primary color"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.secondaryColor}
+										onChange={(event) => updateOrderDetail('secondaryColor', event.target.value)}
+										placeholder="Secondary color"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.beltSizing}
+										onChange={(event) => updateOrderDetail('beltSizing', event.target.value)}
+										placeholder="Belt sizing"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.pantsSize}
+										onChange={(event) => updateOrderDetail('pantsSize', event.target.value)}
+										placeholder="Pants size"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.foldHole}
+										onChange={(event) => updateOrderDetail('foldHole', event.target.value)}
+										placeholder="Fold-hole"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.purseSize}
+										onChange={(event) => updateOrderDetail('purseSize', event.target.value)}
+										placeholder="Purse size"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.leatherMaterial}
+										onChange={(event) => updateOrderDetail('leatherMaterial', event.target.value)}
+										placeholder="Leather / material"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.hardware}
+										onChange={(event) => updateOrderDetail('hardware', event.target.value)}
+										placeholder="Hardware"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+								</div>
+								<div className="space-y-3 mt-3">
+									<input
+										value={orderDetails.toolingDesign}
+										onChange={(event) => updateOrderDetail('toolingDesign', event.target.value)}
+										placeholder="Tooling / design"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.laceStitching}
+										onChange={(event) => updateOrderDetail('laceStitching', event.target.value)}
+										placeholder="Lace / stitching"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+									<input
+										value={orderDetails.specialFinish}
+										onChange={(event) => updateOrderDetail('specialFinish', event.target.value)}
+										placeholder="Pipeliner / special finish"
+										className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper"
+									/>
+								</div>
+							</div>
+
+							<div className="rounded-lg border border-copper/20 bg-charcoal/40 px-4 py-3 text-sm text-beige">
+								<span className="text-cream font-bold">Estimated delivery:</span> {deliveryWindow}
+							</div>
+
+							<textarea
 								value={notes}
 								onChange={(event) => setNotes(event.target.value)}
-								placeholder="Tell us what you want made"
+								placeholder="Extra notes"
 								rows={5}
 								className="w-full rounded-lg border border-copper/30 bg-charcoal/70 px-4 py-3 text-cream placeholder:text-beige/70 focus:outline-none focus:border-copper resize-none"
 							/>

@@ -12,11 +12,13 @@ interface CheckoutRequest {
 	customerName?: string;
 	email?: string;
 	phone?: string;
+	deliveryWindow?: string;
+	orderDetails?: Record<string, string | undefined>;
 	notes?: string;
 }
 
 const SQUARE_API_VERSION = '2026-05-20';
-const MAX_PAYMENT_NOTE_LENGTH = 500;
+const MAX_PAYMENT_NOTE_LENGTH = 1000;
 
 function getEnvValue(env: Record<string, unknown>, key: string): string | undefined {
 	const value = env[key] || process.env[key];
@@ -24,11 +26,25 @@ function getEnvValue(env: Record<string, unknown>, key: string): string | undefi
 }
 
 function makePaymentNote(body: CheckoutRequest, itemSummary: string, total: number): string {
+	const details = body.orderDetails || {};
 	const parts = [
 		`Twisted website order: ${itemSummary}`,
 		body.customerName ? `Name: ${body.customerName}` : '',
 		body.email ? `Email: ${body.email}` : '',
 		body.phone ? `Phone: ${body.phone}` : '',
+		details.address ? `Address: ${details.address}` : '',
+		body.deliveryWindow ? `Delivery: ${body.deliveryWindow}` : '',
+		details.primaryColor ? `Primary color: ${details.primaryColor}` : '',
+		details.secondaryColor ? `Secondary color: ${details.secondaryColor}` : '',
+		details.beltSizing ? `Belt sizing: ${details.beltSizing}` : '',
+		details.pantsSize ? `Pants size: ${details.pantsSize}` : '',
+		details.foldHole ? `Fold-hole: ${details.foldHole}` : '',
+		details.purseSize ? `Purse size: ${details.purseSize}` : '',
+		details.leatherMaterial ? `Leather/material: ${details.leatherMaterial}` : '',
+		details.hardware ? `Hardware: ${details.hardware}` : '',
+		details.toolingDesign ? `Tooling/design: ${details.toolingDesign}` : '',
+		details.laceStitching ? `Lace/stitching: ${details.laceStitching}` : '',
+		details.specialFinish ? `Special finish: ${details.specialFinish}` : '',
 		body.notes ? `Notes: ${body.notes}` : '',
 		`Order total: $${total}`
 	].filter(Boolean);

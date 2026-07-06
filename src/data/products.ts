@@ -15,7 +15,7 @@ export interface Product {
 	slug: string;
 	name: string;
 	category: 'wallets' | 'belts' | 'purses' | 'welding-gear' | 'bible-covers';
-	subcategory?: 'slim' | 'bifold' | 'trifold' | 'clutch' | 'roper';
+	subcategory?: 'slim' | 'bifold' | 'trifold' | 'clutch' | 'roper' | 'biker';
 	price: number;  // Starting price
 	priceRange?: {
 		min: number;
@@ -117,7 +117,7 @@ export const walletProducts: Product[] = [
 		subcategory: 'bifold',
 		price: 95,
 		priceRange: { min: 95, max: 125 },
-		images: ['/TCL1.png'],
+		images: ['/featured-work/rooster-floral-bifold-wallet.png'],
 		description: 'Coming Soon',
 		longDescription: 'Timeless bifold design with ample storage for cards and cash. Hand-stitched with premium leather.',
 		features: [
@@ -140,7 +140,7 @@ export const walletProducts: Product[] = [
 		subcategory: 'trifold',
 		price: 110,
 		priceRange: { min: 110, max: 140 },
-		images: ['/TCL1.png'],
+		images: ['/featured-work/custom-trifold-wallet.png'],
 		description: 'Coming Soon',
 		longDescription: 'Maximum storage in a compact trifold design. Perfect for those who carry more cards and need organization.',
 		features: [
@@ -191,7 +191,7 @@ export const walletProducts: Product[] = [
 		subcategory: 'roper',
 		price: 95,
 		priceRange: { min: 95, max: 115 },
-		images: ['/TCL1.png'],
+		images: ['/Fieldnote-cover.jpeg'],
 		description: 'Coming Soon',
 		longDescription: 'Functional roper-style wallet with integrated notebook pocket. Perfect for field work or everyday notes.',
 		features: [
@@ -215,7 +215,7 @@ export const walletProducts: Product[] = [
 		subcategory: 'roper',
 		price: 105,
 		priceRange: { min: 105, max: 130 },
-		images: ['/TCL1.png'],
+		images: ['/featured-work/custom-roper-wallet.png'],
 		description: 'Coming Soon',
 		longDescription: 'Classic roper wallet with checkbook cover. Traditional western design meets modern functionality.',
 		features: [
@@ -223,6 +223,30 @@ export const walletProducts: Product[] = [
 			'Card storage',
 			'Cash compartment',
 			'Western tooling',
+			'Handmade to order'
+		],
+		variants: [
+			{ type: 'color', options: ['Black', 'Brown', 'Tan', 'Natural'] }
+		],
+		inStock: false
+	},
+	{
+		id: 'biker-wallet-001',
+		slug: 'custom-biker-wallet',
+		name: 'Custom Biker Wallet',
+		category: 'wallets',
+		subcategory: 'biker',
+		price: 125,
+		priceRange: { min: 125, max: 175 },
+		images: ['/featured-work/custom-biker-wallet.png'],
+		description: 'Coming Soon',
+		longDescription: 'Custom biker wallet with snap closure, chain attachment, and hand-tooled leather details. Built for secure everyday carry with western character.',
+		features: [
+			'Snap closure',
+			'Chain attachment',
+			'Custom tooling options',
+			'Card and cash storage',
+			'Premium full-grain leather',
 			'Handmade to order'
 		],
 		variants: [

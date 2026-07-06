@@ -19,7 +19,9 @@ export const metadata = {
 export default function BifoldTrifoldWalletsPage() {
 	const bifoldWallets = getProductsBySubcategory('bifold');
 	const trifoldWallets = getProductsBySubcategory('trifold');
-	const allWallets = [...bifoldWallets, ...trifoldWallets];
+	const roperWallets = getProductsBySubcategory('roper');
+	const bikerWallets = getProductsBySubcategory('biker');
+	const allWallets = [...bifoldWallets, ...trifoldWallets, ...roperWallets, ...bikerWallets];
 
 	return (
 		<div className="relative min-h-screen">
