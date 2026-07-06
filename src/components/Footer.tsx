@@ -15,11 +15,11 @@ export default function Footer() {
 					<div>
 						<h4 className="font-bold text-lg text-cream mb-4">Products</h4>
 						<ul className="space-y-2 text-beige text-sm">
-							<li><a href="#products" className="hover:text-copper transition-colors">Wallets</a></li>
-							<li><a href="#products" className="hover:text-copper transition-colors">Belts</a></li>
-							<li><a href="#products" className="hover:text-copper transition-colors">Purses</a></li>
-							<li><a href="#products" className="hover:text-copper transition-colors">Welding Gear</a></li>
-							<li><a href="#products" className="hover:text-copper transition-colors">Book/Bible/Planner Covers</a></li>
+							<li><a href="/#products" className="hover:text-copper transition-colors">Wallets</a></li>
+							<li><a href="/#products" className="hover:text-copper transition-colors">Belts</a></li>
+							<li><a href="/#products" className="hover:text-copper transition-colors">Purses</a></li>
+							<li><a href="/#products" className="hover:text-copper transition-colors">Welding Gear</a></li>
+							<li><a href="/#products" className="hover:text-copper transition-colors">Book/Bible/Planner Covers</a></li>
 						</ul>
 					</div>
 
@@ -60,10 +60,7 @@ export default function Footer() {
 								<span className="block text-sage text-xs font-bold uppercase tracking-wide">
 									Marketing
 								</span>
-								<a
-									href="mailto:connie@twistedcustomleather.com"
-									className="hover:text-copper transition-colors"
-								>
+								<a href="mailto:connie@twistedcustomleather.com" className="hover:text-copper transition-colors">
 									connie@twistedcustomleather.com
 								</a>
 							</li>
@@ -71,10 +68,7 @@ export default function Footer() {
 								<span className="block text-sage text-xs font-bold uppercase tracking-wide">
 									Crafter
 								</span>
-								<a
-									href="mailto:randy@twistedcustomleather.com"
-									className="hover:text-copper transition-colors"
-								>
+								<a href="mailto:randy@twistedcustomleather.com" className="hover:text-copper transition-colors">
 									randy@twistedcustomleather.com
 								</a>
 							</li>
