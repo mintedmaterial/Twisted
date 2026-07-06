@@ -9,6 +9,7 @@ const featuredWork = [
 		span: '',
 		width: 400,
 		height: 300,
+		href: 'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
 	},
 	{
 		src: '/featured-work/rooster-floral-bifold-wallet.png',

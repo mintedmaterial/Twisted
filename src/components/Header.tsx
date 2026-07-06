@@ -9,6 +9,7 @@ const photoAlbums = {
 	belts: 'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
 	leatherWork: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
 	weldingGear: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
+	portfolios: 'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
 };
 
 export default function Header() {
@@ -162,6 +163,14 @@ export default function Header() {
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Welding Gear Album
+											</a>
+											<a
+												href={photoAlbums.portfolios}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+											>
+												Portfolios Album
 											</a>
 											<button
 												onClick={() => scrollToSection('custom-order')}
@@ -318,6 +327,15 @@ export default function Header() {
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Welding Gear Album
+										</a>
+										<a
+											href={photoAlbums.portfolios}
+											target="_blank"
+											rel="noopener noreferrer"
+											onClick={closeMobileMenu}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Portfolios Album
 										</a>
 										<button
 											onClick={() => scrollToSection('custom-order')}
