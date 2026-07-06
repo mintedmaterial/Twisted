@@ -2,6 +2,15 @@ import Image from 'next/image';
 
 const featuredWork = [
 	{
+		src: '/featured-work/custom-leather-portfolio-black-bg.jpg',
+		alt: 'Custom leather portfolios on a black background',
+		title: 'Portfolios',
+		category: 'Portfolios',
+		span: '',
+		width: 340,
+		height: 332,
+	},
+	{
 		src: '/featured-work/rooster-floral-bifold-wallet.png',
 		alt: 'Front side of a custom floral tooled bifold wallet with rooster artwork',
 		title: 'Wallet Set',
