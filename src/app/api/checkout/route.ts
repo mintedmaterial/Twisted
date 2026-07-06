@@ -14,21 +14,35 @@ interface CheckoutRequest {
 	phone?: string;
 	deliveryWindow?: string;
 	orderDetails?: Record<string, string | undefined>;
+	exoticHide?: string;
 	notes?: string;
 }
 
 const SQUARE_API_VERSION = '2026-05-20';
 const MAX_PAYMENT_NOTE_LENGTH = 1000;
 
+const exoticHideOptions = [
+	{ id: 'none', label: 'No exotic hide', amount: 0 },
+	{ id: 'stingray', label: 'Stingray', amount: 100 },
+	{ id: 'gator', label: 'Gator', amount: 50 },
+	{ id: 'ostrich', label: 'Ostrich', amount: 50 },
+];
+
 function getEnvValue(env: Record<string, unknown>, key: string): string | undefined {
 	const value = env[key] || process.env[key];
 	return typeof value === 'string' && value.trim() ? value.trim() : undefined;
 }
 
+function getExoticHide(id?: string) {
+	return exoticHideOptions.find((option) => option.id === id) || exoticHideOptions[0];
+}
+
 function makePaymentNote(body: CheckoutRequest, itemSummary: string, total: number): string {
 	const details = body.orderDetails || {};
+	const exoticHide = getExoticHide(body.exoticHide);
 	const parts = [
 		`Twisted website order: ${itemSummary}`,
+		exoticHide.amount ? `Exotic hide: ${exoticHide.label} +$${exoticHide.amount}` : '',
 		body.customerName ? `Name: ${body.customerName}` : '',
 		body.email ? `Email: ${body.email}` : '',
 		body.phone ? `Phone: ${body.phone}` : '',
@@ -83,7 +97,9 @@ export async function POST(request: NextRequest) {
 		}
 
 		const validItems = cartItems as Array<typeof checkoutProducts[number] & { quantity: number }>;
-		const total = validItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+		const exoticHide = getExoticHide(body.exoticHide);
+		const itemTotal = validItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
+		const total = itemTotal + exoticHide.amount;
 		const itemSummary = validItems
 			.map((item) => `${item.quantity} ${item.name}`)
 			.join(', ');
