@@ -60,13 +60,12 @@ const featuredWork = [
 	},
 	{
 		src: '/featured-work/custom-leather-floral-purse-lgv.jpg',
-		alt: 'Custom tooled leather purse and wallet from the Twisted Custom Leather work album',
-		title: 'Leather Work Album',
-		category: 'Photo Album',
+		alt: 'Custom tooled leather purse and wallet from Twisted Custom Leather',
+		title: 'Tooled Purse & Wallet',
+		category: 'Purses',
 		span: '',
 		width: 419,
 		height: 313,
-		href: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
 	},
 	{
 		src: '/featured-work/custom-leather-floral-purse-lgv.jpg',
