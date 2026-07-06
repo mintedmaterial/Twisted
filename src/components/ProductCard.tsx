@@ -20,7 +20,13 @@ export default function ProductCard({
 	actionExternal = false,
 }: ProductCardProps) {
 	return (
-		<div className="card-glow glass rounded-lg p-6 md:p-8 transition-all duration-300 hover:scale-105 group">
+		<a
+			href={actionHref}
+			target={actionExternal ? '_blank' : undefined}
+			rel={actionExternal ? 'noopener noreferrer' : undefined}
+			aria-label={actionLabel}
+			className="card-glow glass rounded-lg p-6 md:p-8 transition-all duration-300 hover:scale-105 group block focus:outline-none focus-visible:ring-2 focus-visible:ring-copper-light"
+		>
 			{iconImage ? (
 				<div className="mb-4 group-hover:scale-110 transition-transform duration-300">
 					<Image
@@ -47,16 +53,9 @@ export default function ProductCard({
 				</p>
 			)}
 
-			<div className="mt-4 inline-block">
-				<a
-					href={actionHref}
-					target={actionExternal ? '_blank' : undefined}
-					rel={actionExternal ? 'noopener noreferrer' : undefined}
-					className="text-copper font-bold text-sm group-hover:text-copper-light transition-colors"
-				>
-					{actionLabel} -&gt;
-				</a>
-			</div>
-		</div>
+			<span className="mt-4 inline-block text-copper font-bold text-sm group-hover:text-copper-light transition-colors">
+				{actionLabel} -&gt;
+			</span>
+		</a>
 	);
 }
