@@ -1,6 +1,5 @@
 import AboutHero from '@/components/about/AboutHero';
 import StorySection from '@/components/about/StorySection';
-import SupplierLogos from '@/components/about/SupplierLogos';
 import ReviewsWidget from '@/components/about/ReviewsWidget';
 import NewsletterSignup from '@/components/NewsletterSignup';
 
@@ -22,35 +21,18 @@ export const metadata = {
 export default function AboutPage() {
 	return (
 		<div className="relative min-h-screen">
-			{/* Video Background (matching homepage) */}
 			<div className="fixed inset-0 -z-10 overflow-hidden">
-				<video
-					autoPlay
-					loop
-					muted
-					playsInline
-					className="absolute inset-0 w-full h-full object-cover"
-				>
+				<video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
 					<source src="/background.mp4" type="video/mp4" />
 				</video>
 				<div className="absolute inset-0 bg-black/60" />
 			</div>
 
-			{/* Page Content */}
 			<main>
-				{/* Hero Section */}
 				<AboutHero />
-
-				{/* Story Section */}
 				<StorySection />
-
-				{/* Supplier Logos */}
-				<SupplierLogos />
-
-				{/* Reviews Widget */}
 				<ReviewsWidget />
 
-				{/* Newsletter CTA (matching Lifetime Leather pattern) */}
 				<section className="px-4 sm:px-6 lg:px-8 py-16">
 					<div className="max-w-3xl mx-auto">
 						<div className="glass card-glow rounded-lg p-8 sm:p-12 text-center">
