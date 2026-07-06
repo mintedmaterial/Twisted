@@ -37,9 +37,21 @@ export const checkoutProducts: CheckoutProduct[] = [
 		amount: 220
 	},
 	{
-		id: 'welding-gear',
-		name: 'Welding Gear',
-		description: 'Starting price for custom leather welding gear built for real use.',
+		id: 'welding-armguard',
+		name: 'Armguard',
+		description: 'Starting price for a custom leather armguard built for real welding work.',
+		amount: 280
+	},
+	{
+		id: 'welding-hood',
+		name: 'Welding Hood',
+		description: 'Starting price for a custom leather welding hood with fit and details confirmed after checkout.',
+		amount: 280
+	},
+	{
+		id: 'welding-knee-pads',
+		name: 'Knee Pads',
+		description: 'Starting price for custom leather welding knee pads built for durability and comfort.',
 		amount: 280
 	},
 	{
