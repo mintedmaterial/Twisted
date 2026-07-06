@@ -2,6 +2,8 @@ import AboutHero from '@/components/about/AboutHero';
 import StorySection from '@/components/about/StorySection';
 import ReviewsWidget from '@/components/about/ReviewsWidget';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata = {
 	title: 'About Randy and Twisted Custom Leather',
@@ -28,6 +30,8 @@ export default function AboutPage() {
 				<div className="absolute inset-0 bg-black/60" />
 			</div>
 
+			<Header />
+
 			<main>
 				<AboutHero />
 				<StorySection />
@@ -48,6 +52,8 @@ export default function AboutPage() {
 					</div>
 				</section>
 			</main>
+
+			<Footer />
 		</div>
 	);
 }
