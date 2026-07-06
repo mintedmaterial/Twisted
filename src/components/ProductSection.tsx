@@ -5,31 +5,47 @@ const products = [
 		title: 'Wallets',
 		description: 'Handcrafted wallets, ropers, clutches, and card holders built to be carried every day.',
 		iconImage: '/wallet-icon.png',
+		actionLabel: 'Shop wallets',
+		actionHref: '/products/wallets/bifold-trifold',
 	},
 	{
 		title: 'Belts',
 		description: 'Premium leather belts cut, tooled, and fitted for long-lasting western quality.',
 		iconImage: '/belt-icon.png',
+		actionLabel: 'View belt photos',
+		actionHref: 'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
+		actionExternal: true,
 	},
 	{
 		title: 'Purses',
 		description: 'Leather purses and bags with practical layouts, custom details, and western charm.',
 		iconImage: '/purse-icon.png',
+		actionLabel: 'View purse photos',
+		actionHref: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
+		actionExternal: true,
 	},
 	{
 		title: 'Welding Gear',
 		description: 'Heavy-duty leather gear built to protect and endure.',
 		iconImage: '/Pancake-black.png',
+		actionLabel: 'View welding gear photos',
+		actionHref: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
+		actionExternal: true,
 	},
 	{
 		title: 'Bible Covers',
 		description: 'Beautiful custom leather Bible covers crafted with care.',
 		iconImage: '/bible-icon.png',
+		actionLabel: 'Start a custom order',
+		actionHref: '#custom-order',
 	},
 	{
 		title: 'Misc',
 		description: 'Guitar straps, sheaths, gifts, and specialty pieces made around your idea.',
 		iconImage: '/misc-icon.png',
+		actionLabel: 'View leather photos',
+		actionHref: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
+		actionExternal: true,
 	},
 ];
 
@@ -53,6 +69,9 @@ export default function ProductSection() {
 							title={product.title}
 							description={product.description}
 							iconImage={product.iconImage}
+							actionLabel={product.actionLabel}
+							actionHref={product.actionHref}
+							actionExternal={product.actionExternal}
 						/>
 					))}
 				</div>
