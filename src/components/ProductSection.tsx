@@ -20,9 +20,8 @@ const products = [
 		title: 'Purses',
 		description: 'Leather purses and bags with practical layouts, custom details, and western charm.',
 		iconImage: '/purse-icon.png',
-		actionLabel: 'View purse photos',
-		actionHref: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
-		actionExternal: true,
+		actionLabel: 'View purse examples',
+		actionHref: '#featured-work',
 	},
 	{
 		title: 'Welding Gear',
@@ -43,9 +42,8 @@ const products = [
 		title: 'Misc',
 		description: 'Guitar straps, sheaths, gifts, and specialty pieces made around your idea.',
 		iconImage: '/misc-icon.png',
-		actionLabel: 'View leather photos',
-		actionHref: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
-		actionExternal: true,
+		actionLabel: 'View leather examples',
+		actionHref: '#featured-work',
 	},
 ];
 
