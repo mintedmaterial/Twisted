@@ -20,8 +20,9 @@ type DetailKey =
 	| 'specialFinish';
 
 type OrderDetails = Record<DetailKey, string>;
-
 type ExoticHideId = 'none' | 'stingray' | 'gator' | 'ostrich';
+
+const LACE_STITCHING_UPCHARGE = 25;
 
 const exoticHideOptions: Array<{ id: ExoticHideId; label: string; amount: number }> = [
 	{ id: 'none', label: 'No exotic hide', amount: 0 },
@@ -56,7 +57,7 @@ const detailFields: Array<{ key: DetailKey; label: string; wide?: boolean }> = [
 	{ key: 'leatherMaterial', label: 'Leather / material' },
 	{ key: 'hardware', label: 'Hardware' },
 	{ key: 'toolingDesign', label: 'Tooling / design', wide: true },
-	{ key: 'laceStitching', label: 'Lace / stitching', wide: true },
+	{ key: 'laceStitching', label: 'Lace / stitching (+$25)', wide: true },
 	{ key: 'specialFinish', label: 'Pipeliner / special finish', wide: true },
 ];
 
@@ -76,8 +77,9 @@ export default function CustomOrderCheckout() {
 		.filter((product) => product.quantity > 0), [cart]);
 
 	const exoticHide = exoticHideOptions.find((option) => option.id === selectedExoticHide) || exoticHideOptions[0];
+	const laceStitchingUpcharge = orderDetails.laceStitching.trim() ? LACE_STITCHING_UPCHARGE : 0;
 	const itemTotal = cartItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
-	const total = itemTotal + exoticHide.amount;
+	const total = itemTotal + exoticHide.amount + laceStitchingUpcharge;
 	const deliveryWindow = useMemo(() => {
 		const today = new Date();
 		const start = new Date(today);
@@ -185,6 +187,12 @@ export default function CustomOrderCheckout() {
 								<div className="flex items-center justify-between gap-4 text-beige">
 									<span>{exoticHide.label} exotic hide upcharge</span>
 									<span className="text-copper font-bold">${exoticHide.amount}</span>
+								</div>
+							)}
+							{laceStitchingUpcharge > 0 && (
+								<div className="flex items-center justify-between gap-4 text-beige">
+									<span>Lace/stitching upcharge</span>
+									<span className="text-copper font-bold">${laceStitchingUpcharge}</span>
 								</div>
 							)}
 						</div>
