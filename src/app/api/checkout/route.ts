@@ -20,6 +20,7 @@ interface CheckoutRequest {
 
 const SQUARE_API_VERSION = '2026-05-20';
 const MAX_PAYMENT_NOTE_LENGTH = 1000;
+const LACE_STITCHING_UPCHARGE = 25;
 
 const exoticHideOptions = [
 	{ id: 'none', label: 'No exotic hide', amount: 0 },
@@ -37,12 +38,18 @@ function getExoticHide(id?: string) {
 	return exoticHideOptions.find((option) => option.id === id) || exoticHideOptions[0];
 }
 
+function getLaceStitchingUpcharge(details: Record<string, string | undefined>) {
+	return details.laceStitching?.trim() ? LACE_STITCHING_UPCHARGE : 0;
+}
+
 function makePaymentNote(body: CheckoutRequest, itemSummary: string, total: number): string {
 	const details = body.orderDetails || {};
 	const exoticHide = getExoticHide(body.exoticHide);
+	const laceStitchingUpcharge = getLaceStitchingUpcharge(details);
 	const parts = [
 		`Twisted website order: ${itemSummary}`,
 		exoticHide.amount ? `Exotic hide: ${exoticHide.label} +$${exoticHide.amount}` : '',
+		laceStitchingUpcharge ? `Lace/stitching upcharge: +$${laceStitchingUpcharge}` : '',
 		body.customerName ? `Name: ${body.customerName}` : '',
 		body.email ? `Email: ${body.email}` : '',
 		body.phone ? `Phone: ${body.phone}` : '',
@@ -97,9 +104,11 @@ export async function POST(request: NextRequest) {
 		}
 
 		const validItems = cartItems as Array<typeof checkoutProducts[number] & { quantity: number }>;
+		const details = body.orderDetails || {};
 		const exoticHide = getExoticHide(body.exoticHide);
+		const laceStitchingUpcharge = getLaceStitchingUpcharge(details);
 		const itemTotal = validItems.reduce((sum, item) => sum + item.amount * item.quantity, 0);
-		const total = itemTotal + exoticHide.amount;
+		const total = itemTotal + exoticHide.amount + laceStitchingUpcharge;
 		const itemSummary = validItems
 			.map((item) => `${item.quantity} ${item.name}`)
 			.join(', ');
