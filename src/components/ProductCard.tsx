@@ -7,6 +7,7 @@ interface ProductCardProps {
 	iconImage?: string;
 	actionLabel?: string;
 	actionHref?: string;
+	actionExternal?: boolean;
 }
 
 export default function ProductCard({
@@ -16,6 +17,7 @@ export default function ProductCard({
 	iconImage,
 	actionLabel = 'Start an order',
 	actionHref = '#custom-order',
+	actionExternal = false,
 }: ProductCardProps) {
 	return (
 		<div className="card-glow glass rounded-lg p-6 md:p-8 transition-all duration-300 hover:scale-105 group">
@@ -48,6 +50,8 @@ export default function ProductCard({
 			<div className="mt-4 inline-block">
 				<a
 					href={actionHref}
+					target={actionExternal ? '_blank' : undefined}
+					rel={actionExternal ? 'noopener noreferrer' : undefined}
 					className="text-copper font-bold text-sm group-hover:text-copper-light transition-colors"
 				>
 					{actionLabel} -&gt;
