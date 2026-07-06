@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function Footer() {
 	return (
 		<footer id="contact" className="glass border-t border-copper/30 py-12 md:py-16 px-4 sm:px-6 lg:px-8 mt-16">
@@ -15,11 +17,11 @@ export default function Footer() {
 					<div>
 						<h4 className="font-bold text-lg text-cream mb-4">Products</h4>
 						<ul className="space-y-2 text-beige text-sm">
-							<li><a href="/#products" className="hover:text-copper transition-colors">Wallets</a></li>
-							<li><a href="/#products" className="hover:text-copper transition-colors">Belts</a></li>
-							<li><a href="/#products" className="hover:text-copper transition-colors">Purses</a></li>
-							<li><a href="/#products" className="hover:text-copper transition-colors">Welding Gear</a></li>
-							<li><a href="/#products" className="hover:text-copper transition-colors">Book/Bible/Planner Covers</a></li>
+							<li><Link href="/#products" className="hover:text-copper transition-colors">Wallets</Link></li>
+							<li><Link href="/#products" className="hover:text-copper transition-colors">Belts</Link></li>
+							<li><Link href="/#products" className="hover:text-copper transition-colors">Purses</Link></li>
+							<li><Link href="/#products" className="hover:text-copper transition-colors">Welding Gear</Link></li>
+							<li><Link href="/#products" className="hover:text-copper transition-colors">Book/Bible/Planner Covers</Link></li>
 						</ul>
 					</div>
 
