@@ -32,6 +32,7 @@ export interface Product {
 }
 
 const walletPhoto = '/wallet.png';
+const moneyClipWalletPhoto = '/products/wallets/money-clip-wallet-card.svg';
 
 /**
  * Wallet Products
@@ -86,20 +87,20 @@ export const walletProducts: Product[] = [
 	},
 	{
 		id: 'slim-wallet-003',
-		slug: 'front-pocket-wallet',
-		name: 'Front Pocket Wallet',
+		slug: 'money-clip-wallet',
+		name: 'Money Clip Wallet',
 		category: 'wallets',
 		subcategory: 'slim',
 		price: 95,
 		priceRange: { min: 95, max: 110 },
-		images: [walletPhoto],
+		images: [moneyClipWalletPhoto],
 		description: 'Coming Soon',
-		longDescription: 'Designed for comfort and accessibility in your front pocket. Slim profile with maximum functionality.',
+		longDescription: 'Slim leather money clip wallet with custom tooling and a compact everyday-carry layout.',
 		features: [
 			'Minimal tooling included',
-			'Front pocket optimized',
-			'Multiple card slots',
-			'Cash compartment',
+			'Money clip layout',
+			'Compact card storage',
+			'Slim pocket profile',
 			'Handmade to order'
 		],
 		variants: [
