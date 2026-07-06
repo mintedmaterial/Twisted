@@ -59,13 +59,13 @@ const featuredWork = [
 		href: 'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
 	},
 	{
-		src: '/featured-work/custom-leather-floral-purse-lgv.jpg',
-		alt: 'Custom tooled leather purse and wallet from Twisted Custom Leather',
-		title: 'Tooled Purse & Wallet',
+		src: '/purse.jpeg',
+		alt: 'Brown custom leather fringe purse',
+		title: 'Leather Fringe Purse',
 		category: 'Purses',
 		span: '',
-		width: 419,
-		height: 313,
+		width: 1536,
+		height: 2048,
 	},
 	{
 		src: '/featured-work/custom-leather-floral-purse-lgv.jpg',
