@@ -7,10 +7,21 @@ interface ProductGridProps {
 }
 
 const walletAlbumLinks: Record<string, string> = {
+	'hand-stitched-slim-wallet': 'https://photos.google.com/share/AF1QipPJk4btpXPnH-McibDEZ4QTESKuRc68yOedEQInOubeEHHuGUK95jK44Ic49YL1sQ?key=MFc5eGZtemttWDhrSWF5OFFxTzRTbS13ODZVYnFR',
+	'minimalist-card-holder': 'https://photos.google.com/share/AF1QipMEfOqFlmaDcTS513GOviHY4C24pBz8vrewQc7kGON2aQ6336dcmZkjowjhBYH1yw?key=UC1jXzB5aHk4eWFhRURpc2IwR3NrSUZVbTdxenJn',
 	'classic-bifold-wallet': 'https://photos.google.com/share/AF1QipPJk4btpXPnH-McibDEZ4QTESKuRc68yOedEQInOubeEHHuGUK95jK44Ic49YL1sQ?key=MFc5eGZtemttWDhrSWF5OFFxTzRTbS13ODZVYnFR',
 	'checkbook-roper-wallet': 'https://photos.google.com/share/AF1QipOM2VPGNu1ZYNHw9PLOQAfkdQwkkKvQzHSlrGcdWDesfJ_avXuYXnfj7m-okskLMg?key=bDNJVE81WEtjUnhSZ2U4QWxpeW9lZ0xrdmVtZUtB',
 	'money-clip-wallet': 'https://photos.google.com/share/AF1QipNOTSGdDeCR25xI0s3icxjhEEgCDGlZSFGJZS9jnSnUtZ93FHG2xIM5QZPuzSK6OQ?key=c3VRZk9DdXpMb0h5YjVraXZEZ21BWVBabVhrblFn',
 	'trifold-wallet': 'https://photos.google.com/share/AF1QipMEfOqFlmaDcTS513GOviHY4C24pBz8vrewQc7kGON2aQ6336dcmZkjowjhBYH1yw?key=UC1jXzB5aHk4eWFhRURpc2IwR3NrSUZVbTdxenJn',
+};
+
+const walletAlbumLabels: Record<string, string> = {
+	'hand-stitched-slim-wallet': 'Bi-fold Wallets',
+	'minimalist-card-holder': 'Tri-fold Wallets',
+	'classic-bifold-wallet': 'Bi-fold Wallets',
+	'checkbook-roper-wallet': 'Roper Checkbook Wallet',
+	'money-clip-wallet': 'Money Clip Wallet',
+	'trifold-wallet': 'Tri-fold Wallets',
 };
 
 export default function ProductGrid({ products }: ProductGridProps) {
@@ -18,6 +29,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
 		<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 			{products.map((product) => {
 				const albumHref = walletAlbumLinks[product.slug];
+				const displayName = walletAlbumLabels[product.slug] ?? product.name;
 				const href = albumHref ?? `/products/wallets/${product.subcategory}`;
 
 				return (
@@ -32,7 +44,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
 						<div className="relative w-full aspect-square overflow-hidden bg-beige/10">
 							<Image
 								src={product.images[0]}
-								alt={product.name}
+								alt={displayName}
 								fill
 								className="object-cover transition-transform group-hover:scale-110"
 								sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -43,7 +55,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
 						<div className="p-6">
 							{/* Product Name */}
 							<h3 className="heading-western text-xl text-copper mb-2 group-hover:text-copper-light transition-colors">
-								{product.name}
+								{displayName}
 							</h3>
 
 							{/* Description */}
