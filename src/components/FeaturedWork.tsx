@@ -32,14 +32,14 @@ const featuredWork = [
 		height: 335,
 	},
 	{
-		src: '/featured-work/custom-pipeline-arm-pad.svg',
+		src: 'https://lh3.googleusercontent.com/pw/AP1GczPNiEESOiuJVC5aR8feTLIu5UznvVfCYVbennNgPAQPBdAqGAbMgKPJ9b2AZJ2ctUX5zbUtv0zNULX-_LEQBzeuq3vwtvX8GVhrAINSpk4baAWTBWjYwIpHja503-UXhT9TG286X4LgePCsttT0bxcM=w524-h698-s-no-gm',
 		alt: 'Custom tooled leather welding arm pad set',
 		title: 'Custom Pipeline Arm Guard',
 		category: 'Welding Gear',
 		span: '',
-		width: 220,
-		height: 165,
-		href: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
+		width: 524,
+		height: 698,
+		href: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA/photo/AF1QipMAfvfW-Iggd2w43t0R_LjXdGapeanTWw0qlyfS?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
 	},
 	{
 		src: '/featured-work/custom-tooled-belt-rs-tail.jpg',
