@@ -32,7 +32,7 @@ export interface Product {
 }
 
 const walletPhoto = '/wallet.png';
-const moneyClipWalletPhoto = 'https://photos.fife.usercontent.google.com/pw/AP1GczOyXFSTllFzf3szh99TWRVbnsgYw6cjU3g2irr4EnuQxoEI3iXAkm117g=w684-h912-s-no-gm?authuser=2';
+const moneyClipWalletPhoto = walletPhoto;
 
 /**
  * Wallet Products
