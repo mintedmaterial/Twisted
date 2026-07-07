@@ -32,7 +32,7 @@ export interface Product {
 }
 
 const walletPhoto = '/wallet.png';
-const moneyClipWalletPhoto = '/products/wallets/money-clip-wallet-card.svg';
+const moneyClipWalletPhoto = '/products/wallets/money-clip-wallet-card.jpg';
 
 /**
  * Wallet Products
