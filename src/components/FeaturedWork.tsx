@@ -43,15 +43,6 @@ const featuredWork = [
 	},
 	{
 		src: '/featured-work/custom-tooled-belt-rs-tail.jpg',
-		alt: 'Custom hand-tooled leather belt with initials and floral tooling',
-		title: 'Custom Personalized Belts',
-		category: 'Belts',
-		span: '',
-		width: 597,
-		height: 403,
-	},
-	{
-		src: '/featured-work/custom-tooled-belt-rs-tail.jpg',
 		alt: 'Turquoise custom tooled leather belt from the Twisted Custom Leather belts album',
 		title: 'Belts Album',
 		category: 'Photo Album',
