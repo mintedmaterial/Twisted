@@ -6,7 +6,16 @@ interface ProductDetailCardProps {
 	product: Product;
 }
 
+const walletAlbumLinks: Record<string, string> = {
+	'classic-bifold-wallet': 'https://photos.google.com/share/AF1QipPJk4btpXPnH-McibDEZ4QTESKuRc68yOedEQInOubeEHHuGUK95jK44Ic49YL1sQ?key=MFc5eGZtemttWDhrSWF5OFFxTzRTbS13ODZVYnFR',
+	'checkbook-roper-wallet': 'https://photos.google.com/share/AF1QipOM2VPGNu1ZYNHw9PLOQAfkdQwkkKvQzHSlrGcdWDesfJ_avXuYXnfj7m-okskLMg?key=bDNJVE81WEtjUnhSZ2U4QWxpeW9lZ0xrdmVtZUtB',
+	'money-clip-wallet': 'https://photos.google.com/share/AF1QipNOTSGdDeCR25xI0s3icxjhEEgCDGlZSFGJZS9jnSnUtZ93FHG2xIM5QZPuzSK6OQ?key=c3VRZk9DdXpMb0h5YjVraXZEZ21BWVBabVhrblFn',
+	'trifold-wallet': 'https://photos.google.com/share/AF1QipMEfOqFlmaDcTS513GOviHY4C24pBz8vrewQc7kGON2aQ6336dcmZkjowjhBYH1yw?key=UC1jXzB5aHk4eWFhRURpc2IwR3NrSUZVbTdxenJn',
+};
+
 export default function ProductDetailCard({ product }: ProductDetailCardProps) {
+	const albumHref = walletAlbumLinks[product.slug];
+
 	return (
 		<div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
 			{/* Product Image - Left Column */}
@@ -64,13 +73,24 @@ export default function ProductDetailCard({ product }: ProductDetailCardProps) {
 					</div>
 				)}
 
-				{/* Coming Soon Button */}
-				<button
-					className="w-full px-8 py-4 bg-copper/20 border-2 border-copper rounded-lg text-copper text-xl font-bold cursor-not-allowed opacity-70 transition-opacity mb-6"
-					disabled
-				>
-					Coming Soon
-				</button>
+				{/* Photo Album / Coming Soon Button */}
+				{albumHref ? (
+					<a
+						href={albumHref}
+						target="_blank"
+						rel="noopener noreferrer"
+						className="w-full px-8 py-4 bg-copper/20 border-2 border-copper rounded-lg text-copper text-xl font-bold text-center hover:bg-copper/30 hover:text-copper-light transition-colors mb-6"
+					>
+						View Photos
+					</a>
+				) : (
+					<button
+						className="w-full px-8 py-4 bg-copper/20 border-2 border-copper rounded-lg text-copper text-xl font-bold cursor-not-allowed opacity-70 transition-opacity mb-6"
+						disabled
+					>
+						Coming Soon
+					</button>
+				)}
 
 				{/* Tooling Badge */}
 				{product.toolingIncluded && (
