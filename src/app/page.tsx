@@ -8,6 +8,7 @@ import ProductSection from "@/components/ProductSection";
 import Script from "next/script";
 import YouTubeEmbed from "@/components/YouTubeEmbed";
 import FeaturedWork from "@/components/FeaturedWork";
+import RandyVideo from "@/components/RandyVideo";
 
 export default function Home() {
 	const businessSchema = {
@@ -50,6 +51,7 @@ export default function Home() {
 
 			<main>
 				<Hero />
+				<RandyVideo />
 				<ProductSection />
 				<FeaturedWork />
 				<YouTubeEmbed />
