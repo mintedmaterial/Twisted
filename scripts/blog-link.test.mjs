@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import test from 'node:test';
 
-const blogUrl = 'https://blog.twistedcustomleather.com/blog';
+const blogUrl = 'https://blog.twistedcustomleather.com/blog/posts';
 const header = readFileSync(new URL('../src/components/Header.tsx', import.meta.url), 'utf8');
 const footer = readFileSync(new URL('../src/components/Footer.tsx', import.meta.url), 'utf8');
 

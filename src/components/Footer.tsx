@@ -40,7 +40,7 @@ export default function Footer() {
 							</li>
 							<li>
 								<a
-									href="https://blog.twistedcustomleather.com/blog"
+									href="https://blog.twistedcustomleather.com/blog/posts"
 									className="hover:text-copper transition-colors"
 								>
 									Blog
