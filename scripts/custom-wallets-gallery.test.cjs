@@ -4,7 +4,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 const test = require('node:test');
 const vm = require('node:vm');
-const sharp = require('../node_modules/.pnpm/node_modules/sharp');
+let sharp;
+try {
+	sharp = require('sharp');
+} catch {
+	sharp = require('../node_modules/.pnpm/node_modules/sharp');
+}
 const ts = require('typescript');
 
 const root = path.resolve(__dirname, '..');
