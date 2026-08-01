@@ -42,3 +42,20 @@ test('lightbox model navigates and wraps in both directions', () => {
   assert.equal(model.nextLightboxIndex(0, 0), null);
   assert.equal(model.previousLightboxIndex(0, 0), null);
 });
+
+test('shared lightbox exposes the required accessible controls and complete image', () => {
+  const component = read('src/components/GalleryLightbox.tsx');
+  assert.match(component, /'use client'/);
+  assert.match(component, /role="dialog"/);
+  assert.match(component, /aria-modal="true"/);
+  assert.match(component, /aria-label="Close larger image"/);
+  assert.match(component, /aria-label="Previous image"/);
+  assert.match(component, /aria-label="Next image"/);
+  assert.match(component, /aria-label=\{`View larger: \$\{image\.alt\}`\}/);
+  assert.match(component, /event\.key === 'Escape'/);
+  assert.match(component, /event\.key === 'ArrowLeft'/);
+  assert.match(component, /event\.key === 'ArrowRight'/);
+  assert.match(component, /object-contain/);
+  assert.match(component, /document\.body\.style\.overflow = 'hidden'/);
+  assert.match(component, /opener\?\.focus\(\)/);
+});
