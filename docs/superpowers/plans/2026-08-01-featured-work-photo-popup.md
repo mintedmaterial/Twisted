@@ -489,7 +489,7 @@ Expected: Wrangler validates and packages the `twisted` Worker without publishin
 
 ```bash
 git push -u origin codex/build1-featured-popup
-gh pr create --base main --head codex/build1-featured-popup --title "Add featured work photo popup" --body-file .superpowers/pr-body.md
+gh pr create --base main --head codex/build1-featured-popup --title "Add featured work photo popup" --body "Adds accessible larger-photo popups to the seven Featured Work cards while preserving the four existing Google Photos album links."
 gh pr merge --merge --delete-branch
 ```
 
