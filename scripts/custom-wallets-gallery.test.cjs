@@ -24,6 +24,21 @@ const preparedAssetNames = [
 	'trifold-pnut-floral.webp',
 	'trifold-ranch-floral.webp',
 ];
+const expectedNonWalletGalleryHash = 'ddc2c1fc3ff51fa36183e2bb81b5156fd2b82b6003d318779fcb52d73a06b901';
+const sourcePhotoHashes = [
+	['D:\\TCL Photos\\Roper Wallets\\IMG_0044.JPG', '0965740CA59376970683F0935099C426B420CDC6D86F4CBB5284C8192E86A969'],
+	['D:\\TCL Photos\\Roper Wallets\\IMG_0211.JPG', '1C1E61A98F6D47C1E624736DF7F6770EC40396B78E575EDCA0138DA84C9638EB'],
+	['D:\\TCL Photos\\Roper Wallets\\IMG_0682.HEIC', '00061F93EC424FF4BB52F46687C0BD7A8DF2A22FD94E175063F888FD96B2141C'],
+	['D:\\TCL Photos\\Roper Wallets\\IMG_0442 (W)-2.HEIC', '5C831C79C7068DACD5C501467FF66D66EA95C23DBE3E67CB3F5BF713F4C7B61C'],
+	['D:\\TCL Photos\\Roper Wallets\\IMG_0641.HEIC', 'F4678115E135BA79ED9DC8CE6F88105A51B2E70752847265675A77439C1A1FD2'],
+	['D:\\TCL Photos\\Roper Wallets\\IMG_1258-(W).HEIC', 'C5CA8833FCD04504AB5539D5B0A67F0FD304A27CB9D74ABEDE4C18841BD5947E'],
+	['D:\\TCL Photos\\tri-folds\\F30FB1C9-3EDA-4CBF-8F18-F91A8B1E1AFB.JPG', 'E1465A83987332E9623A05B03365B37D22E433FE4D10339093088B49AA925225'],
+	['D:\\TCL Photos\\tri-folds\\IMG_0029.JPG', 'B354D13C6AF3C89FE223A3825B20FDACAB69AD392C51D73E68CD06337508B400'],
+	['D:\\TCL Photos\\tri-folds\\IMG_0671.HEIC', '863C69B73F112C044C6D46EE021D2BDE3C6CC5878257F1A7AE7A0864AEB734F2'],
+	['D:\\TCL Photos\\tri-folds\\IMG_0689.HEIC', '9AC63C798A84C7496BE5C66A73C80806575DE4824A77D2BB8C6ECC2583DFB048'],
+	['D:\\TCL Photos\\tri-folds\\IMG_1353.HEIC', 'FAE61D243743662FA9EC0EF88607F5200F2095EA703221A2F1B5F5F65921EEF5'],
+	['D:\\TCL Photos\\tri-folds\\IMG_1523.JPG', '5B2D2C8DE6EE52B43F1FE991601A372E9F8500F1466A02169E1A669D7003FFE4'],
+];
 
 function loadTypeScriptModule(file) {
 	const source = read(file);
@@ -40,7 +55,6 @@ function loadTypeScriptModule(file) {
 }
 
 const galleries = JSON.parse(JSON.stringify(loadTypeScriptModule('src/data/galleries.ts').galleries));
-const baselineGalleries = JSON.parse(JSON.stringify(loadTypeScriptModule('.superpowers/sdd/baselines/task-2/galleries.ts').galleries));
 const walletGallery = galleries.find((gallery) => gallery.slug === 'wallets');
 
 test('Products menus contain the exact album routes and no wallet product links', () => {
@@ -106,11 +120,11 @@ test('real wallet records have exactly one valid category and the expected count
 			assert.equal(Object.prototype.hasOwnProperty.call(image, 'category'), false, `${gallery.slug}:${image.src} must remain category-free`);
 		}
 	}
-	assert.deepEqual(
-		galleries.filter((gallery) => gallery.slug !== 'wallets'),
-		baselineGalleries.filter((gallery) => gallery.slug !== 'wallets'),
-		'non-wallet gallery configuration and records must exactly match the Task 2 baseline',
-	);
+	const nonWalletGalleryHash = crypto
+		.createHash('sha256')
+		.update(JSON.stringify(galleries.filter((gallery) => gallery.slug !== 'wallets')))
+		.digest('hex');
+	assert.equal(nonWalletGalleryHash, expectedNonWalletGalleryHash, 'non-wallet gallery configuration and records must exactly match the approved snapshot');
 });
 
 test('all gallery routes and assets remain present with accurate decodable dimensions', async () => {
@@ -138,12 +152,16 @@ test('all prepared Roper and Tri-fold assets use the complete-photo 1600 by 1200
 	}
 });
 
-test('selected source photographs still match their original SHA-256 hashes', () => {
-	const baseline = JSON.parse(read('.superpowers/sdd/baselines/task-2/source-hashes.json'));
-	assert.equal(baseline.length, 12);
-	for (const entry of baseline) {
-		const actual = crypto.createHash('sha256').update(fs.readFileSync(entry.Path)).digest('hex').toUpperCase();
-		assert.equal(actual, entry.Hash, entry.Path);
+test('selected source photographs still match their original SHA-256 hashes', (context) => {
+	assert.equal(sourcePhotoHashes.length, 12);
+	const unavailable = sourcePhotoHashes.filter(([sourcePath]) => !fs.existsSync(sourcePath));
+	if (unavailable.length > 0) {
+		context.skip('Original source-photo drive is not available in this environment.');
+		return;
+	}
+	for (const [sourcePath, expectedHash] of sourcePhotoHashes) {
+		const actual = crypto.createHash('sha256').update(fs.readFileSync(sourcePath)).digest('hex').toUpperCase();
+		assert.equal(actual, expectedHash, sourcePath);
 	}
 });
 
