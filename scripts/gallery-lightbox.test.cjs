@@ -93,3 +93,16 @@ test('shared lightbox exposes the required accessible controls and complete imag
   assert.match(component, /document\.body\.style\.overflow = 'hidden'/);
   assert.match(component, /opener\?\.focus\(\)/);
 });
+
+test('every standard and filtered wallet album uses the shared lightbox', () => {
+  const page = read('src/app/gallery/[slug]/page.tsx');
+  const wallets = read('src/components/WalletGallery.tsx');
+  assert.match(page, /import GalleryLightbox from '@\/components\/GalleryLightbox'/);
+  assert.match(page, /<GalleryLightbox images=\{gallery\.images\} \/>/);
+  assert.doesNotMatch(page, /gallery\.images\.map\(\(image\) =>/);
+  assert.match(wallets, /import GalleryLightbox from '@\/components\/GalleryLightbox'/);
+  assert.match(wallets, /<GalleryLightbox images=\{visibleImages\} imageFit="contain" \/>/);
+  assert.doesNotMatch(wallets, /visibleImages\.map\(\(image\) =>/);
+  assert.match(wallets, /\{walletFilters\.map\(\(filter\) => \(/);
+  assert.match(wallets, /href="\/#custom-order"/);
+});

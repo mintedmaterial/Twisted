@@ -1,8 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import GalleryLightbox from '@/components/GalleryLightbox';
 import type { WalletGalleryImage } from '@/data/galleries';
 import {
 	getWalletView,
@@ -38,16 +38,7 @@ export default function WalletGallery({ images }: WalletGalleryProps) {
 			</p>
 
 			{visibleImages.length > 0 ? (
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-					{visibleImages.map((image) => (
-						<article key={image.src} className="group overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/70 card-glow">
-							<div className="relative aspect-[4/3] bg-charcoal">
-								<Image src={image.src} alt={image.alt} width={image.width} height={image.height} className="absolute inset-0 h-full w-full object-contain" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw" />
-							</div>
-							<div className="p-5"><h2 className="heading-western text-2xl text-cream">{image.title}</h2></div>
-						</article>
-					))}
-				</div>
+				<GalleryLightbox images={visibleImages} imageFit="contain" />
 			) : (
 				<div className="glass rounded-lg border border-copper/30 p-8 text-center">
 					<p className="text-beige mb-4">No examples are shown in this category yet.</p>

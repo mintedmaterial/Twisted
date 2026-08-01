@@ -177,12 +177,12 @@ test('wallet route uses exact filters, accessible state, and the two normal orde
 
 	const walletGuardIndex = page.indexOf("gallery.slug === 'wallets' ? (");
 	const walletComponentIndex = page.indexOf('<WalletGallery images={gallery.images} />');
-	const nonWalletImageMapIndex = page.indexOf('{gallery.images.map((image) => (');
+	const nonWalletLightboxIndex = page.indexOf('<GalleryLightbox images={gallery.images} />');
 	const emptyStateIndex = page.indexOf('New photos coming soon');
 	assert.notEqual(walletGuardIndex, -1, 'wallet-only route guard must exist');
 	assert.ok(walletComponentIndex > walletGuardIndex, 'wallet component must render inside the wallet guard');
-	assert.ok(nonWalletImageMapIndex > walletComponentIndex, 'non-wallet image map branch must remain after the wallet branch');
-	assert.ok(emptyStateIndex > nonWalletImageMapIndex, 'non-wallet empty-state branch must remain after gallery branches');
+	assert.ok(nonWalletLightboxIndex > walletComponentIndex, 'non-wallet lightbox must remain after the wallet branch');
+	assert.ok(emptyStateIndex > nonWalletLightboxIndex, 'non-wallet empty-state branch must remain after gallery branches');
 
 	assert.match(component, /aria-pressed=\{activeCategory === filter\.value\}/);
 	assert.match(component, /role="group" aria-label="Filter custom wallets by style"/);
@@ -248,7 +248,7 @@ test('WalletGallery requires categorized wallet records while standard records s
 
 test('wallet cards preserve complete photos without stretching or hover cropping', () => {
 	const component = read('src/components/WalletGallery.tsx');
-	assert.match(component, /className="absolute inset-0 h-full w-full object-contain/);
-	assert.doesNotMatch(component, /object-cover/);
-	assert.doesNotMatch(component, /group-hover:scale-/);
+	const lightbox = read('src/components/GalleryLightbox.tsx');
+	assert.match(component, /<GalleryLightbox images=\{visibleImages\} imageFit="contain" \/>/);
+	assert.match(lightbox, /imageFit === 'contain' \? 'object-contain' : 'object-cover transition-transform duration-500 group-hover:scale-105'/);
 });

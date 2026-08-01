@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Footer from '@/components/Footer';
+import GalleryLightbox from '@/components/GalleryLightbox';
 import Header from '@/components/Header';
 import VideoBackground from '@/components/VideoBackground';
 import WalletGallery from '@/components/WalletGallery';
@@ -97,30 +97,7 @@ export default async function GalleryPage({ params }: GalleryPageProps) {
 						gallery.slug === 'wallets' ? (
 							<WalletGallery images={gallery.images} />
 						) : (
-							<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-								{gallery.images.map((image) => (
-									<article
-										key={image.src}
-										className="group overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/70 card-glow"
-									>
-										<div className="relative aspect-[4/3] bg-charcoal">
-											<Image
-												src={image.src}
-												alt={image.alt}
-												width={image.width}
-												height={image.height}
-												className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-												sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-											/>
-										</div>
-										<div className="p-5">
-											<h2 className="heading-western text-2xl text-cream">
-												{image.title}
-											</h2>
-										</div>
-									</article>
-								))}
-							</div>
+							<GalleryLightbox images={gallery.images} />
 						)
 					) : (
 						<div className="glass rounded-lg border border-copper/30 p-8 md:p-10 text-center">
