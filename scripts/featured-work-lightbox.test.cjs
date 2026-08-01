@@ -63,3 +63,20 @@ test('featured work popup exposes accessible controls and the optional album act
   assert.match(component, /window\.scrollTo/);
   assert.match(component, /opener\?\.focus\(\)/);
 });
+
+test('all seven featured cards use the popup and existing album links remain unchanged', () => {
+  const featured = read('src/components/FeaturedWork.tsx');
+  const component = read('src/components/FeaturedWorkLightbox.tsx');
+  const hrefs = [...featured.matchAll(/href: '([^']+)'/g)].map((match) => match[1]);
+  assert.match(featured, /import FeaturedWorkLightbox/);
+  assert.match(featured, /<FeaturedWorkLightbox items=\{featuredWork\} \/>/);
+  assert.equal((featured.match(/title: '/g) || []).length, 7);
+  assert.deepEqual(hrefs, [
+    'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
+    'https://photos.google.com/share/AF1QipOsNxODm1-e7A7G3G6ZEPn-cshXXMuZRXZXyykPdt4nqefNbiUnD5bRCaW32J-fsg?key=RFJLS0hBckVXTmpubFdBU0xGbzNjSWFiXzR2VnVn',
+    'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA/photo/AF1QipMAfvfW-Iggd2w43t0R_LjXdGapeanTWw0qlyfS?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
+    'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
+  ]);
+  assert.match(component, /target="_blank"/);
+  assert.match(component, /rel="noopener noreferrer"/);
+});
