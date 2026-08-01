@@ -2,13 +2,13 @@ import Image from 'next/image';
 
 const featuredWork = [
 	{
-		src: '/featured-work/custom-leather-wallet-set.jpg',
-		alt: 'Two custom leather portfolios',
+		src: '/gallery/portfolios/oilfield-portfolio-cover.webp',
+		alt: 'Hand-tooled floral and oilfield leather portfolio cover',
 		title: 'Portfolios',
 		category: 'Portfolios',
 		span: '',
-		width: 400,
-		height: 300,
+		width: 1200,
+		height: 1600,
 		href: 'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
 	},
 	{
