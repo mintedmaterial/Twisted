@@ -1,15 +1,16 @@
-'use client';
+﻿'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
 
 const photoAlbums = {
-	wallets: 'https://photos.google.com/share/AF1QipOsNxODm1-e7A7G3G6ZEPn-cshXXMuZRXZXyykPdt4nqefNbiUnD5bRCaW32J-fsg?key=RFJLS0hBckVXTmpubFdBU0xGbzNjSWFiXzR2VnVn',
-	belts: 'https://photos.app.goo.gl/LTtAmZFpcWxB893j2',
-	leatherWork: 'https://goo.gl/photos/grjoFDY7N5rQUaGx5',
-	weldingGear: 'https://photos.google.com/share/AF1QipPzOOqKXTMznO6pcbD_tzOVFen160_3j2S1ndp848nNXufyX3sKbKXxPNT_lbFSwA?key=QWpuY19GY1BIWWg0bndnZnFRdmY1bmZNME40RDl3',
-	portfolios: 'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
+	wallets: '/gallery/wallets',
+	belts: '/gallery/belts',
+	leatherWork: '/gallery/leather-work',
+	weldingGear: '/gallery/welding-gear',
+	bibleCovers: '/gallery/bible-covers',
+	portfolios: '/gallery/portfolios',
 };
 
 export default function Header() {
@@ -96,82 +97,45 @@ export default function Header() {
 								<div className="absolute top-full left-0 pt-3 w-56">
 									<div className="glass backdrop-blur-md rounded-lg border border-copper/30 py-2 shadow-lg">
 										<div className="px-3 py-2">
-											<p className="text-xs text-sage uppercase tracking-wide font-bold mb-2">Wallets</p>
-											<Link
-												href="/products/wallets/slim"
-												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
-											>
-												Slim Wallets
-											</Link>
-											<Link
-												href="/products/wallets/bifold-trifold"
-												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
-											>
-												Bifold & Trifold
-											</Link>
-											<Link
-												href="/products/wallets/clutch"
-												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
-											>
-												Clutch Wallets
-											</Link>
-											<Link
-												href="/products/wallets/roper"
-												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
-											>
-												Roper Wallets
-											</Link>
-											<Link
-												href="/products/wallets/biker"
-												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
-											>
-												Biker Wallets
-											</Link>
-										</div>
-										<div className="border-t border-copper/30 mt-2 pt-2 px-3">
 											<p className="text-xs text-sage uppercase tracking-wide font-bold px-3 py-1">
-												Photo Albums
+												Albums
 											</p>
-											<a
+											<Link
 												href={photoAlbums.wallets}
-												target="_blank"
-												rel="noopener noreferrer"
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Wallet Album
-											</a>
-											<a
+											</Link>
+											<Link
 												href={photoAlbums.belts}
-												target="_blank"
-												rel="noopener noreferrer"
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Belts Album
-											</a>
-											<a
+											</Link>
+											<Link
 												href={photoAlbums.leatherWork}
-												target="_blank"
-												rel="noopener noreferrer"
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Purses & Leather Work
-											</a>
-											<a
+											</Link>
+											<Link
 												href={photoAlbums.weldingGear}
-												target="_blank"
-												rel="noopener noreferrer"
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Welding Gear Album
-											</a>
-											<a
+											</Link>
+											<Link
+												href={photoAlbums.bibleCovers}
+												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
+											>
+												Bible Covers Album
+											</Link>
+											<Link
 												href={photoAlbums.portfolios}
-												target="_blank"
-												rel="noopener noreferrer"
 												className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
 											>
 												Portfolios Album
-											</a>
+											</Link>
 											<button
 												onClick={() => scrollToSection('custom-order')}
 												className="block w-full text-left px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors"
@@ -189,6 +153,12 @@ export default function Header() {
 							className="text-cream hover:text-copper transition-colors font-medium"
 						>
 							About
+						</Link>
+						<Link
+							href="/blog"
+							className="text-cream hover:text-copper transition-colors font-medium"
+						>
+							Blog
 						</Link>
 						<button
 							onClick={() => scrollToSection('contact')}
@@ -253,90 +223,51 @@ export default function Header() {
 
 								{mobileProductsOpen && (
 									<div className="ml-4 mt-2 space-y-2">
-										<p className="text-xs text-sage uppercase tracking-wide font-bold px-2 py-1">Wallets</p>
-										<Link
-											href="/products/wallets/slim"
-											onClick={closeMobileMenu}
-											className="block text-cream hover:text-copper transition-colors px-2 py-2"
-										>
-											Slim Wallets
-										</Link>
-										<Link
-											href="/products/wallets/bifold-trifold"
-											onClick={closeMobileMenu}
-											className="block text-cream hover:text-copper transition-colors px-2 py-2"
-										>
-											Bifold & Trifold
-										</Link>
-										<Link
-											href="/products/wallets/clutch"
-											onClick={closeMobileMenu}
-											className="block text-cream hover:text-copper transition-colors px-2 py-2"
-										>
-											Clutch Wallets
-										</Link>
-										<Link
-											href="/products/wallets/roper"
-											onClick={closeMobileMenu}
-											className="block text-cream hover:text-copper transition-colors px-2 py-2"
-										>
-											Roper Wallets
-										</Link>
-										<Link
-											href="/products/wallets/biker"
-											onClick={closeMobileMenu}
-											className="block text-cream hover:text-copper transition-colors px-2 py-2"
-										>
-											Biker Wallets
-										</Link>
-										<p className="text-xs text-sage uppercase tracking-wide font-bold px-2 py-1 mt-2">
-											Photo Albums
+										<p className="text-xs text-sage uppercase tracking-wide font-bold px-2 py-1">
+											Albums
 										</p>
-										<a
+										<Link
 											href={photoAlbums.wallets}
-											target="_blank"
-											rel="noopener noreferrer"
 											onClick={closeMobileMenu}
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Wallet Album
-										</a>
-										<a
+										</Link>
+										<Link
 											href={photoAlbums.belts}
-											target="_blank"
-											rel="noopener noreferrer"
 											onClick={closeMobileMenu}
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Belts Album
-										</a>
-										<a
+										</Link>
+										<Link
 											href={photoAlbums.leatherWork}
-											target="_blank"
-											rel="noopener noreferrer"
 											onClick={closeMobileMenu}
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Purses & Leather Work
-										</a>
-										<a
+										</Link>
+										<Link
 											href={photoAlbums.weldingGear}
-											target="_blank"
-											rel="noopener noreferrer"
 											onClick={closeMobileMenu}
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Welding Gear Album
-										</a>
-										<a
+										</Link>
+										<Link
+											href={photoAlbums.bibleCovers}
+											onClick={closeMobileMenu}
+											className="block text-cream hover:text-copper transition-colors px-2 py-2"
+										>
+											Bible Covers Album
+										</Link>
+										<Link
 											href={photoAlbums.portfolios}
-											target="_blank"
-											rel="noopener noreferrer"
 											onClick={closeMobileMenu}
 											className="block text-cream hover:text-copper transition-colors px-2 py-2"
 										>
 											Portfolios Album
-										</a>
+										</Link>
 										<button
 											onClick={() => scrollToSection('custom-order')}
 											className="block w-full text-left text-cream hover:text-copper transition-colors px-2 py-2"
@@ -353,6 +284,13 @@ export default function Header() {
 								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
 							>
 								About
+							</Link>
+							<Link
+								href="/blog"
+								onClick={closeMobileMenu}
+								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
+							>
+								Blog
 							</Link>
 							<button
 								onClick={() => scrollToSection('contact')}
