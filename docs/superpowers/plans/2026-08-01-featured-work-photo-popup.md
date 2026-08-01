@@ -155,7 +155,7 @@ git commit -m "test: define featured work lightbox behavior"
 
 **Interfaces:**
 - Consumes: the four pure functions from Task 1.
-- Consumes: `FeaturedWorkItem[]` with `src`, `alt`, `title`, `category`, `width`, `height`, optional `position`, optional `href`, and optional `span`.
+- Produces: exported `FeaturedWorkItem` with `src`, `alt`, `title`, `category`, `width`, `height`, optional `position`, optional `href`, and optional `span`.
 - Produces: `FeaturedWorkLightbox({ items }: { items: FeaturedWorkItem[] })`.
 
 - [ ] **Step 1: Append a failing component-contract test**
@@ -197,13 +197,24 @@ Implement these exact behaviors in `FeaturedWorkLightbox.tsx`:
 
 import Image from 'next/image';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
-import type { FeaturedWorkItem } from '@/components/FeaturedWork';
 import {
   nextFeaturedFocusIndex,
   nextFeaturedPhoto,
   openFeaturedPhoto,
   previousFeaturedPhoto,
 } from '@/components/featuredWorkLightboxModel';
+
+export type FeaturedWorkItem = {
+  src: string;
+  alt: string;
+  title: string;
+  category: string;
+  width: number;
+  height: number;
+  span?: string;
+  position?: string;
+  href?: string;
+};
 
 const focusableSelector = 'button:not([disabled]), [href], [tabindex]:not([tabindex="-1"])';
 
@@ -375,7 +386,7 @@ git commit -m "feat: add accessible featured work photo popup"
 - Modify: `scripts/featured-work-lightbox.test.cjs`
 
 **Interfaces:**
-- Produces: exported `FeaturedWorkItem` type consumed by Task 2.
+- Consumes: exported `FeaturedWorkItem` type from Task 2.
 - Passes: the unchanged `featuredWork` array to `<FeaturedWorkLightbox items={featuredWork} />`.
 
 - [ ] **Step 1: Append a failing integration test**
@@ -410,19 +421,7 @@ Expected: the integration test FAILS because `FeaturedWork.tsx` does not yet del
 At the top of `FeaturedWork.tsx`, remove the now-unused `Image` import and add:
 
 ```tsx
-import FeaturedWorkLightbox from '@/components/FeaturedWorkLightbox';
-
-export type FeaturedWorkItem = {
-  src: string;
-  alt: string;
-  title: string;
-  category: string;
-  width: number;
-  height: number;
-  span?: string;
-  position?: string;
-  href?: string;
-};
+import FeaturedWorkLightbox, { type FeaturedWorkItem } from '@/components/FeaturedWorkLightbox';
 ```
 
 Change the existing array declaration from `const featuredWork = [` to `const featuredWork: FeaturedWorkItem[] = [`. Leave every one of the seven existing object literals byte-for-byte unchanged.
