@@ -43,6 +43,40 @@ test('lightbox model navigates and wraps in both directions', () => {
   assert.equal(model.previousLightboxIndex(0, 0), null);
 });
 
+test('lightbox controller preserves the original opener throughout navigation', () => {
+  const model = loadTypeScriptModule('src/components/galleryLightboxModel.ts');
+  const originalOpener = { id: 'first-photo' };
+  const navigatedPhoto = { id: 'third-photo' };
+
+  assert.equal(model.preserveLightboxOpener(null, originalOpener), originalOpener);
+  assert.equal(model.preserveLightboxOpener(originalOpener, navigatedPhoto), originalOpener);
+});
+
+test('lightbox controller closes an index invalidated by an image-list change', () => {
+  const model = loadTypeScriptModule('src/components/galleryLightboxModel.ts');
+  const openedImages = [{ src: 'one' }, { src: 'two' }];
+
+  assert.equal(model.reconcileLightboxIndex(null, 3), null);
+  assert.equal(model.reconcileLightboxIndex(1, 3), 1);
+  assert.equal(model.reconcileLightboxIndex(2, 2), null);
+  assert.equal(model.reconcileLightboxIndex(0, 0), null);
+  assert.equal(model.shouldCloseLightboxForImagesChange(openedImages, openedImages, 1), false);
+  assert.equal(model.shouldCloseLightboxForImagesChange(openedImages, [...openedImages], 1), true);
+  assert.equal(model.shouldCloseLightboxForImagesChange(openedImages, openedImages.slice(0, 1), 1), true);
+});
+
+test('lightbox controller cycles focus in both directions and recovers outside focus', () => {
+  const model = loadTypeScriptModule('src/components/galleryLightboxModel.ts');
+
+  assert.equal(model.nextLightboxFocusIndex(0, 3, false), 1);
+  assert.equal(model.nextLightboxFocusIndex(2, 3, false), 0);
+  assert.equal(model.nextLightboxFocusIndex(2, 3, true), 1);
+  assert.equal(model.nextLightboxFocusIndex(0, 3, true), 2);
+  assert.equal(model.nextLightboxFocusIndex(-1, 3, false), 0);
+  assert.equal(model.nextLightboxFocusIndex(-1, 3, true), 2);
+  assert.equal(model.nextLightboxFocusIndex(0, 0, false), null);
+});
+
 test('shared lightbox exposes the required accessible controls and complete image', () => {
   const component = read('src/components/GalleryLightbox.tsx');
   assert.match(component, /'use client'/);
