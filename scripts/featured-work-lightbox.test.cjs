@@ -43,3 +43,23 @@ test('featured popup focus cycles and recovers outside focus', () => {
   assert.equal(model.nextFeaturedFocusIndex(-1, 3, true), 2);
   assert.equal(model.nextFeaturedFocusIndex(0, 0, false), null);
 });
+
+test('featured work popup exposes accessible controls and the optional album action', () => {
+  const component = read('src/components/FeaturedWorkLightbox.tsx');
+  assert.match(component, /'use client'/);
+  assert.match(component, /role="dialog"/);
+  assert.match(component, /aria-modal="true"/);
+  assert.match(component, /aria-label="Close larger image"/);
+  assert.match(component, /aria-label="Previous image"/);
+  assert.match(component, /aria-label="Next image"/);
+  assert.match(component, /View Full Album/);
+  assert.match(component, /selectedItem\.href/);
+  assert.match(component, /event\.key === 'Escape'/);
+  assert.match(component, /event\.key === 'ArrowLeft'/);
+  assert.match(component, /event\.key === 'ArrowRight'/);
+  assert.match(component, /object-contain/);
+  assert.match(component, /document\.body\.style\.overflow = 'hidden'/);
+  assert.match(component, /sibling\.setAttribute\('inert', ''\)/);
+  assert.match(component, /window\.scrollTo/);
+  assert.match(component, /opener\?\.focus\(\)/);
+});
