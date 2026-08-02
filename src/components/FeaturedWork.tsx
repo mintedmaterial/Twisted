@@ -1,6 +1,6 @@
-import Image from 'next/image';
+import FeaturedWorkLightbox, { type FeaturedWorkItem } from '@/components/FeaturedWorkLightbox';
 
-const featuredWork = [
+const featuredWork: FeaturedWorkItem[] = [
 	{
 		src: 'https://lh3.googleusercontent.com/pw/AP1GczPM9XIkZnxqrfQIgXv7yF7vDC2g4VhSlAPzsXu_YRmwUiVRtEaZefpRKuxp7sj9KUbOoM771elbKB6RksdC5m4byxM_F5RZ3MOTjDQd3JbJ8D-SKLfRvmq7V17KVa1ySQMOqysjcTpJKXtCSVxsSnjrcg7oUh2RKSPr4BqAMfVrQPoQXK2pnOZhVF8q6FehjpAYQdDa5yUAtQjle3u9pi3sKgMtD0gwAlu89y2E_knZ78SvhjbTfFIzFTPwIwY8_Uei1QTQSNUsuisv94ZCl4pcwiT7Iv33P8KTlEnqW1wlxL2-pE2UXIIj-GvEBrdnTLLClZc5gG5uaoL9eyMk_SR9z3PsVbQ2jxNHZlG3k_GyuE97qDhn-tlauUakG6cNircphT_-w03oykcqboYHycuycXbZCQ3ORUSuiG2ybkDuZdvX1x-j7Hvhr6Z1U_17U5OyzQRj2rO7zE1aG7wkF_TLy-5d-Jkc5zuhqp7f7KSKt6wthQ7p-CxqMVMDqWi37W7miZ5NzSTdTKfjWMW4lp8GxIGsIHsgDP4OL6G6hJn9ZtWoGXSTbTGXvybZseB43PI3GcuVwXbFVF2VXqwt388IpBQfZSshT7nr5WsWaVBh90_P1_t_QVqILTivcGeoWtiJOblNMfj0qm3hV_YVNA5HGfW4E-nQAq1L2lTvyJjYYEXZWecpw2cBlE0EAyYuSwuZyXzdgffpJ-KQcFfmDeZJpz-Ef2AKlEyEqP5z_E-R2NwxuUd5EyEthyV8M7h164mbmLARRXdA05jhjQN1M9gjhzAGMfKAimpO79PEJL8bowuvuP64B2NGfZLSF2mFm22tL0MiHsK8Hdh-aSw9Z4xlT3YhdAhVBvRF1X6R4GGYZ9vrrqSwH2pbzqWfWfS5TIMm91JWNCZ3XCFxCkORhGY7n2k0-d9YXjH-DmvTuXBYXaTo9Wqn6JIo3UjdBK845de09Ixwio7is9YA2ObjZeVwI6wZuI4exUcHqS_yU0bwnIYj-w=w401-h301-no',
 		alt: 'Custom tooled leather portfolio cover with floral tooling and a name panel',
@@ -96,65 +96,7 @@ export default function FeaturedWork() {
 					</a>
 				</div>
 
-				<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
-					{featuredWork.map((item) => {
-						const isExternalImage = item.src.startsWith('http');
-						const imageClassName = "absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105";
-						const card = (
-							<article
-								className={`group relative overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/60 min-h-[18rem] ${item.span}`}
-							>
-								{isExternalImage ? (
-									<img
-										src={item.src}
-										alt={item.alt}
-										className={imageClassName}
-										style={{ objectPosition: item.position ?? 'center' }}
-									/>
-								) : (
-									<Image
-										src={item.src}
-										alt={item.alt}
-										width={item.width}
-										height={item.height}
-										className={imageClassName}
-										style={{ objectPosition: item.position ?? 'center' }}
-										sizes={item.span ? '(max-width: 1024px) 100vw, 50vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw'}
-									/>
-								)}
-								<div className="absolute inset-0 bg-gradient-to-t from-wood-dark/80 via-wood-dark/10 to-transparent" />
-								<div className="absolute left-4 right-4 bottom-4">
-									<p className="text-copper-light text-sm font-bold uppercase">
-										{item.category}
-									</p>
-									<h3 className="heading-western text-2xl text-cream">
-										{item.title}
-									</h3>
-								</div>
-							</article>
-						);
-
-						if (item.href) {
-							return (
-								<a
-									key={item.title}
-									href={item.href}
-									target="_blank"
-									rel="noopener noreferrer"
-									aria-label={`Open ${item.title}`}
-								>
-									{card}
-								</a>
-							);
-						}
-
-						return (
-							<div key={item.title}>
-								{card}
-							</div>
-						);
-					})}
-				</div>
+				<FeaturedWorkLightbox items={featuredWork} />
 			</div>
 		</section>
 	);
