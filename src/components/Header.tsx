@@ -91,6 +91,7 @@ export default function Header() {
 						</div>
 
 						<Link href="/about" className="text-cream hover:text-copper transition-colors font-medium">About</Link>
+						<Link href="https://blog.twistedcustomleather.com/blog/posts" className="text-cream hover:text-copper transition-colors font-medium">Blog</Link>
 						<button onClick={() => scrollToSection('contact')} className="text-cream hover:text-copper transition-colors font-medium">Contact</button>
 					</nav>
 
@@ -132,6 +133,13 @@ export default function Header() {
 							</div>
 
 							<Link href="/about" onClick={closeMobileMenu} className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2">About</Link>
+							<Link
+								href="https://blog.twistedcustomleather.com/blog/posts"
+								onClick={closeMobileMenu}
+								className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2"
+							>
+								Blog
+							</Link>
 							<button onClick={() => scrollToSection('contact')} className="text-cream hover:text-copper transition-colors font-medium text-left px-2 py-2">Contact</button>
 						</nav>
 					</div>
