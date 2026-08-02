@@ -63,6 +63,7 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
   const scrollPosition = useRef({ x: 0, y: 0 });
   const captionId = useId();
   const selectedItem = selectedIndex === null ? null : items[selectedIndex] ?? null;
+  const isOpen = selectedItem !== null;
 
   const close = useCallback(() => {
     const opener = openerRef.current;
@@ -83,7 +84,7 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
   }, [items.length]);
 
   useEffect(() => {
-    if (!selectedItem) return;
+    if (!isOpen) return;
     previousOverflow.current = document.body.style.overflow;
     const restoreBackground = dialogRef.current ? makeBackgroundInert(dialogRef.current) : () => {};
     document.body.style.overflow = 'hidden';
@@ -92,7 +93,7 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
       document.body.style.overflow = previousOverflow.current;
       restoreBackground();
     };
-  }, [selectedItem]);
+  }, [isOpen]);
 
   useEffect(() => {
     if (!selectedItem) return;
@@ -131,7 +132,7 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
             }}
             className="group text-left cursor-zoom-in focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-copper"
           >
-            <article className={`relative overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/60 min-h-[18rem] ${item.span ?? ''}`}>
+            <div className={`relative overflow-hidden rounded-lg border border-copper/30 bg-wood-dark/60 min-h-[18rem] ${item.span ?? ''}`}>
               {item.src.startsWith('http') ? (
                 <img src={item.src} alt={item.alt} className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" style={{ objectPosition: item.position ?? 'center' }} />
               ) : (
@@ -142,7 +143,7 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
                 <p className="text-copper-light text-sm font-bold uppercase">{item.category}</p>
                 <h3 className="heading-western text-2xl text-cream">{item.title}</h3>
               </div>
-            </article>
+            </div>
           </button>
         ))}
       </div>

@@ -64,6 +64,18 @@ test('featured work popup exposes accessible controls and the optional album act
   assert.match(component, /opener\?\.focus\(\)/);
 });
 
+test('featured popup lifecycle runs only when the popup opens or closes', () => {
+  const component = read('src/components/FeaturedWorkLightbox.tsx');
+  assert.match(component, /const isOpen = selectedItem !== null;/);
+  assert.match(component, /useEffect\(\(\) => \{\s+if \(!isOpen\) return;[\s\S]*?\}, \[isOpen\]\);/);
+});
+
+test('featured card buttons do not nest articles', () => {
+  const component = read('src/components/FeaturedWorkLightbox.tsx');
+  assert.doesNotMatch(component, /className="group text-left[\s\S]*?<article\b/);
+  assert.match(component, /className=\{`relative overflow-hidden rounded-lg border border-copper\/30 bg-wood-dark\/60 min-h-\[18rem\] \$\{item\.span \?\? ''\}`\}/);
+});
+
 test('all seven featured cards use the popup and existing album links remain unchanged', () => {
   const featured = read('src/components/FeaturedWork.tsx');
   const component = read('src/components/FeaturedWorkLightbox.tsx');
