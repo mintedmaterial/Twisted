@@ -80,9 +80,11 @@ test('all seven featured cards use the popup and existing album links remain unc
   const featured = read('src/components/FeaturedWork.tsx');
   const component = read('src/components/FeaturedWorkLightbox.tsx');
   const hrefs = [...featured.matchAll(/href: '([^']+)'/g)].map((match) => match[1]);
+  const { galleryOrderReferences } = loadTypeScriptModule('src/data/gallery-order-references.ts');
   assert.match(featured, /import FeaturedWorkLightbox/);
   assert.match(featured, /<FeaturedWorkLightbox items=\{featuredWork\} \/>/);
-  assert.equal((featured.match(/title: '/g) || []).length, 7);
+  assert.equal(galleryOrderReferences.length, 7);
+  assert.equal(galleryOrderReferences.every(({ title }) => title.trim().length > 0), true);
   assert.deepEqual(hrefs, [
     'https://photos.app.goo.gl/GpcrR32WbqrkSV4L7',
     'https://photos.google.com/share/AF1QipOsNxODm1-e7A7G3G6ZEPn-cshXXMuZRXZXyykPdt4nqefNbiUnD5bRCaW32J-fsg?key=RFJLS0hBckVXTmpubFdBU0xGbzNjSWFiXzR2VnVn',
@@ -91,4 +93,16 @@ test('all seven featured cards use the popup and existing album links remain unc
   ]);
   assert.match(component, /target="_blank"/);
   assert.match(component, /rel="noopener noreferrer"/);
+});
+
+test('featured work maps gallery pieces to preselected custom-order references', () => {
+  const featured = read('src/components/FeaturedWork.tsx');
+  const component = read('src/components/FeaturedWorkLightbox.tsx');
+
+  assert.match(featured, /import \{ galleryOrderReferences \}/);
+  assert.equal((featured.match(/\.\.\.galleryOrderReferences\[\d\]/g) || []).length, 7);
+  assert.match(component, /productId\?: string/);
+  assert.match(component, /referenceId\?: string/);
+  assert.match(component, /Make One Like This/);
+  assert.match(component, /\/?\?product=\$\{encodeURIComponent\(selectedItem\.productId\)\}&reference=\$\{encodeURIComponent\(selectedItem\.referenceId\)\}#custom-order/);
 });

@@ -186,6 +186,27 @@ Your site will be available at:
 - **Workers:** `https://twisted.<YOUR_SUBDOMAIN>.workers.dev`
 - **Custom Domain:** Configure in Cloudflare Dashboard > Workers > twisted > Triggers > Custom Domains
 
+## Custom-order checkout publication gates
+
+Do not publish the guided custom-order checkout until every item in this section is configured and verified in the target environment.
+
+### Square environment isolation
+
+- Set `SQUARE_ENVIRONMENT` to exactly `sandbox` or `production`. Any other or missing value fails closed.
+- For sandbox, configure `SQUARE_SANDBOX_ACCESS_TOKEN` as a secret and `SQUARE_SANDBOX_LOCATION_ID` as a variable.
+- For production, configure `SQUARE_PRODUCTION_ACCESS_TOKEN` as a secret and `SQUARE_PRODUCTION_LOCATION_ID` as a variable.
+- Never configure a custom Square API endpoint. The application fixes sandbox to `https://connect.squareupsandbox.com` and production to `https://connect.squareup.com`.
+- Before production publication, complete a manual sandbox payment-link test and a separate production payment-link smoke test. Confirm the amount, shipping-address collection, redirect, private order reference, and duplicate-submit behavior in each mode.
+
+### Private order records and photos
+
+- Bind the private R2 bucket as `ORDER_ASSETS` and configure `ORDER_ASSET_TOKEN_SECRET` as a strong secret. The same secret signs private, same-origin photo and order-record URLs.
+- Configure and verify an R2 lifecycle rule for the `order-assets/` prefix with a 90-day expiration target.
+- Configure and verify a separate R2 lifecycle rule for the `order-manifests/` prefix with a 365-day expiration target.
+- Treat both lifecycle rules as publication gates. The website intentionally makes no customer-facing retention promise until the production rules have been verified.
+- Confirm private photo and manifest responses are inaccessible with altered tokens and return `Cache-Control: private, no-store`, `X-Robots-Tag: noindex, nofollow, noarchive`, and `X-Content-Type-Options: nosniff` with valid tokens.
+- Confirm production uploads accept structurally valid JPEG and PNG files only, enforce the three-file/8 MB limits, and reject truncated or trailing-payload fixtures.
+
 ## Testing Locally (Without Cloudflare Runtime)
 
 Since Windows has issues with workerd, test using standard Next.js:

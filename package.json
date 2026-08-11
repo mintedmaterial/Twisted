@@ -2,7 +2,14 @@
 	"name": "tcl-app",
 	"version": "0.1.0",
 	"private": true,
+	"engines": {
+		"node": "22.x"
+	},
 	"scripts": {
+		"test": "node scripts/run-tests.cjs",
+		"typecheck": "tsc --noEmit",
+		"cf-typecheck": "node scripts/check-cloudflare-types.cjs --check",
+		"build:opennext": "opennextjs-cloudflare build",
 		"dev": "next dev --turbopack",
 		"build": "next build",
 		"start": "next start",
@@ -10,7 +17,7 @@
 		"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
 		"upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
 		"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
-		"cf-typegen": "wrangler types --env-interface CloudflareEnv ./cloudflare-env.d.ts"
+		"cf-typegen": "node scripts/check-cloudflare-types.cjs"
 	},
 	"dependencies": {
 		"@elevenlabs/client": "^0.12.2",
@@ -22,14 +29,16 @@
 	"devDependencies": {
 		"@eslint/eslintrc": "^3",
 		"@tailwindcss/postcss": "^4",
+		"@testing-library/react": "16.3.0",
 		"@types/node": "^20",
 		"@types/react": "^19",
 		"@types/react-dom": "^19",
 		"eslint": "^9",
 		"eslint-config-next": "15.4.6",
 		"eslint-plugin-react-hooks": "^5.2.0",
+		"jsdom": "26.1.0",
 		"tailwindcss": "^4",
 		"typescript": "^5",
-		"wrangler": "^4.55.0"
+		"wrangler": "4.106.0"
 	}
 }

@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  verify:
     runs-on: ubuntu-latest
-    name: Deploy to Cloudflare Workers
+    name: Verify production candidate
 
     steps:
       - name: Checkout code
@@ -18,17 +18,54 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
 
+
+      - name: Run full test suite
+        run: npm test
+
+      - name: Type-check application
+        run: npm run typecheck
+
+      - name: Verify generated Cloudflare bindings
+        run: npm run cf-typecheck
+
       - name: Build OpenNext worker bundle
-        run: npx opennextjs-cloudflare build
+        run: npm run build:opennext
+        env:
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Verify OpenNext worker bundle
         run: test -f .open-next/worker.js && test -d .open-next/assets
+
+  deploy:
+    if: github.event_name == 'workflow_dispatch'
+    needs: verify
+    runs-on: ubuntu-latest
+    environment: production
+    name: Deploy approved candidate to Cloudflare Workers
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build approved OpenNext worker bundle
+        run: npm run build:opennext
+        env:
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
 
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy --config wrangler.jsonc

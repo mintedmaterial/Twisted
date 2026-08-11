@@ -39,11 +39,34 @@
 			"database_id": "0463a12e-0924-4856-a8ba-42a0c94e8287"
 		}
 	],
+	"r2_buckets": [
+		{
+			"binding": "ORDER_ASSETS",
+			"bucket_name": "twisted-order-assets"
+		}
+	],
+	"ratelimits": [
+		{ "name": "ORDER_INTENT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
+		{ "name": "ORDER_UPLOAD_RATE_LIMITER", "namespace_id": "1002", "simple": { "limit": 12, "period": 60 } },
+		{ "name": "ORDER_CHECKOUT_RATE_LIMITER", "namespace_id": "1003", "simple": { "limit": 6, "period": 60 } }
+	],
+	"secrets": {
+		"required": [
+			"ORDER_ASSET_TOKEN_SECRET",
+			"ORDER_INTENT_TOKEN_SECRET",
+			"ORDER_MAINTENANCE_SECRET",
+			"ORDER_REFERENCE_SECRET",
+			"SQUARE_PRODUCTION_ACCESS_TOKEN",
+			"TURNSTILE_SECRET_KEY"
+		]
+	},
 	"observability": {
 		"enabled": true
 	},
 	"vars": {
-		"SQUARE_LOCATION_ID": "KMGV4Y657Z2A5"
+		"SQUARE_ENVIRONMENT": "production",
+		"SQUARE_PRODUCTION_LOCATION_ID": "KMGV4Y657Z2A5",
+		"TURNSTILE_ALLOWED_HOSTNAMES": "twistedcustomleather.com,www.twistedcustomleather.com"
 	}
 	/**
 	 * Smart Placement
