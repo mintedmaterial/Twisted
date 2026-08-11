@@ -31,6 +31,14 @@ binding = "DB"
 database_name = "twisted-newsletter"
 database_id = "0463a12e-0924-4856-a8ba-42a0c94e8287"
 
+[[r2_buckets]]
+binding = "ORDER_ASSETS"
+bucket_name = "twisted-order-assets"
+
+[vars]
+SQUARE_ENVIRONMENT = "production"
+SQUARE_PRODUCTION_LOCATION_ID = "KMGV4Y657Z2A5"
+
 # Observability - Logs
 [observability]
 

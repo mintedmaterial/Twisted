@@ -83,7 +83,7 @@ export default function Header() {
 											<Link href="/#featured-work" className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors">Purses & Leather Work</Link>
 											<a href={photoAlbums.weldingGear} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors">Welding Gear Album</a>
 											<a href={photoAlbums.portfolios} target="_blank" rel="noopener noreferrer" className="block px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors">Portfolios Album</a>
-											<button onClick={() => scrollToSection('custom-order')} className="block w-full text-left px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors">Bible Cover Quote</button>
+											<Link href="/?product=bible-cover#custom-order" className="block w-full text-left px-3 py-2 text-cream hover:text-copper hover:bg-copper/10 rounded transition-colors">Bible Cover Quote</Link>
 										</div>
 									</div>
 								</div>
@@ -126,7 +126,7 @@ export default function Header() {
 										<Link href="/#featured-work" onClick={closeMobileMenu} className="block text-cream hover:text-copper transition-colors px-2 py-2">Purses & Leather Work</Link>
 										<a href={photoAlbums.weldingGear} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="block text-cream hover:text-copper transition-colors px-2 py-2">Welding Gear Album</a>
 										<a href={photoAlbums.portfolios} target="_blank" rel="noopener noreferrer" onClick={closeMobileMenu} className="block text-cream hover:text-copper transition-colors px-2 py-2">Portfolios Album</a>
-										<button onClick={() => scrollToSection('custom-order')} className="block w-full text-left text-cream hover:text-copper transition-colors px-2 py-2">Bible Cover Quote</button>
+										<Link href="/?product=bible-cover#custom-order" onClick={closeMobileMenu} className="block w-full text-left text-cream hover:text-copper transition-colors px-2 py-2">Bible Cover Quote</Link>
 									</div>
 								)}
 							</div>

@@ -18,6 +18,8 @@ export type FeaturedWorkItem = {
   height: number;
   position?: string;
   href?: string;
+  productId?: string;
+  referenceId?: string;
   span?: string;
 };
 
@@ -158,6 +160,9 @@ export default function FeaturedWorkLightbox({ items }: { items: FeaturedWorkIte
               <p className="text-copper-light text-sm font-bold uppercase">{selectedItem.category}</p>
               <p className="heading-western text-xl text-cream">{selectedItem.title}</p>
             </figcaption>
+            {selectedItem.productId && selectedItem.referenceId && (
+              <a href={`/?product=${encodeURIComponent(selectedItem.productId)}&reference=${encodeURIComponent(selectedItem.referenceId)}#custom-order`} className="rounded-lg border border-copper px-5 py-3 font-bold text-cream hover:bg-copper/20">Make One Like This</a>
+            )}
             {selectedItem.href && <a href={selectedItem.href} target="_blank" rel="noopener noreferrer" className="rounded-lg bg-copper px-5 py-3 font-bold text-charcoal hover:bg-cream">View Full Album</a>}
           </figure>
           <button type="button" aria-label="Next image" onClick={next} className="absolute right-2 top-1/2 z-10 h-14 w-12 -translate-y-1/2 rounded-full border border-copper bg-charcoal/90 text-4xl text-cream sm:right-5">›</button>
