@@ -1,3 +1,4 @@
+
 const assert = require('node:assert/strict');
 const test = require('node:test');
 const React = require('react');
@@ -93,6 +94,7 @@ test('Turnstile expiry defeats a late upload response and checkout submits recov
     render(React.createElement(Assistant));
     fireEvent.click(screen.getByRole('button', { name: /Continue to customization/i }));
     await waitFor(() => assert.ok(turnstileOptions));
+    assert.equal(turnstileOptions.appearance, 'interaction-only');
     act(() => turnstileOptions.callback('turnstile-token-1'));
     const file = new File(['image bytes'], 'sketch.jpg', { type: 'image/jpeg' });
     fireEvent.change(screen.getByLabelText(/Choose reference images/i), { target: { files: [file] } });

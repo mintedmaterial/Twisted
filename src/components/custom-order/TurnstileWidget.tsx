@@ -1,3 +1,4 @@
+
 'use client';
 
 import Script from 'next/script';
@@ -35,6 +36,7 @@ export default function TurnstileWidget({ siteKey, resetNonce, disabled, onToken
 		widgetIdRef.current = window.turnstile.render(containerRef.current, {
 			sitekey: siteKey,
 			action: TURNSTILE_ACTION,
+			appearance: 'interaction-only',
 			callback: (token: string) => callbacksRef.current.onToken(token),
 			'expired-callback': () => callbacksRef.current.onExpired(),
 			'error-callback': () => callbacksRef.current.onError(),
