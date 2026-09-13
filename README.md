@@ -44,7 +44,7 @@ tcl-app/
 │   └── fonts/satoshi/          # Self-hosted Satoshi fonts
 ├── .github/workflows/
 │   └── deploy.yml              # GitHub Actions deployment
-├── wrangler.toml               # Cloudflare Worker configuration
+├── wrangler.jsonc              # Cloudflare Worker configuration
 └── next.config.ts              # Next.js configuration
 
 ```
@@ -52,7 +52,7 @@ tcl-app/
 ## Local Development
 
 ### Prerequisites
-- Node.js 20+
+- Node.js 22 (the version used by verification and deployment)
 - npm or pnpm
 
 ### Setup
@@ -80,84 +80,47 @@ The Cloudflare workerd runtime has compatibility issues on Windows. For local de
 
 ## Deployment
 
+Custom-order publication is intentionally gated. See [docs/deployment-guide.md](docs/deployment-guide.md) for required Turnstile, Images, R2 lifecycle, rate-limit/WAF, Square, maintenance-reconciliation, and protected-environment checks.
+
 ### GitHub Actions (Recommended)
 
-The project uses GitHub Actions for automatic deployment to avoid Windows compatibility issues with Cloudflare's workerd runtime.
-
-#### Setup Steps:
-
-1. **Create GitHub Repository**:
-   ```bash
-   gh repo create TwistedCustomLeather/tcl-app --public --source=. --remote=origin
-   ```
-
-2. **Get Cloudflare Credentials**:
-
-   **Account ID**:
-   - Go to https://dash.cloudflare.com/
-   - Click on "Workers & Pages"
-   - Copy your Account ID from the right sidebar
-
-   **API Token**:
-   - Go to https://dash.cloudflare.com/profile/api-tokens
-   - Click "Create Token"
-   - Use "Edit Cloudflare Workers" template
-   - Or create custom token with permissions:
-     - Account > Workers Scripts > Edit
-     - Account > Workers KV Storage > Edit (if using KV)
-     - Zone > Workers Routes > Edit
-   - Copy the generated token
-
-3. **Add GitHub Secrets**:
-   - Go to your GitHub repository
-   - Settings > Secrets and variables > Actions
-   - Add two secrets:
-     - `CLOUDFLARE_API_TOKEN`: Your API token
-     - `CLOUDFLARE_ACCOUNT_ID`: Your account ID
-
-4. **Deploy**:
-   ```bash
-   git add .
-   git commit -m "Initial commit: Twisted Custom Leather landing page"
-   git push origin main
-   ```
-
-The GitHub Action will automatically:
-- Build the Next.js app
-- Create the OpenNext worker bundle
-- Deploy to Cloudflare Workers
-
-Your site will be live at: `https://twisted.<YOUR_SUBDOMAIN>.workers.dev`
+A push to `main` verifies the application but does not deploy it. Production deployment requires a manual `workflow_dispatch`, successful verification, and approval through the protected production environment. Configure the public `NEXT_PUBLIC_TURNSTILE_SITE_KEY` repository variable and the Cloudflare account/token secrets before requesting that approval. Follow [docs/deployment-guide.md](docs/deployment-guide.md) for every external and manual publication gate.
 
 ### Manual Deployment (Linux/WSL Only)
 
 If you're on Linux or WSL:
 
 ```bash
-# Build the app
-npm run build
-
-# Build the worker
-npx opennextjs-cloudflare build --skipBuild
+# Install the locked dependency graph and run the same gates as CI
+npm ci
+npm test
+npm run typecheck
+npm run cf-typecheck
+npm run build:opennext
 
 # Login to Cloudflare
 npx wrangler login
 
 # Deploy
-npx wrangler deploy
+npx wrangler deploy --config wrangler.jsonc
 ```
 
 ## Worker Configuration
 
-The worker is configured in `wrangler.toml`:
+The worker is configured in `wrangler.jsonc`:
 
 - **Name**: `twisted`
 - **Runtime**: Cloudflare Workers (workerd)
 - **Compatibility**: nodejs_compat flag enabled
 - **Bindings**:
   - `ASSETS`: Static file serving
-  - `IMAGES`: Image optimization
+  - `IMAGES`: Image optimization and canonical reference-image conversion
   - `WORKER_SELF_REFERENCE`: Self-reference for caching
+  - `DB`: D1 newsletter database
+  - `ORDER_ASSETS`: Private R2 order intents, uploads, attempt-bound assets, and manifests
+  - `ORDER_INTENT_RATE_LIMITER`: Order-session creation limits
+  - `ORDER_UPLOAD_RATE_LIMITER`: Reference upload/removal limits
+  - `ORDER_CHECKOUT_RATE_LIMITER`: Checkout creation limits
 
 ## Custom Domain
 
@@ -173,11 +136,9 @@ To add a custom domain (e.g., twistedcustomleather.com):
 
 ## Future Enhancements
 
-### Planned Bindings
+### Possible Future Bindings
 - **Workers AI**: Product recommendations, chat support
-- **D1 Database**: Product catalog and inventory
 - **KV Storage**: Fast edge-cached product data
-- **R2 Object Storage**: Product images with zero egress
 - **Durable Objects**: Shopping cart and sessions
 - **Queues**: Order processing
 

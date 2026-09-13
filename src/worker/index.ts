@@ -12,7 +12,7 @@ export interface Env {
 }
 
 const workerHandler = {
-	async fetch(request: Request, _env: Env, _ctx: ExecutionContext): Promise<Response> {
+	async fetch(request: Request): Promise<Response> {
 		const url = new URL(request.url);
 
 		// Health check endpoint

@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 export default function StorySection() {
 	return (
 		<section className="px-4 sm:px-6 lg:px-8 py-20">
@@ -26,10 +28,13 @@ export default function StorySection() {
 					<div className="mt-12 glass card-glow rounded-lg p-8">
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
 							<div className="md:col-span-1">
-								<img
+								<Image
 									src="/Randy.jpg"
 									alt="Randy, Master Craftsman and Founder of Twisted Custom Leather"
+									width={420}
+									height={560}
 									className="rounded-lg shadow-lg w-full h-auto"
+									sizes="(max-width: 768px) 100vw, 33vw"
 								/>
 							</div>
 							<div className="md:col-span-2 space-y-4 text-beige">

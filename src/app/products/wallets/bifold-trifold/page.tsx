@@ -2,9 +2,18 @@ import { getProductsBySubcategory } from '@/data/products';
 import ProductGrid from '@/components/products/ProductGrid';
 
 export const metadata = {
-	title: 'Bifold & Trifold Wallets | Twisted Custom Leather',
-	description: 'Traditional bifold and trifold leather wallets. Handmade with premium materials. Starting at $95.',
-	keywords: ['bifold wallet', 'trifold wallet', 'leather wallet', 'handmade wallet', 'traditional wallet']
+	title: 'Custom Bifold and Trifold Leather Wallets',
+	description: 'Traditional bifold and trifold leather wallets handmade with premium materials, western character, card storage, and custom tooling options.',
+	keywords: ['custom bifold wallet', 'custom trifold wallet', 'traditional leather wallet', 'handmade wallet', 'western leather wallet'],
+	alternates: {
+		canonical: '/products/wallets/bifold-trifold',
+	},
+	openGraph: {
+		title: 'Custom Bifold and Trifold Leather Wallets',
+		description: 'Classic handmade leather wallets with card storage, cash compartments, and custom western details.',
+		url: '/products/wallets/bifold-trifold',
+		images: [{ url: '/wallet.png', width: 1200, height: 630, alt: 'Custom bifold and trifold leather wallets' }],
+	},
 };
 
 export default function BifoldTrifoldWalletsPage() {

@@ -1,47 +1,42 @@
 import AboutHero from '@/components/about/AboutHero';
 import StorySection from '@/components/about/StorySection';
-import SupplierLogos from '@/components/about/SupplierLogos';
 import ReviewsWidget from '@/components/about/ReviewsWidget';
 import NewsletterSignup from '@/components/NewsletterSignup';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export const metadata = {
-	title: 'About Us | Twisted Custom Leather',
-	description: 'Learn about Twisted Custom Leather - locally owned, handcrafted leather goods with a lifetime guarantee. Quality materials from trusted suppliers.',
-	keywords: ['about twisted custom leather', 'handmade leather', 'valliant oklahoma', 'custom leather goods', 'lifetime guarantee']
+	title: 'About Randy and Twisted Custom Leather',
+	description: 'Meet Randy and the story behind Twisted Custom Leather in Valliant, Oklahoma. Handmade wallets, belts, welding gear, guitar straps, and western leather goods built to last.',
+	keywords: ['about twisted custom leather', 'Randy leather craftsman', 'handmade leather Oklahoma', 'valliant oklahoma', 'custom leather goods', 'lifetime guarantee'],
+	alternates: {
+		canonical: '/about',
+	},
+	openGraph: {
+		title: 'About Randy and Twisted Custom Leather',
+		description: 'A locally owned Oklahoma leather shop creating handmade western leather goods with premium materials and real-life durability.',
+		url: '/about',
+		images: [{ url: '/Randy.jpg', width: 1200, height: 630, alt: 'Randy of Twisted Custom Leather' }],
+	},
 };
 
 export default function AboutPage() {
 	return (
 		<div className="relative min-h-screen">
-			{/* Video Background (matching homepage) */}
 			<div className="fixed inset-0 -z-10 overflow-hidden">
-				<video
-					autoPlay
-					loop
-					muted
-					playsInline
-					className="absolute inset-0 w-full h-full object-cover"
-				>
+				<video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
 					<source src="/background.mp4" type="video/mp4" />
 				</video>
 				<div className="absolute inset-0 bg-black/60" />
 			</div>
 
-			{/* Page Content */}
+			<Header />
+
 			<main>
-				{/* Hero Section */}
 				<AboutHero />
-
-				{/* Story Section */}
 				<StorySection />
-
-				{/* Supplier Logos */}
-				<SupplierLogos />
-
-				{/* Reviews Widget */}
 				<ReviewsWidget />
 
-				{/* Newsletter CTA (matching Lifetime Leather pattern) */}
 				<section className="px-4 sm:px-6 lg:px-8 py-16">
 					<div className="max-w-3xl mx-auto">
 						<div className="glass card-glow rounded-lg p-8 sm:p-12 text-center">
@@ -57,6 +52,8 @@ export default function AboutPage() {
 					</div>
 				</section>
 			</main>
+
+			<Footer />
 		</div>
 	);
 }

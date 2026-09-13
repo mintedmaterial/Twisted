@@ -9,8 +9,8 @@ export default function NewsletterSection() {
 						Stay Connected
 					</h2>
 					<p className="text-beige mb-6">
-						Subscribe to get special offers, new product launches, and behind-the-scenes
-						updates from our workshop.
+						Get new product photos, custom order openings, show updates, and the occasional special offer
+						from our workshop.
 					</p>
 					<NewsletterSignup source="home-page" className="max-w-md mx-auto" />
 				</div>

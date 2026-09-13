@@ -3,9 +3,18 @@ import ProductDetailCard from '@/components/products/ProductDetailCard';
 import Link from 'next/link';
 
 export const metadata = {
-	title: 'Field Notes Roper Wallet | Twisted Custom Leather',
-	description: 'Functional roper wallet with notebook pocket, card slots, and pen holder. Western styling. Starting at $95.',
-	keywords: ['roper wallet', 'field notes wallet', 'western wallet', 'notebook wallet', 'leather wallet']
+	title: 'Custom Roper and Field Notes Leather Wallets',
+	description: 'Handmade roper and Field Notes leather wallets with notebook pockets, card slots, pen holders, western tooling, and rugged everyday construction.',
+	keywords: ['custom roper wallet', 'field notes wallet', 'western wallet', 'notebook wallet', 'handmade leather wallet'],
+	alternates: {
+		canonical: '/products/wallets/roper',
+	},
+	openGraph: {
+		title: 'Custom Roper and Field Notes Leather Wallets',
+		description: 'Field-ready handmade leather wallets with notebook storage, card slots, and western craftsmanship.',
+		url: '/products/wallets/roper',
+		images: [{ url: '/Fieldnote-cover.jpeg', width: 1200, height: 630, alt: 'Custom Field Notes leather wallet' }],
+	},
 };
 
 export default function RoperWalletPage() {
