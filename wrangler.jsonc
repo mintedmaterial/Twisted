@@ -2,10 +2,7 @@
  * For more details on how to configure Wrangler, refer to:
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
+
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "twisted",
@@ -20,37 +17,40 @@
 		"directory": ".open-next/assets"
 	},
 	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
 	},
 	"services": [
 		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
 			"binding": "WORKER_SELF_REFERENCE",
 			"service": "twisted"
 		}
 	],
 	"observability": {
 		"enabled": true
-	}
-	/**
-	 * Smart Placement
-	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
-	 */
-	// "placement": {  "mode": "smart" }
-	/**
-	 * Bindings
-	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
-	 * databases, object storage, AI inference, real-time communication and more.
-	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
-	 */
-	/**
-	 * Environment Variables
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
-	 * Note: Use secrets to store sensitive data.
-	 * https://developers.cloudflare.com/workers/configuration/secrets/
-	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "twisted-newsletter",
+			"database_id": "b3b64ce4-8731-4ffe-ab46-f66d722dbc2c",
+			"migrations_dir": "./migrations"
+		}
+	],
+	"r2_buckets": [
+		{
+			"binding": "UGC_ASSETS",
+			"bucket_name": "twisted-order-assets",
+			"remote": true
+		}
+	],
+	"vars": {
+		"DISCORD_WEBHOOK_URL": "",
+		"CAMPAIGN_FROM_ADDRESS": "campaigns@twistedcustomleather.com"
+	},
+	"send_email": [
+		{
+			"name": "EMAIL",
+			"allowed_sender_addresses": ["campaigns@twistedcustomleather.com"]
+		}
+	]
 }
