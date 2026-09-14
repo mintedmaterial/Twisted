@@ -1,11 +1,3 @@
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
-/**
- * For more details on how to configure Wrangler, refer to:
- * https://developers.cloudflare.com/workers/wrangler/configuration/
- */
 {
 	"$schema": "node_modules/wrangler/config-schema.json",
 	"name": "twisted",
@@ -20,14 +12,10 @@
 		"directory": ".open-next/assets"
 	},
 	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
 		"binding": "IMAGES"
 	},
 	"services": [
 		{
-			// Self-reference service binding, the service name must match the worker name
-			// see https://opennext.js.org/cloudflare/caching
 			"binding": "WORKER_SELF_REFERENCE",
 			"service": "twisted"
 		}
@@ -43,12 +31,37 @@
 		{
 			"binding": "ORDER_ASSETS",
 			"bucket_name": "twisted-order-assets"
+		},
+		{
+			"binding": "UGC_ASSETS",
+			"bucket_name": "twisted-order-assets"
 		}
 	],
 	"ratelimits": [
-		{ "name": "ORDER_INTENT_RATE_LIMITER", "namespace_id": "1001", "simple": { "limit": 10, "period": 60 } },
-		{ "name": "ORDER_UPLOAD_RATE_LIMITER", "namespace_id": "1002", "simple": { "limit": 12, "period": 60 } },
-		{ "name": "ORDER_CHECKOUT_RATE_LIMITER", "namespace_id": "1003", "simple": { "limit": 6, "period": 60 } }
+		{
+			"name": "ORDER_INTENT_RATE_LIMITER",
+			"namespace_id": "1001",
+			"simple": {
+				"limit": 10,
+				"period": 60
+			}
+		},
+		{
+			"name": "ORDER_UPLOAD_RATE_LIMITER",
+			"namespace_id": "1002",
+			"simple": {
+				"limit": 12,
+				"period": 60
+			}
+		},
+		{
+			"name": "ORDER_CHECKOUT_RATE_LIMITER",
+			"namespace_id": "1003",
+			"simple": {
+				"limit": 6,
+				"period": 60
+			}
+		}
 	],
 	"secrets": {
 		"required": [
@@ -57,7 +70,9 @@
 			"ORDER_MAINTENANCE_SECRET",
 			"ORDER_REFERENCE_SECRET",
 			"SQUARE_PRODUCTION_ACCESS_TOKEN",
-			"TURNSTILE_SECRET_KEY"
+			"TURNSTILE_SECRET_KEY",
+			"MAGIC_LINK_SECRET",
+			"CLOUDFLARE_EMAIL_API_TOKEN"
 		]
 	},
 	"observability": {
@@ -66,24 +81,15 @@
 	"vars": {
 		"SQUARE_ENVIRONMENT": "production",
 		"SQUARE_PRODUCTION_LOCATION_ID": "KMGV4Y657Z2A5",
-		"TURNSTILE_ALLOWED_HOSTNAMES": "twistedcustomleather.com,www.twistedcustomleather.com"
-	}
-	/**
-	 * Smart Placement
-	 * https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
-	 */
-	// "placement": {  "mode": "smart" }
-	/**
-	 * Bindings
-	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
-	 * databases, object storage, AI inference, real-time communication and more.
-	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
-	 */
-	/**
-	 * Environment Variables
-	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
-	 * Note: Use secrets to store sensitive data.
-	 * https://developers.cloudflare.com/workers/configuration/secrets/
-	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+		"TURNSTILE_ALLOWED_HOSTNAMES": "twistedcustomleather.com,www.twistedcustomleather.com",
+		"DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/1352636777721254010/x_lKtnnI-1YKs2cIoI8O2kMy-V5SMbvCNbfXEkteoAZiHaPPIRDb_9XH0Mr3Z7QLn63",
+		"CAMPAIGN_FROM_ADDRESS": "colt@twistedcustomleather.com",
+		"CLOUDFLARE_ACCOUNT_ID": "ff3c5e2beaea9f85fee3200bfe28da16"
+	},
+	"send_email": [
+		{
+			"name": "EMAIL",
+			"destination_address": "colt@twistedcustomleather.com"
+		}
+	]
 }
