@@ -6,17 +6,43 @@ const ADMIN_EMAILS = new Set([
 	'colt@twistedcustomleather.com',
 	'randy@twistedcustomleather.com',
 	'connie@twistedcustomleather.com',
+	'ccogburn85@gmail.com',
+	'mintedmaterial@gmail.com',
+	'colt@minte.dev',
+	'connie2734@gmail.com',
 ]);
 
 function getAccessEmail(request: NextRequest): string | null {
 	const header = request.headers.get('cf-access-authenticated-user-email');
-	if (!header) return null;
-	return header.toLowerCase();
+	if (header) return header.toLowerCase().trim();
+
+	// Check cf-access-jwt-assertion header or CF_Authorization cookie if Access is cookie-scoped
+	const jwt = request.headers.get('cf-access-jwt-assertion') || request.cookies.get('CF_Authorization')?.value;
+	if (jwt) {
+		try {
+			const parts = jwt.split('.');
+			if (parts.length >= 2) {
+				const payloadBase64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+				const json = atob(payloadBase64);
+				const parsed = JSON.parse(json);
+				if (parsed && typeof parsed.email === 'string') {
+					return parsed.email.toLowerCase().trim();
+				}
+			}
+		} catch {
+			// ignore malformed token
+		}
+	}
+
+	return null;
 }
 
 function isAdmin(email: string | null): boolean {
 	if (!email) return false;
-	return ADMIN_EMAILS.has(email);
+	const normalized = email.toLowerCase().trim();
+	if (ADMIN_EMAILS.has(normalized)) return true;
+	if (normalized.endsWith('@twistedcustomleather.com')) return true;
+	return false;
 }
 
 export async function GET(request: NextRequest) {
@@ -71,13 +97,19 @@ export async function POST(request: NextRequest) {
 		const { env } = getCloudflareContext();
 		const db = env.DB as D1Database | undefined;
 		const accountId =
-			typeof process.env.CLOUDFLARE_ACCOUNT_ID === 'string' ? process.env.CLOUDFLARE_ACCOUNT_ID : undefined;
+			(typeof env.CLOUDFLARE_ACCOUNT_ID === 'string' ? env.CLOUDFLARE_ACCOUNT_ID : undefined) ||
+			(typeof process !== 'undefined' && typeof process.env.CLOUDFLARE_ACCOUNT_ID === 'string'
+				? process.env.CLOUDFLARE_ACCOUNT_ID
+				: undefined);
 		const apiToken =
-			typeof process.env.CLOUDFLARE_EMAIL_API_TOKEN === 'string' ? process.env.CLOUDFLARE_EMAIL_API_TOKEN : undefined;
+			(typeof env.CLOUDFLARE_EMAIL_API_TOKEN === 'string' ? env.CLOUDFLARE_EMAIL_API_TOKEN : undefined) ||
+			(typeof process !== 'undefined' && typeof process.env.CLOUDFLARE_EMAIL_API_TOKEN === 'string'
+				? process.env.CLOUDFLARE_EMAIL_API_TOKEN
+				: undefined);
 
-		if (!db || !accountId || !apiToken) {
-			console.error('Missing DB, CLOUDFLARE_ACCOUNT_ID, or CLOUDFLARE_EMAIL_API_TOKEN');
-			return NextResponse.json({ error: 'Service misconfigured' }, { status: 500 });
+		if (!db) {
+			console.error('Missing DB');
+			return NextResponse.json({ error: 'Database not configured' }, { status: 500 });
 		}
 
 		const body = (await request.json()) as {
@@ -133,16 +165,22 @@ export async function POST(request: NextRequest) {
 				.bind(rewardCode, row.id)
 				.run();
 
-			await sendEmail({
-				accountId,
-				apiToken,
-				to: row.email,
-				from: { address: fromAddress, name: 'Twisted Custom Leather' },
-				replyTo: 'colt@twistedcustomleather.com',
-				subject: 'Your Twisted gear is going live',
-				html: buildApprovalHtml(row.first_name, rewardAmount, rewardCode),
-				text: buildApprovalText(row.first_name, rewardAmount, rewardCode),
-			});
+			if (accountId && apiToken) {
+				try {
+					await sendEmail({
+						accountId,
+						apiToken,
+						to: row.email,
+						from: { address: fromAddress, name: 'Twisted Custom Leather' },
+						replyTo: 'colt@twistedcustomleather.com',
+						subject: 'Your Twisted gear is going live',
+						html: buildApprovalHtml(row.first_name, rewardAmount, rewardCode),
+						text: buildApprovalText(row.first_name, rewardAmount, rewardCode),
+					});
+				} catch (emailError) {
+					console.error('Approval email send failed:', emailError);
+				}
+			}
 
 			return NextResponse.json({ success: true, status: 'approved', rewardAmount, rewardCode });
 		}
@@ -158,16 +196,22 @@ export async function POST(request: NextRequest) {
 			.bind('declined', now, body.reviewNotes ?? null, now, row.id)
 			.run();
 
-		await sendEmail({
-			accountId,
-			apiToken,
-			to: row.email,
-			from: { address: fromAddress, name: 'Twisted Custom Leather' },
-			replyTo: 'colt@twistedcustomleather.com',
-			subject: 'Thanks for sending us your Twisted gear',
-			html: buildDeclineHtml(row.first_name),
-			text: buildDeclineText(row.first_name),
-		});
+		if (accountId && apiToken) {
+			try {
+				await sendEmail({
+					accountId,
+					apiToken,
+					to: row.email,
+					from: { address: fromAddress, name: 'Twisted Custom Leather' },
+					replyTo: 'colt@twistedcustomleather.com',
+					subject: 'Thanks for sending us your Twisted gear',
+					html: buildDeclineHtml(row.first_name),
+					text: buildDeclineText(row.first_name),
+				});
+			} catch (emailError) {
+				console.error('Decline email send failed:', emailError);
+			}
+		}
 
 		return NextResponse.json({ success: true, status: 'declined' });
 	} catch (error) {

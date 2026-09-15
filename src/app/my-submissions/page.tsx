@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UgcStatusPortal } from '@/components/ugc/UgcStatusPortal';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
 	title: 'My Submissions | Twisted Custom Leather',
@@ -18,11 +19,13 @@ export default function MySubmissionsPage() {
 					<div className="text-center mb-10">
 						<h1 className="text-4xl md:text-5xl font-bold text-cream mb-4">My submissions</h1>
 						<p className="text-lg text-beige">
-							Enter the email you used to submit. We will send you a secure link to view your status.
+							Check the status of your Show Us Your Twisted Gear submissions and store credit.
 						</p>
 					</div>
 					<div className="rounded-2xl border border-copper/30 bg-cream/5 backdrop-blur-sm p-6 md:p-10 shadow-xl">
-						<UgcStatusPortal />
+						<Suspense fallback={<div className="text-cream text-center py-8">Loading status portal...</div>}>
+							<UgcStatusPortal />
+						</Suspense>
 					</div>
 				</div>
 			</main>

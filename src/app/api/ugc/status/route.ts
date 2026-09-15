@@ -7,11 +7,10 @@ export async function GET(request: NextRequest) {
 	try {
 		const { env } = getCloudflareContext();
 		const db = env.DB as D1Database | undefined;
-		const secret =
-			typeof process.env.MAGIC_LINK_SECRET === 'string' ? process.env.MAGIC_LINK_SECRET : undefined;
+		const secret = ((env.MAGIC_LINK_SECRET as string | undefined) ?? (process.env.MAGIC_LINK_SECRET as string | undefined) ?? '')?.trim();
 
 		if (!db || !secret) {
-			console.error('Missing DB or MAGIC_LINK_SECRET');
+			console.error('Missing DB or MAGIC_LINK_SECRET. DB:', !!db, 'Secret:', !!secret);
 			return NextResponse.json({ error: 'Service misconfigured' }, { status: 500 });
 		}
 

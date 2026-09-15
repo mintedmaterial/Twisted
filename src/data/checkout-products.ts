@@ -30,15 +30,35 @@ export type CustomizationValues = Partial<Record<CustomizationFieldKey, string>>
 const freezeArray = <Value>(values: Value[]): Value[] => Object.freeze(values) as unknown as Value[];
 const paidUpgrade = (upgrade: PaidUpgrade): PaidUpgrade => Object.freeze(upgrade) as PaidUpgrade;
 
+export const STARTING_PRICES = {
+	'custom-wallet': 140,
+	'tooled-wallet': 200,
+	'custom-belt': 180,
+	'floral-tooled-belt': 360,
+	'bible-cover': 220,
+	'welding-armguard': 280,
+	'welding-hood': 280,
+	'welding-knee-pads': 175,
+	'guitar-strap': 240,
+	'custom-purse': 400,
+} as const;
+
+export const UPGRADE_PRICES = {
+	'stingray': 100,
+	'gator': 50,
+	'ostrich': 50,
+	'lace-stitching': 25,
+} as const;
+
 const exoticUpgrades = freezeArray<PaidUpgrade>([
-	paidUpgrade({ id: 'stingray', label: 'Stingray exotic hide', amount: 100 }),
-	paidUpgrade({ id: 'gator', label: 'Gator exotic hide', amount: 50 }),
-	paidUpgrade({ id: 'ostrich', label: 'Ostrich exotic hide', amount: 50 }),
-	paidUpgrade({ id: 'lace-stitching', label: 'Lace / stitching', amount: 25 }),
+	paidUpgrade({ id: 'stingray', label: 'Stingray exotic hide', amount: UPGRADE_PRICES['stingray'] }),
+	paidUpgrade({ id: 'gator', label: 'Gator exotic hide', amount: UPGRADE_PRICES['gator'] }),
+	paidUpgrade({ id: 'ostrich', label: 'Ostrich exotic hide', amount: UPGRADE_PRICES['ostrich'] }),
+	paidUpgrade({ id: 'lace-stitching', label: 'Lace / stitching', amount: UPGRADE_PRICES['lace-stitching'] }),
 ]);
 
 const laceStitchingUpgrade = freezeArray<PaidUpgrade>([
-	paidUpgrade({ id: 'lace-stitching', label: 'Lace / stitching', amount: 25 }),
+	paidUpgrade({ id: 'lace-stitching', label: 'Lace / stitching', amount: UPGRADE_PRICES['lace-stitching'] }),
 ]);
 
 const walletFields = freezeArray<CustomizationFieldKey>([
@@ -77,7 +97,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'custom-wallet',
 		name: 'Custom Wallet',
 		description: 'Starting price for a handmade leather wallet. Heavy tooling, exotic leather, or unusual layouts may require a quote.',
-		amount: 140,
+		amount: STARTING_PRICES['custom-wallet'],
 		category: 'wallet',
 		fieldKeys: walletFields,
 		requiredFieldKeys: walletRequiredFields,
@@ -87,7 +107,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'tooled-wallet',
 		name: 'Tooled Wallet',
 		description: 'Starting price for a tooled wallet with more custom detail and western character.',
-		amount: 200,
+		amount: STARTING_PRICES['tooled-wallet'],
 		category: 'wallet',
 		fieldKeys: walletFields,
 		requiredFieldKeys: walletRequiredFields,
@@ -97,7 +117,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'custom-belt',
 		name: 'Custom Belt',
 		description: 'Starting price for a handmade custom belt with fit and leather details confirmed after checkout.',
-		amount: 180,
+		amount: STARTING_PRICES['custom-belt'],
 		category: 'belt',
 		fieldKeys: beltFields,
 		requiredFieldKeys: beltRequiredFields,
@@ -107,7 +127,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'floral-tooled-belt',
 		name: 'Floral Tooled Belt',
 		description: 'Starting price for a floral tooled western belt. Complex patterns or premium materials may require a quote.',
-		amount: 360,
+		amount: STARTING_PRICES['floral-tooled-belt'],
 		category: 'belt',
 		fieldKeys: beltFields,
 		requiredFieldKeys: beltRequiredFields,
@@ -117,7 +137,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'bible-cover',
 		name: 'Bible Or Book Cover',
 		description: 'Starting price for a custom Bible, book, planner, or legal pad cover.',
-		amount: 220,
+		amount: STARTING_PRICES['bible-cover'],
 		category: 'cover',
 		fieldKeys: coverFields,
 		requiredFieldKeys: coverRequiredFields,
@@ -127,7 +147,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'welding-armguard',
 		name: 'Armguard',
 		description: 'Starting price for a custom leather armguard built for real welding work.',
-		amount: 280,
+		amount: STARTING_PRICES['welding-armguard'],
 		category: 'welding',
 		fieldKeys: weldingFields,
 		requiredFieldKeys: weldingRequiredFields,
@@ -137,7 +157,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'welding-hood',
 		name: 'Welding Hood',
 		description: 'Starting price for a custom leather welding hood with fit and details confirmed after checkout.',
-		amount: 280,
+		amount: STARTING_PRICES['welding-hood'],
 		category: 'welding',
 		fieldKeys: weldingFields,
 		requiredFieldKeys: weldingRequiredFields,
@@ -146,8 +166,8 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 	product({
 		id: 'welding-knee-pads',
 		name: 'Knee Pads',
-		description: 'Starting price for custom leather welding knee pads built for durability and comfort.',
-		amount: 280,
+		description: 'Starting price for custom leather welding knee pads built for durability and comfort ($175.00 a set).',
+		amount: STARTING_PRICES['welding-knee-pads'],
 		category: 'welding',
 		fieldKeys: weldingFields,
 		requiredFieldKeys: weldingRequiredFields,
@@ -157,7 +177,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'guitar-strap',
 		name: 'Guitar Strap',
 		description: 'Starting price for a handmade leather guitar strap with custom design details.',
-		amount: 240,
+		amount: STARTING_PRICES['guitar-strap'],
 		category: 'guitar-strap',
 		fieldKeys: guitarStrapFields,
 		requiredFieldKeys: guitarStrapRequiredFields,
@@ -167,7 +187,7 @@ export const checkoutProducts: CheckoutProduct[] = freezeArray([
 		id: 'custom-purse',
 		name: 'Custom Purse Or Bag',
 		description: 'Starting price for a custom purse or bag. Larger, exotic, or heavily tooled bags are quote-only.',
-		amount: 400,
+		amount: STARTING_PRICES['custom-purse'],
 		category: 'purse',
 		fieldKeys: purseFields,
 		requiredFieldKeys: purseRequiredFields,

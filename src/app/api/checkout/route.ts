@@ -600,6 +600,52 @@ export async function POST(request: NextRequest) {
 		await finalizeCompletedIntent();
 		ownership = undefined;
 		attachedKeys = [];
+
+		if (env.DB) {
+			try {
+				await env.DB.prepare(
+					`INSERT INTO customers (email, phone, name, updated_at)
+					 VALUES (?, ?, ?, CURRENT_TIMESTAMP)
+					 ON CONFLICT(email) DO UPDATE SET
+					   phone = coalesce(excluded.phone, customers.phone),
+					   name = coalesce(excluded.name, customers.name),
+					   updated_at = CURRENT_TIMESTAMP`
+				).bind(
+					order.email,
+					order.phone || null,
+					order.customerName
+				).run();
+
+				const customer = await env.DB.prepare(
+					'SELECT id FROM customers WHERE email = ? LIMIT 1'
+				).bind(order.email).first<{ id: number }>();
+
+				if (customer) {
+					await env.DB.prepare(
+						`INSERT INTO conversation_orders (
+							customer_id, conversation_id, product_type,
+							customization, estimated_price, status, notes
+						) VALUES (?, ?, ?, ?, ?, ?, ?)`
+					).bind(
+						customer.id,
+						completedManifest.checkoutAttemptId,
+						order.product.id,
+						JSON.stringify({
+							customization: order.customization,
+							upgrades: order.upgrades,
+							orderReference: completedManifest.orderReference,
+							checkoutUrl,
+						}),
+						order.total,
+						'checkout_initiated',
+						order.notes || null
+					).run();
+				}
+			} catch (dbError) {
+				console.error('Failed to log order to D1 database:', dbError);
+			}
+		}
+
 		return checkoutResponse(completedManifest);
 	} catch (error) {
 		if (!providerInvocationStarted) {
