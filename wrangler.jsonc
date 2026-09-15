@@ -7,6 +7,16 @@
 		"nodejs_compat",
 		"global_fetch_strictly_public"
 	],
+	"routes": [
+		{
+			"pattern": "twistedcustomleather.com/*",
+			"zone_name": "twistedcustomleather.com"
+		},
+		{
+			"pattern": "www.twistedcustomleather.com/*",
+			"zone_name": "twistedcustomleather.com"
+		}
+	],
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".open-next/assets"
