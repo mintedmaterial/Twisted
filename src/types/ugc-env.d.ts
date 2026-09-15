@@ -8,6 +8,8 @@ declare global {
     CLOUDFLARE_ACCOUNT_ID?: string;
     MAGIC_LINK_SECRET?: string;
     CLOUDFLARE_EMAIL_API_TOKEN?: string;
+    // Feature flag binding (Cloudflare Flagship native binding)
+    FLAGS?: { evaluate: (key: string, context?: Record<string, unknown>) => Promise<boolean | { value: boolean }> };
     [key: string]: unknown;
   }
 }

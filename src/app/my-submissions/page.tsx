@@ -1,6 +1,10 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UgcStatusPortal } from '@/components/ugc/UgcStatusPortal';
+import { evaluateFlag, getVisitorId } from '@/lib/flags';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 
@@ -9,7 +13,20 @@ export const metadata: Metadata = {
 	description: 'Check the status of your Twisted Gear submissions and store credit.',
 };
 
-export default function MySubmissionsPage() {
+export default async function MySubmissionsPage() {
+	const { env } = getCloudflareContext();
+	const headersList = await headers();
+	const request = new Request('https://twistedcustomleather.com/my-submissions', {
+		headers: headersList,
+	});
+	const visitorId = getVisitorId(request);
+
+	const ugcEnabled = await evaluateFlag(env, 'ugc_campaign', { visitorId });
+
+	if (!ugcEnabled) {
+		redirect('/submit-your-gear/paused');
+	}
+
 	return (
 		<div className="relative min-h-screen">
 			<div className="absolute inset-0 bg-wood-dark" />

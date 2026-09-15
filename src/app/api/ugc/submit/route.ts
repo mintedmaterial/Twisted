@@ -7,6 +7,7 @@ import {
 	normalizeEmail,
 	sanitizeR2Key,
 } from '@/lib/ugc';
+import { evaluateFlag, getVisitorId } from '@/lib/flags';
 
 const MAX_VIDEO_BYTES = 100 * 1024 * 1024; // 100 MB
 const MAX_IMAGE_BYTES = 10 * 1024 * 1024;  // 10 MB
@@ -16,6 +17,17 @@ const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'i
 export async function POST(request: NextRequest) {
 	try {
 		const { env } = getCloudflareContext();
+
+		// Feature flag check — reject submissions if campaign is paused
+		const visitorId = getVisitorId(request);
+		const ugcEnabled = await evaluateFlag(env, 'ugc_campaign', { visitorId });
+		if (!ugcEnabled) {
+			return NextResponse.json(
+				{ error: 'The UGC campaign is currently paused. Please check back later.' },
+				{ status: 403 }
+			);
+		}
+
 		const db = env.DB as D1Database | undefined;
 		const bucket = env.UGC_ASSETS as R2Bucket | undefined;
 

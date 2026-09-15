@@ -1,6 +1,10 @@
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { UgcUploadForm } from '@/components/ugc/UgcUploadForm';
+import { evaluateFlag, getVisitorId, visitorCookie } from '@/lib/flags';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -9,7 +13,20 @@ export const metadata: Metadata = {
 		'Submit a photo or video of your Twisted gear in action. If we publish it, earn up to $25 in store credit.',
 };
 
-export default function SubmitGearPage() {
+export default async function SubmitGearPage() {
+	const { env } = getCloudflareContext();
+	const headersList = await headers();
+	const request = new Request('https://twistedcustomleather.com/submit-your-gear', {
+		headers: headersList,
+	});
+	const visitorId = getVisitorId(request);
+
+	const ugcEnabled = await evaluateFlag(env, 'ugc_campaign', { visitorId });
+
+	if (!ugcEnabled) {
+		redirect('/submit-your-gear/paused');
+	}
+
 	return (
 		<div className="relative min-h-screen">
 			<div className="absolute inset-0 bg-wood-dark" />
