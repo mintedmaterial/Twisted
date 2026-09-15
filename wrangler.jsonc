@@ -83,13 +83,12 @@
 		"SQUARE_PRODUCTION_LOCATION_ID": "KMGV4Y657Z2A5",
 		"TURNSTILE_ALLOWED_HOSTNAMES": "twistedcustomleather.com,www.twistedcustomleather.com",
 		"DISCORD_WEBHOOK_URL": "https://discord.com/api/webhooks/1352636777721254010/x_lKtnnI-1YKs2cIoI8O2kMy-V5SMbvCNbfXEkteoAZiHaPPIRDb_9XH0Mr3Z7QLn63",
-		"CAMPAIGN_FROM_ADDRESS": "colt@twistedcustomleather.com",
+		"CAMPAIGN_FROM_ADDRESS": "campaigns@twistedcustomleather.com",
 		"CLOUDFLARE_ACCOUNT_ID": "ff3c5e2beaea9f85fee3200bfe28da16"
 	},
 	"send_email": [
 		{
-			"name": "EMAIL",
-			"destination_address": "colt@twistedcustomleather.com"
+			"name": "EMAIL"
 		}
 	]
 }

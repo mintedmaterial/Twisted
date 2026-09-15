@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { rewardAmountFor, UGC_STATUSES, type UgcStatus } from '@/lib/ugc';
+import { sendNotificationEmail } from '@/lib/email';
 
 const ADMIN_EMAILS = new Set([
 	'colt@twistedcustomleather.com',
@@ -96,16 +97,6 @@ export async function POST(request: NextRequest) {
 
 		const { env } = getCloudflareContext();
 		const db = env.DB as D1Database | undefined;
-		const accountId =
-			(typeof env.CLOUDFLARE_ACCOUNT_ID === 'string' ? env.CLOUDFLARE_ACCOUNT_ID : undefined) ||
-			(typeof process !== 'undefined' && typeof process.env.CLOUDFLARE_ACCOUNT_ID === 'string'
-				? process.env.CLOUDFLARE_ACCOUNT_ID
-				: undefined);
-		const apiToken =
-			(typeof env.CLOUDFLARE_EMAIL_API_TOKEN === 'string' ? env.CLOUDFLARE_EMAIL_API_TOKEN : undefined) ||
-			(typeof process !== 'undefined' && typeof process.env.CLOUDFLARE_EMAIL_API_TOKEN === 'string'
-				? process.env.CLOUDFLARE_EMAIL_API_TOKEN
-				: undefined);
 
 		if (!db) {
 			console.error('Missing DB');
@@ -165,22 +156,16 @@ export async function POST(request: NextRequest) {
 				.bind(rewardCode, row.id)
 				.run();
 
-			if (accountId && apiToken) {
-				try {
-					await sendEmail({
-						accountId,
-						apiToken,
-						to: row.email,
-						from: { address: fromAddress, name: 'Twisted Custom Leather' },
-						replyTo: 'colt@twistedcustomleather.com',
-						subject: 'Your Twisted gear is going live',
-						html: buildApprovalHtml(row.first_name, rewardAmount, rewardCode),
-						text: buildApprovalText(row.first_name, rewardAmount, rewardCode),
-					});
-				} catch (emailError) {
-					console.error('Approval email send failed:', emailError);
-				}
-			}
+			await sendNotificationEmail({
+				env,
+				db,
+				to: row.email,
+				fromAddress,
+				replyTo: 'colt@twistedcustomleather.com',
+				subject: 'Your Twisted gear is going live',
+				html: buildApprovalHtml(row.first_name, rewardAmount, rewardCode),
+				text: buildApprovalText(row.first_name, rewardAmount, rewardCode),
+			});
 
 			return NextResponse.json({ success: true, status: 'approved', rewardAmount, rewardCode });
 		}
@@ -196,62 +181,21 @@ export async function POST(request: NextRequest) {
 			.bind('declined', now, body.reviewNotes ?? null, now, row.id)
 			.run();
 
-		if (accountId && apiToken) {
-			try {
-				await sendEmail({
-					accountId,
-					apiToken,
-					to: row.email,
-					from: { address: fromAddress, name: 'Twisted Custom Leather' },
-					replyTo: 'colt@twistedcustomleather.com',
-					subject: 'Thanks for sending us your Twisted gear',
-					html: buildDeclineHtml(row.first_name),
-					text: buildDeclineText(row.first_name),
-				});
-			} catch (emailError) {
-				console.error('Decline email send failed:', emailError);
-			}
-		}
+		await sendNotificationEmail({
+			env,
+			db,
+			to: row.email,
+			fromAddress,
+			replyTo: 'colt@twistedcustomleather.com',
+			subject: 'Thanks for sending us your Twisted gear',
+			html: buildDeclineHtml(row.first_name),
+			text: buildDeclineText(row.first_name),
+		});
 
 		return NextResponse.json({ success: true, status: 'declined' });
 	} catch (error) {
 		console.error('UGC admin review error:', error);
 		return NextResponse.json({ error: 'Failed to process review.' }, { status: 500 });
-	}
-}
-
-async function sendEmail(opts: {
-	accountId: string;
-	apiToken: string;
-	to: string;
-	from: { address: string; name: string };
-	replyTo: string;
-	subject: string;
-	html: string;
-	text: string;
-}) {
-	const res = await fetch(
-		`https://api.cloudflare.com/client/v4/accounts/${opts.accountId}/email/sending/send`,
-		{
-			method: 'POST',
-			headers: {
-				Authorization: `Bearer ${opts.apiToken}`,
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				to: opts.to,
-				from: opts.from,
-				reply_to: opts.replyTo,
-				subject: opts.subject,
-				html: opts.html,
-				text: opts.text,
-			}),
-		}
-	);
-
-	if (!res.ok) {
-		const text = await res.text();
-		throw new Error(`Email send failed (${res.status}): ${text}`);
 	}
 }
 
