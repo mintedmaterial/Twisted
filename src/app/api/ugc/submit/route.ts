@@ -15,6 +15,16 @@ const ALLOWED_IMAGE_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'i
 
 export async function POST(request: NextRequest) {
 	try {
+		// Guard early: only multipart/form-data can be parsed, anything else
+		// makes request.formData() throw and surfaces as a 500 below.
+		const contentType = request.headers.get('content-type') ?? '';
+		if (!contentType.toLowerCase().includes('multipart/form-data')) {
+			return NextResponse.json(
+				{ error: 'Expected multipart/form-data submission.' },
+				{ status: 400 }
+			);
+		}
+
 		const { env } = getCloudflareContext();
 		const db = env.DB as D1Database | undefined;
 		const bucket = env.UGC_ASSETS as R2Bucket | undefined;
